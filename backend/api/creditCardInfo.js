@@ -14,7 +14,7 @@ creditCardInfoRouter.use((req,res,next) => {
 
 // GET request - 
 creditCardInfoRouter.get((req,res,next) => {
-    console.log("A  get request is being made to /creditCardInfo");
+    console.log("A get request is being made to /creditCardInfo");
 
     next();
 

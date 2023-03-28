@@ -14,7 +14,7 @@ tagsRouter.use((req,res,next) => {
 
 // GET request - 
 tagsRouter.get((req,res,next) => {
-    console.log("A  get request is being made to /tags");
+    console.log("A get request is being made to /tags");
 
     next();
 

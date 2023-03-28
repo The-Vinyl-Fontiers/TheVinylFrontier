@@ -14,7 +14,7 @@ ordersRouter.use((req,res,next) => {
 
 // GET request - 
 ordersRouter.get((req,res,next) => {
-    console.log("A  get request is being made to /orders");
+    console.log("A get request is being made to /orders");
 
     next();
 

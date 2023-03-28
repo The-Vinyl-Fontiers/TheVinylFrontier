@@ -14,7 +14,7 @@ vinylRouter.use((req,res,next) => {
 
 // GET request - 
 vinylRouter.get((req,res,next) => {
-    console.log("A  get request is being made to /vinyl");
+    console.log("A get request is being made to /vinyl");
 
     next();
 

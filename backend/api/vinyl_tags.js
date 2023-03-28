@@ -14,7 +14,7 @@ vinylTagsRouter.use((req,res,next) => {
 
 // GET request - 
 vinylTagsRouter.get((req,res,next) => {
-    console.log("A  get request is being made to /vinyl_tags");
+    console.log("A get request is being made to /vinyl_tags");
 
     next();
 
