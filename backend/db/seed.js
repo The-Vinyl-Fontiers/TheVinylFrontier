@@ -69,8 +69,6 @@ async function buildTables() {
             completed BOOLEAN DEFAULT false
         );`);
 
-       
-
         await client.query(`
         CREATE TABLE order_products (
             id SERIAL PRIMARY KEY,
