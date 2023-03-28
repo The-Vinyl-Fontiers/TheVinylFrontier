@@ -1,0 +1,50 @@
+createbd TheVinylFrontier
+
+psql TheVinylFrontier
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    "isAdmin" BOOLEAN DEFAULT false
+);
+
+CREATE TABLE vinyls (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    artist VARCHAR(255) NOT NULL,
+    price INTEGER NOT NULL
+);
+
+CREATE TABLE tags (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE vinyl_tags (
+    id SERIAL PRIMARY KEY,
+    "vinylID" INTEGER REFERENCES vinyls(id),
+    "tagID" INTEGER REFERENCES tags(id),
+    UNIQUE("vinylID", "tagID")
+);
+
+CREATE TABLE payments (
+    id SERIAL PRIMARY KEY,
+    "userID" INTEGER REFERENCES users(id),
+    address VARCHAR(255) NOT NULL,
+    "CCNum" INTEGER NOT NULL
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    "paymentID" INTEGER REFERENCES payments(id),
+    "userID" INTEGER REFERENCES users(id),
+    completed BOOLEAN DEFAULT false
+);
+
+CREATE TABLE order_products (
+    id SERIAL PRIMARY KEY,
+    "orderID" INTEGER REFERENCES orders(id),
+    "vinylID" INTEGER REFERENCES vinyls(id)
+);
