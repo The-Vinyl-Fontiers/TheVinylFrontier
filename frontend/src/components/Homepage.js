@@ -18,7 +18,15 @@ const HomePage = (props) =>{
     }, [])
     return (
         <div>
-            <h1>blahblahblah</h1>
+            {
+                props.loggedIn ? (
+                <div>
+                </div>
+
+                ) : <div>
+
+                </div>  
+            }
         </div>
     )
 }
