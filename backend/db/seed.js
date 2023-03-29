@@ -60,7 +60,9 @@ async function buildTables() {
             id SERIAL PRIMARY KEY,
             "userID" INTEGER REFERENCES users(id),
             address VARCHAR(255) NOT NULL,
-            "CCNum" VARCHAR(255) NOT NULL
+            "CCNum" VARCHAR(255) NOT NULL,
+            "cardholderName" VARCHAR(255) NOT NULL,
+            "CVVNum" INTEGER NOT NULL
         );`);
 
         await client.query(`
@@ -99,8 +101,8 @@ async function seedDB() {
         INSERT INTO vinyl_tags("vinylID", "tagID")
         VALUES (1, 3), (1, 6), (2,1), (2, 2), (3, 1), (3, 2), (3, 7);
 
-        INSERT INTO payments ("userID", address, "CCNum") 
-        VALUES (1, '123 Street Road', 2349876239846) , (2, '1826 Lane Street', 239856729385), (3, '908 Circle Court', 3986510131), (4, '2324 Road Lane', 1243245545); 
+        INSERT INTO payments ("userID", address, "CCNum", "cardholderName", "CVVNum") 
+        VALUES (1, '123 Street Road', 2349876239846, 'Chase Forlini', 653) , (2, '1826 Lane Street', 239856729385, 'David Kapaku', 234), (3, '908 Circle Court', 3986510131, 'Jacob Boatright', 234), (4, '2324 Road Lane', 1243245545, 'User User', 234); 
 
         INSERT INTO orders ("paymentID", "userID", status) 
         VALUES (1, 1, 'pending'), (2, 2, 'completed'), (3, 3, 'inProgress'), (4 ,4, 'completed');

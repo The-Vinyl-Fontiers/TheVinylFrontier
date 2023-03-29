@@ -2,7 +2,7 @@
 const express = require('express');
 const vinylRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { getAllVinyls } = require("../db");
+const { getAllVinyls, createVinyl } = require("../db");
 
 // Middleware to test api/vinyl
 vinylRouter.use((req,res,next) => {
@@ -13,7 +13,7 @@ vinylRouter.use((req,res,next) => {
 });
 
 // GET request - 
-vinylRouter.get(async (req,res,next) => {
+vinylRouter.get( "/", async (req,res,next) => {
     console.log("A get request is being made to /vinyl");
     try {
         const vinyls = await getAllVinyls()
@@ -25,9 +25,29 @@ vinylRouter.get(async (req,res,next) => {
 });
 
 // POST request - Purpose: 
-vinylRouter.post((req,res,next) => {
+vinylRouter.post( "/", async(req,res,next) => {
     console.log("A post request is being made to /vinyl");
+
+    const {title, artist, yearReleased, price, imgURL} = req.body
+ 
+    const {isAdmin}= req.body.user //THIS MUST BE CHANGED TO req.user WHEN WE ADD req.user 
+
     try {
+        if(!isAdmin) {
+            res.send("You must be an admin to perform this action")
+        }
+
+        if(!title || !artist || !yearReleased || !price || !imgURL) {
+            res.send("Invalid vinyl data.").status()
+        }
+
+        const vinyl = await createVinyl({title, artist, yearReleased, price, imgURL})
+
+        if(vinyl) {
+            res.send(vinyl)
+        }else {
+            res.send("Your vinyl was unable to be created.").status(500)
+        }
         
     } catch (error) {
         res.send(error)
