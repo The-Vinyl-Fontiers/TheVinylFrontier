@@ -9,8 +9,7 @@ const HomePage = (props) =>{
     useEffect(()=> {
         if (localStorage.getItem("token")){
             setLoggedIn(true);
-            fetchRoutines();
-            fetchActivities();
+            fetch();
         } else {
             props.setLoggedIn(false);
             console.log("No Token Exists");
@@ -19,14 +18,17 @@ const HomePage = (props) =>{
     return (
         <div>
             {
-                props.loggedIn ? (
+                props.LoggedIn ? (
                 <div>
+                    {
+
+                    }
                 </div>
 
                 ) : <div>
 
                 </div>  
             }
-        </div>
+        </div> 
     )
 }
