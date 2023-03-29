@@ -1,4 +1,5 @@
 const client = require("./client")
+const {createVinyl, getAllVinyls, getVinylByTitle} = require("./index")
 
 async function dropTables() {
     try {
@@ -35,7 +36,7 @@ async function buildTables() {
             title VARCHAR(255) NOT NULL,
             artist VARCHAR(255) NOT NULL,
             price DECIMAL NOT NULL,
-            yearReleased INTEGER NOT NULL
+            "yearReleased" INTEGER NOT NULL
         );
         `);
 
@@ -88,7 +89,7 @@ async function seedDB() {
         INSERT INTO users(username, password, email, "isAdmin") 
         VALUES ('chase', 'chase', 'chase@chase.com', true), ('david', 'david', 'david@david.com', true), ('jacob', 'jacob', 'jacob@jacob.com', true) , ('user', 'user', 'user@user.com', false);
 
-        INSERT INTO vinyls(title, artist, price, yearReleased) 
+        INSERT INTO vinyls(title, artist, price, "yearReleased") 
         VALUES ('Random Access Memories', 'Daft Punk', 2.14, 2013), ('Is This It', 'The Strokes', 1.00, 2001), ('Wide Awake!', 'Parquet Courts', 5.60, 2018);
 
         INSERT INTO tags(name)
@@ -120,6 +121,15 @@ async function buildDB() {
         await dropTables();
         await buildTables();
         await seedDB();
+
+        const allVinyls = await getAllVinyls();
+        console.log(allVinyls)
+
+        const glassAnimals = await createVinyl({title: "How to Be a Human Being", artist: "Glass Animals", price: "5.65", yearReleased: 2016})
+        console.log(glassAnimals)
+
+        const isThisIt = await getVinylByTitle("Is This It")
+        console.log(isThisIt)
 
         client.end()
 
