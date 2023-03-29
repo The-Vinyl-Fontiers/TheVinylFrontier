@@ -23,7 +23,7 @@ async function createVinyl({title, artist, price, yearReleased, imgURL}) {
 
             return vinyl
         }
-        
+
     } catch (error) {
         throw error
     }
@@ -93,7 +93,7 @@ async function getVinylByID(id) {
         `,[vinyl.id])
 
 
-       const tags = [];
+       const tags = []; //add tags to vinyls
        for(let i = 0; i < rows.length; i ++) {
         tags.push(rows[i].name)
        }
@@ -106,30 +106,114 @@ async function getVinylByID(id) {
     }
 }
 
-async function getVinylsByTags () {
-
-}
-
-async function addTagsToVinyl () {
-
-}
-
-async function delelteTagFromVinyl () {
-
-}
-
-
-async function updateVinyl({}) {
+async function getVinylsByTagName (tagName) {
     try {
+        const {rows : vinylIds} = await client.query(`
+        SELECT "vinylID" FROM vinyl_tags
+        JOIN vinyls ON vinyls.id = vinyl_tags."vinylID"
+        JOIN tags ON tags.id = vinyl_tags."tagID"
+        WHERE tags.name = $1;
+        `,[tagName])
+
+        console.log(vinylIds)
+
+        const vinyls = await Promise.all(vinylIds.map(
+            vinylId => getVinylByID(vinylId.vinylID)
+        ))
+
+        return vinyls;
+    } catch (error) {
+        throw(error);
+    }
+}
+
+async function getVinylsByTagID (tagID) {
+    try {
+        const {rows: ids} = await client.query(`
+        SELECT "vinylID" FROM vinyl_tags
+        WHERE "tagID" = $1
+        `,[tagID])
         
+        const vinyls = await Promise.all(ids.map(
+            id => getVinylByID(id.vinylID)
+        ))
+
+        return vinyls;
     } catch (error) {
         throw error
     }
 }
 
-async function deleteVinyl({}) {
+async function addTagToVinyl (tagID, vinylID) {
     try {
+        const {rows : [vinylTag]} = await client.query(`
+        INSERT INTO vinyl_tags("tagID", "vinylID")
+        VALUES ($1, $2)
+        RETURNING *;
+        `,[tagID, vinylID])      
+
+
+        const vinyl = await getVinylByID(vinylID)
         
+        return vinyl;
+    } catch (error) {
+        throw error
+    }
+}
+
+async function removeTagFromVinyl (tagID, vinylID) {
+    try {
+        const removedTag = await client.query(`
+        SELECT name FROM tags
+        WHERE id = $1
+        `, [tagID])
+
+        await client.query(`
+        DELETE * FROM vinyl_tags
+        WHERE "tagID" = $1, "vinylID" = $2;
+        `,[tagID, vinylID])
+
+        const vinyl = await getVinylByID(vinylID);
+
+        vinyl.removedTag = removedTag
+
+        return vinyl        
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+async function updateVinyl({id, title, artist, price, yearReleased, imgURL}) {
+    try {
+        const {rows: [vinyl]} = await client.query(`
+        UPDATE vinyls 
+        SET title = $1, artist = $2, price = $3, "yearReleased" = $4, "imgURL" = $5
+        WHERE id ${id}
+        RETURNING *;
+        `,[title, artist, price, yearReleased, imgURL])
+
+        return vinyl;
+    } catch (error) {
+        throw error
+    }
+}
+
+async function deleteVinyl(id) {
+    try {
+        const {rows: [vinyl]} = await getVinylByID(id)
+
+        await client.query(`
+        DELETE * FROM vinyls 
+        WHERE id = $1;
+        `,[id])
+
+        await client.query(`
+        DELETE * FROM vinyl_tags
+        WHERE "vinylID" = $1;       
+        `,[id])
+
+        return vinyl;
     } catch (error) {
         throw error
     }
@@ -142,5 +226,11 @@ module.exports = {
     updateVinyl,
     deleteVinyl,
     getAllVinyls,
-    getVinylByTitle
+    getVinylByTitle,
+    getVinylsByTagName,
+    addTagToVinyl,
+    removeTagFromVinyl,
+    getVinylByID,
+    getVinylsByArtist,
+    getVinylsByTagID
 }

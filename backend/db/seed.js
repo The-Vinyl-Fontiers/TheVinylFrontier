@@ -1,5 +1,5 @@
 const client = require("./client")
-const {createVinyl, getAllVinyls, getVinylByTitle} = require("./index")
+const {createVinyl, getAllVinyls, getVinylByTitle, getVinylsByTagName, addTagToVinyl, getVinylsByArtist, getVinylsByTagID} = require("./index")
 
 async function dropTables() {
     try {
@@ -131,6 +131,15 @@ async function buildDB() {
 
         const isThisIt = await getVinylByTitle("Is This It")
         console.log(isThisIt)
+
+        const rock = await getVinylsByTagName('rock')
+        console.log(rock)
+
+        const newVinylTag = await addTagToVinyl(1,4)
+        console.log(newVinylTag)
+
+        const parquet = await getVinylsByArtist("Parquet Courts")
+        console.log(parquet)
 
         client.end()
 
