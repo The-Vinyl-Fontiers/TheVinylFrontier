@@ -3,15 +3,27 @@ const client = require('./client');
 
 // vinyl FUNCTIONS
 
-async function createVinyl({title, artist, price, yearReleased}) {
+async function createVinyl({title, artist, price, yearReleased, imgURL}) {
     try {
-        const {rows : [vinyl]} = await client.query(`
-        INSERT INTO vinyls(title, artist, price, "yearReleased")
-        VALUES ($1, $2, $3, $4)
-        RETURNING *;
-        `,[title, artist, price, yearReleased])
 
-        return vinyl;
+        if(imgURL) {
+            const {rows : [vinyl]} = await client.query(`
+            INSERT INTO vinyls(title, artist, price, "yearReleased", "imgURL")
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING *;
+            `,[title, artist, price, yearReleased, imgURL])
+
+            return vinyl
+        }else {
+            const {rows : [vinyl]} = await client.query(`
+            INSERT INTO vinyls(title, artist, price, "yearReleased")
+            VALUES ($1, $2, $3, $4)
+            RETURNING *;
+            `,[title, artist, price, yearReleased])
+
+            return vinyl
+        }
+        
     } catch (error) {
         throw error
     }
@@ -103,7 +115,7 @@ async function addTagsToVinyl () {
 }
 
 async function delelteTagFromVinyl () {
-    
+
 }
 
 
