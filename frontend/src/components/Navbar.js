@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 const Navbar= (props) => {
-    const {LoggedIn} =props
+    const {loggedin} =props
     return(
         <div>
             <div>
@@ -12,4 +12,5 @@ const Navbar= (props) => {
     )
 
 }
+
 export default Navbar
