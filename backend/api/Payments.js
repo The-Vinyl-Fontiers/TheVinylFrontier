@@ -45,4 +45,4 @@ creditCardInfoRouter.delete((req,res,next) => {
 });
 
 // EXPORTING the route handler.
-module.exports = creditCardInfoRouter;
+module.exports = paymentsRouter;
