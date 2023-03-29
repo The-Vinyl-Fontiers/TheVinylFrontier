@@ -147,7 +147,7 @@ async function getVinylsByTagID (tagID) {
 async function addTagToVinyl (tagID, vinylID) {
     try {
         const {rows : [vinylTag]} = await client.query(`
-        INSERT INTO vinyl_tags("tagID", "vinylID")
+        INSERT INTO "vinyl_tags"("tagID", "vinylID")
         VALUES ($1, $2)
         RETURNING *;
         `,[tagID, vinylID])      
@@ -163,19 +163,20 @@ async function addTagToVinyl (tagID, vinylID) {
 
 async function removeTagFromVinyl (tagID, vinylID) {
     try {
-        const removedTag = await client.query(`
+        console.log(vinylID, tagID)
+        const {rows: [tag]} = await client.query(`
         SELECT name FROM tags
-        WHERE id = $1
+        WHERE id = $1;
         `, [tagID])
 
         await client.query(`
-        DELETE * FROM vinyl_tags
-        WHERE "tagID" = $1, "vinylID" = $2;
-        `,[tagID, vinylID])
+        DELETE FROM vinyl_tags
+        WHERE "vinylID" = $1 AND "tagID" = $2; 
+        `,[vinylID, tagID])
 
         const vinyl = await getVinylByID(vinylID);
 
-        vinyl.removedTag = removedTag
+        vinyl.removedTag = tag.name
 
         return vinyl        
     } catch (error) {
@@ -204,12 +205,12 @@ async function deleteVinyl(id) {
         const {rows: [vinyl]} = await getVinylByID(id)
 
         await client.query(`
-        DELETE * FROM vinyls 
+        DELETE FROM vinyls 
         WHERE id = $1;
         `,[id])
 
         await client.query(`
-        DELETE * FROM vinyl_tags
+        DELETE FROM vinyl_tags
         WHERE "vinylID" = $1;       
         `,[id])
 
