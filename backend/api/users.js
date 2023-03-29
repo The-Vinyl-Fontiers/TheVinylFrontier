@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const {} = require("../db");
 
 // Middleware to test api/users
-router.use((req,res,next) => {
+usersRouter.use((req,res,next) => {
     console.log("A request is being made to /users");
 
     next();
@@ -14,7 +14,7 @@ router.use((req,res,next) => {
 });
 
 // POST request - Purpose: Create a new user, requiring username and password.
-router.post("/register", async (req,res,next) => {
+usersRouter.post("/register", async (req,res,next) => {
     const {username, password} = req.body;
     console.log(req.body)
     try {
@@ -52,7 +52,7 @@ router.post("/register", async (req,res,next) => {
 });
 
 // POST request - Purpose: Log in a created user.
-router.post("/login", async (req,res,next) => {
+usersRouter.post("/login", async (req,res,next) => {
     try {
         const { username, password } = req.body;
 
@@ -92,7 +92,7 @@ router.post("/login", async (req,res,next) => {
 });
 
 // GET request - Purpose: Send back logged-in user's data if a valid token is supplied in the header.
-router.get("/me",  async (req,res,next) => {
+usersRouter.get("/me",  async (req,res,next) => {
     try {
         const userToken = req.headers.authorization.split(" ")[1];
         const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);       
@@ -116,7 +116,7 @@ router.get("/me",  async (req,res,next) => {
 });
 
 // GET request - Purpose: Return a list of all vinyl for a logged-in user. 
-router.get("/userid/vinyl",  async (req,res,next) => {
+usersRouter.get("/userid/vinyl",  async (req,res,next) => {
     try {
         const userToken = req.headers.authorization.split(" ")[1];
         const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);
