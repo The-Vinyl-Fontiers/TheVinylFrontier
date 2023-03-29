@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = (props) =>{
 
-    const{setLoggedIn} = props;
+    const{setLoggedIn,} = props;
 
 // Auth Check
     useEffect(()=> {
