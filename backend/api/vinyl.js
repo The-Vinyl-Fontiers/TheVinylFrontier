@@ -2,7 +2,7 @@
 const express = require('express');
 const vinylRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const {} = require("../db");
+const { getAllVinyls } = require("../db");
 
 // Middleware to test api/vinyl
 vinylRouter.use((req,res,next) => {
@@ -13,18 +13,25 @@ vinylRouter.use((req,res,next) => {
 });
 
 // GET request - 
-vinylRouter.get((req,res,next) => {
+vinylRouter.get(async (req,res,next) => {
     console.log("A get request is being made to /vinyl");
+    try {
+        const vinyls = await getAllVinyls()
 
-    next();
-
+        res.send(vinyls)
+    } catch (error) {
+        res.send(error)
+    }
 });
 
 // POST request - Purpose: 
 vinylRouter.post((req,res,next) => {
     console.log("A post request is being made to /vinyl");
-
-    next();
+    try {
+        
+    } catch (error) {
+        res.send(error)
+    }
 
 });
 
