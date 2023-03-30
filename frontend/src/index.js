@@ -4,21 +4,6 @@ import {AllProducts, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, 
 import {BrowserRouter, Routes, Link, Route} from "react-router-dom"
 import { createRoot } from "react-dom/client";
 const App=()=>{
-    const [loggedin,setLoggedIn]=useState(false);
-    const [vinyls,setVinyls]=useState();
-    async function fetchVinyls(){
-        try{
-            const response=await fetch("http://localhost:3000/api/vinyls");
-            const vinylData=await response.json();
-            setVinyls(vinylData)
-            
-        }catch (error){
-            alert ("Error has occured")
-        }
-    }
-    useEffect(()=>{
-        fetchVinyls();
-    },[])
     return (
         <BrowserRouter>
             <Header loggedin={loggedin}/>

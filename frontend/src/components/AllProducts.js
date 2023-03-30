@@ -1,20 +1,14 @@
-import { useEffect } from "react";
-
-const AllProducts=(props)=>{
-    const{setLoggedIn,vinyls,fetchVinyls}=props;
-    try{
-        const fetchData=async () =>{
-        try {response = await fetch('http://localhost:3000:/',{
-            header: {
-                'Content-Type':'application/json',
-            }
-        });
-        const {data} = await response.json();
-        return data.posts
+const AllProducts = () =>{
+    const [vinyls,setVinyls]=useState();
+    async function fetchVinyls(){
+        try{
+            const response=await fetch("http://localhost:3000/api/vinyls");
+            const vinylData=await response.json();
+            setVinyls(vinylData)
             
-        }catch(error){
-            alert ("error fetching posts")}
-    }}
-//INCOMPLETE
+        }catch (error){
+            alert ("Error has occured")
+        }
+    }
 }
 export default AllProducts
