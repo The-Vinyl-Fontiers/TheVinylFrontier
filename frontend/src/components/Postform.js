@@ -96,3 +96,4 @@ const createPost= async (event) =>{
     )
 
 }
+export default Postform

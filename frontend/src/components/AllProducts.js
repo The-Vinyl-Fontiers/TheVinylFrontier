@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-
-const AllProducts=(props)=>{
-    const{setLoggedIn,vinyls,fetchVinyls}=props;
-    useEffect(()=>{
-        if(localStorage.getItem("token")){
-            setLoggedIn(true);
-            fetchVinyls();
+const AllProducts = () =>{
+    const [vinyls,setVinyls]=useState();
+    async function fetchVinyls(){
+        try{
+            const response=await fetch("http://localhost:3000/api/vinyls");
+            const vinylData=await response.json();
+            setVinyls(vinylData)
+            
+        }catch (error){
+            alert ("Error has occured")
         }
-    })
-//INCOMPLETE
+    }
 }
 export default AllProducts

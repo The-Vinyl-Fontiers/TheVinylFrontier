@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 import {AllProducts} from './AllProducts';
 
 const HomePage = (props) =>{
-
-    const{setLoggedIn,} = props;
-    useEffect(()=> {
-        if (localStorage.getItem("token")){
+    const [vinyls,fetchVinyls,setLoggedIn]=props
+    useEffect(()=>{
+        fetchVinyls();
+        if (localStorage.getItem('token')){
             setLoggedIn(true);
-            fetch();
-        } else {
-            props.setLoggedIn(false);
-            console.log("No Token Exists");
-        };
-    }, [])
+        }
+    })
     return (
         <div>
             <AllProducts/>
+            <div>
+                <p>blah blah blah blah</p>
+            </div>
             {
                 props.LoggedIn ? (
                 <div>
