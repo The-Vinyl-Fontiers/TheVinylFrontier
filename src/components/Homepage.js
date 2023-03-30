@@ -25,7 +25,7 @@ const HomePage = (props) =>{
                 </div>
 
                 ) : <div>
-
+                    Please Login to access more features blah blah blah
                 </div>  
             }
         </div> 
