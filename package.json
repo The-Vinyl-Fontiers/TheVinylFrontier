@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/The-Vinyl-Fontiers/TheVinylFrontier/issues"
   },
-  "homepage": "https://github.com/The-Vinyl-Fontiers/TheVinylFrontier#readme",
+  "homepage": "/",
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
