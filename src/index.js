@@ -8,10 +8,7 @@ const App=()=>{
             <Header loggedin={loggedin}/>
             <Routes>
                 <Route path ="" element={
-                    <Homepage
-                        vinyls={vinyls}
-                        loggedin ={loggedin}
-                        fetchvinyls={fetchVinyls}/>
+                    <Homepage/>
                 //INCOMPLETE
                 }/>
             </Routes>
