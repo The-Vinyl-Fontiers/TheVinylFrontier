@@ -5,17 +5,18 @@ const bcrypt = require('bcrypt');
 // USER FUNCTIONS
 
 // Create a new user.
-async function createUser({ username, password }) {
+async function createUser({ username, password, email }) {
     try {
         const saltCount = 12;
         const hashedPassword = await bcrypt.hash(password, saltCount);
+        const hashedEmail = await bcrypt.hash(email, saltCount)
 
         const { rows } = await client.query(`
-        INSERT INTO users(username, password)
-        VALUES($1, $2)
+        INSERT INTO users(username, password, email)
+        VALUES($1, $2, $3)
         ON CONFLICT (username) DO NOTHING
         RETURNING *;
-        `, [username, hashedPassword]);
+        `, [username, hashedPassword, hashedEmail]);
 
         return rows[0];
     } catch (error) {
@@ -27,7 +28,7 @@ async function createUser({ username, password }) {
 async function getUser({ username, password }) {
     try {
         const { rows } = await client.query(`
-      SELECT id, username, password
+      SELECT id, username, password, email, "isAdmin"
       FROM users
       WHERE username = $1;
     `, [username]);
@@ -54,7 +55,7 @@ async function getUser({ username, password }) {
 async function getUserById(userId) {
     try {
         const { rows: [user] } = await client.query(`
-      SELECT id, username
+      SELECT id, username, email, "isAdmin"
       FROM users
       WHERE id=${userId};
   `);
@@ -84,6 +85,21 @@ async function getUserByUsername(username) {
     };
 };
 
+async function makeUserAdmin(userID) {
+    try {
+        const {rows: [user]} = await client.query(`
+        UPDATE users
+        SET "isAdmin" = true
+        WHERE id = ${userID}
+        RETURNING *;
+        `)
+        
+        return user
+    } catch (error) {
+        throw error
+    }
+}
+
 // EXPORTING the users functions.
 
 module.exports = {
@@ -91,4 +107,5 @@ module.exports = {
     getUser,
     getUserById,
     getUserByUsername,
+    makeUserAdmin
 }
