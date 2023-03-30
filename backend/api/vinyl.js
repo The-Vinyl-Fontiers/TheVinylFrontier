@@ -131,6 +131,8 @@ vinylRouter.get("/:id" , async(res, req) => {
     }
 })
 
+//GET vinyls by artists 
+//MAYBE: Move to another subrouter so url isnt /vinyl/artist/artistName
 vinylRouter.get("/artist/:artist", async (req, res) =>{
     const {artist} = req.params
     try {
@@ -163,6 +165,8 @@ vinylRouter.post("/:id" , async(req, res) =>{
                     res.send("No vinyl was found with that ID").status(404)
                 } else {
                     const vinylTag = await addTagToVinyl(tagID, id)
+
+                    res.send(vinylTag)
                 }
             }
         }
@@ -171,22 +175,26 @@ vinylRouter.post("/:id" , async(req, res) =>{
     }
 })
 
+//DELETE specific tag from specific vinyl 
 vinylRouter.delete("/:vinylID/:tagID", async (req, res) => {
     const {vinylID, tagID} = req.params;
 
     try {
-        const vinyl = await getVinylByID(vinylID);
+        const vinyl = await getVinylByID(parseInt(vinylID));
         if(!vinyl) {
             res.send("No vinyl was found with that ID.").status(404);
         } else {
-            const tag = await getTagById(tagID);
-            if(!tag ){
-                res.send("No tag was found with that ID").status(404)
-            }else {
-                const vinyl = await removeTagFromVinyl(tagID, vinylID)
+            // const tag = await getTagById(parseInt(tagID));
+            // if(!tag ){
+                // res.send("No tag was found with that ID").status(404)
+            // }else {
 
+
+                //Need getTagByID to be able to check if tag exists
+                const vinyl = await removeTagFromVinyl(parseInt(tagID), parseInt(vinylID))
+                
                 res.send(vinyl)
-            }
+            // }
         }
     } catch (error) {
         res.send(error)
