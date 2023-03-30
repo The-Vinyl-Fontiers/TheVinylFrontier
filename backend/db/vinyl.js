@@ -190,7 +190,7 @@ async function updateVinyl({id, title, artist, price, yearReleased, imgURL}) {
         const {rows: [vinyl]} = await client.query(`
         UPDATE vinyls 
         SET title = $1, artist = $2, price = $3, "yearReleased" = $4, "imgURL" = $5
-        WHERE id ${id}
+        WHERE id  = ${id}
         RETURNING *;
         `,[title, artist, price, yearReleased, imgURL])
 

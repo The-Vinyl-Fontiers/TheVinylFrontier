@@ -3,19 +3,19 @@ const express = require('express');
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {} = require("../db");
+const {getUserByUsername, createUser, makeUserAdmin} = require("../db");
 
 // Middleware to test api/users
-usersRouter.use((req,res,next) => {
-    console.log("A request is being made to /users");
+// usersRouter.use((req,res,next) => {
+//     console.log("A request is being made to /users");
 
-    next();
+//     next();
 
-});
+// });
 
 // POST request - Purpose: Create a new user, requiring username and password.
 usersRouter.post("/register", async (req,res,next) => {
-    const {username, password} = req.body;
+    const {username, password, email} = req.body;
     console.log(req.body)
     try {
         const _user = await getUserByUsername(username);
@@ -32,11 +32,12 @@ usersRouter.post("/register", async (req,res,next) => {
                 message: "Password must be a minimum of 8 characters."
             });
         } else {
-            const user = await createUser({username, password});
+            const user = await createUser({username, password, email});
                 if (user.id) {
                     const token = jwt.sign({
                         id: user.id,
-                        username
+                        username,
+                        isAdmin: user.isAdmin
                     }, process.env.JWT_SECRET, {
                         expiresIn: "1w"
                     });
@@ -69,7 +70,8 @@ usersRouter.post("/login", async (req,res,next) => {
         if (user && areTheyTheSame) { // If the user exists & user password matches password from the request body...
             const token = jwt.sign({ // Create token that has users ID & username encrypted by JWT SECRET.
                 id: user.id,
-                username
+                username,
+                isAdmin: user.isAdmin
             }, process.env.JWT_SECRET, {
                 expiresIn: "1w"
             });
@@ -93,15 +95,17 @@ usersRouter.post("/login", async (req,res,next) => {
 
 // GET request - Purpose: Send back logged-in user's data if a valid token is supplied in the header.
 usersRouter.get("/me",  async (req,res,next) => {
+    console.log("a request is being made to users/me")
     try {
-        const userToken = req.headers.authorization.split(" ")[1];
-        const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);       
-        const user = await getUserByUsername(decryptedUserToken.username);
+        const {username} = req.user
+        
+        const user = await getUserByUsername(username);
 
-        if(user.username == decryptedUserToken.username) {
+        if(user.username == username) {
             res.send({
                 id: user.id,
-                username: decryptedUserToken.username
+                username: username,
+                idAdmin: user.isAdmin
             });
         } else {
             res.send({
@@ -110,8 +114,8 @@ usersRouter.get("/me",  async (req,res,next) => {
             });
         };
 
-    } catch ({name, message}) {
-        next({name, message});
+    } catch (error) {
+        res.send(error);
     };
 });
 
@@ -135,6 +139,26 @@ usersRouter.get("/userid/vinyl",  async (req,res,next) => {
         console.log(error);
     };
 });
+
+usersRouter.post("/:userID/admin" , async(req, res) => {
+    try {
+        const {isAdmin, username, id} = req.user
+        if(!isAdmin) {
+            res.send({
+                name: "Must be admin",
+                message: "You do not have authorization to perform this action."
+            }).status(403)
+        } else {
+            const {userID} = req.params;
+         
+            const user = await makeUserAdmin(userID)
+
+            res.send(user)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 // EXPORTING the route handler.
 module.exports = usersRouter;
