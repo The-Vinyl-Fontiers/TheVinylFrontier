@@ -10,3 +10,4 @@ const AllProducts=(props)=>{
     })
 //INCOMPLETE
 }
+export default AllProducts

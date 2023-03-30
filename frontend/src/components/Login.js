@@ -12,7 +12,7 @@ const Login = () => {
 
         try {
             if(loginUser.length < 6){
-                alert("User Name is too short. 6 Character Minimum")
+                alert("Username is too short. 6 Character Minimum")
                 return;
             } else if (loginPass.length < 8){
                 alert("Password is too short. 8 Character Minimum")
