@@ -1,13 +1,14 @@
 import {Link} from "react-router-dom";
 const Navbar= (props) => {
-    const {loggedin} =props
     return(
         <div>
-            <div>
-                <ul>
-                    <li></li>
+            <nav className="navbar">
+                <ul className="navbar-nav">
+                    <li>
+                        
+                    </li>
                 </ul>
-            </div>
+            </nav>
         </div>
     )
 
