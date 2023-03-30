@@ -15,7 +15,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:react": "PORT=3001 react-scripts start",
+    "start:react": "react-scripts start",
     "start:server": "nodemon ./backend/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,8 +30,20 @@
   "bugs": {
     "url": "https://github.com/The-Vinyl-Fontiers/TheVinylFrontier/issues"
   },
-  "homepage": "https://github.com/The-Vinyl-Fontiers/TheVinylFrontier#readme",
+  "homepage": "/",
   "devDependencies": {
     "nodemon": "^2.0.22"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
