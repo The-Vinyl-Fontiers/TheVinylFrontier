@@ -1,11 +1,10 @@
 import { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
+import {AllProducts} from './AllProducts';
 
 const HomePage = (props) =>{
 
     const{setLoggedIn,} = props;
-
-// Auth Check
     useEffect(()=> {
         if (localStorage.getItem("token")){
             setLoggedIn(true);
@@ -17,11 +16,12 @@ const HomePage = (props) =>{
     }, [])
     return (
         <div>
+            <AllProducts/>
             {
                 props.LoggedIn ? (
                 <div>
                     {
-
+                        //Cart , logout, profile shows up, register leaves
                     }
                 </div>
 
@@ -32,3 +32,4 @@ const HomePage = (props) =>{
         </div> 
     )
 }
+export default HomePage
