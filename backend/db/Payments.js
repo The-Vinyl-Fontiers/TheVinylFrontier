@@ -78,8 +78,8 @@ async function deleteCreditCardInfo({id, UserID}) {
 // EXPORTING the creditCardInfo functions.
 
 module.exports = {
-    creteCreditCardInfo,
+    createPaymentInfo,
     getCreditCardInfo,
-    updateCreditCardInfo,
+    updatePaymentInfo,
     deleteCreditCardInfo,
 }
