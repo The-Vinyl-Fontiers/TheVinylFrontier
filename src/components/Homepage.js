@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import {AllProducts} from './AllProducts';
 
 const HomePage = (props) =>{
-    const [vinyls,fetchVinyls,setLoggedIn]=props
+    const {vinyls,fetchVinyls,setLoggedIn}=props
     useEffect(()=>{
-        fetchVinyls();
         if (localStorage.getItem('token')){
             setLoggedIn(true);
         }
