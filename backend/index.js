@@ -18,8 +18,8 @@ app.use(morgan("dev"))
 app.use("/api" , router)
 
 client.connect()
-app.listen(3000, () => {
-    console.log("We are now connected to port 3000")
+app.listen(3001, () => {
+    console.log("We are now connected to port 3001")
 })
 
 

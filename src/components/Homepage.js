@@ -1,18 +1,18 @@
 import { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
-import {AllProducts} from './AllProducts';
+import {AllProducts} from './index';
 
 const HomePage = (props) =>{
-    const [vinyls,fetchVinyls,setLoggedIn]=props
-    useEffect(()=>{
-        fetchVinyls();
-        if (localStorage.getItem('token')){
-            setLoggedIn(true);
-        }
-    })
+    // const [vinyls,fetchVinyls,setLoggedIn]=props
+    // useEffect(()=>{
+    //     fetchVinyls();
+    //     if (localStorage.getItem('token')){
+    //         setLoggedIn(true);
+    //     }
+    // })
     return (
         <div>
-            <AllProducts/>
+            <AllProducts vinyls={props.vinyls}/>
             <div>
                 <p>blah blah blah blah</p>
             </div>
