@@ -3,14 +3,6 @@ import { Link } from "react-router-dom";
 import {AllProducts} from './index';
 
 const HomePage = (props) =>{
-<<<<<<< HEAD
-    const {vinyls,fetchVinyls,setLoggedIn}=props
-    useEffect(()=>{
-        if (localStorage.getItem('token')){
-            setLoggedIn(true);
-        }
-    })
-=======
     // const [vinyls,fetchVinyls,setLoggedIn]=props
     // useEffect(()=>{
     //     fetchVinyls();
@@ -18,7 +10,6 @@ const HomePage = (props) =>{
     //         setLoggedIn(true);
     //     }
     // })
->>>>>>> 90bca1769901a0d07be0af09d28d7800d38626b8
     return (
         <div>
             <AllProducts vinyls={props.vinyls}/>
