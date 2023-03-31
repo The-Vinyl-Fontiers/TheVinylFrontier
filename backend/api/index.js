@@ -31,6 +31,7 @@ router.use(async(req, res, next) => {
 
       if (id) {
         req.user = await getUserById(id);
+        console.log("added to req.user" , req.user)
         next();
       }
     } catch (error) {
