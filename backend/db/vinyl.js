@@ -163,7 +163,6 @@ async function addTagToVinyl (tagID, vinylID) {
 
 async function removeTagFromVinyl (tagID, vinylID) {
     try {
-        console.log(vinylID, tagID)
         const {rows: [tag]} = await client.query(`
         SELECT name FROM tags
         WHERE id = $1;

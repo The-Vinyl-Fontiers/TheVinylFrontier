@@ -3,7 +3,7 @@ const express = require('express');
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {getUserByUsername, createUser, makeUserAdmin} = require("../db");
+const {getUserByUsername, createUser, makeUserAdmin, createOrder} = require("../db");
 
 // Middleware to test api/users
 // usersRouter.use((req,res,next) => {
@@ -33,18 +33,23 @@ usersRouter.post("/register", async (req,res,next) => {
             });
         } else {
             const user = await createUser({username, password, email});
-                if (user.id) {
-                    const token = jwt.sign({
-                        id: user.id,
-                        username,
-                        isAdmin: user.isAdmin
-                    }, process.env.JWT_SECRET, {
-                        expiresIn: "1w"
-                    });
-                        res.send({
-                        message: "Thank you for signing up to our website!",
-                        token
-                })};
+            if (user.id) {
+                const token = jwt.sign({
+                    id: user.id,
+                    username,
+                    isAdmin: user.isAdmin
+                }, process.env.JWT_SECRET, {
+                    expiresIn: "1w"
+                });
+
+                //create a new pending order for the user
+                const order = await createOrder(user.id)
+
+                res.send({
+                    message: "Thank you for signing up to our website!",
+                    token
+                })
+            };
         };
         
     } catch (error) {
