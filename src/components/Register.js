@@ -5,8 +5,10 @@ const Register = () => {
     const [newPass, setNewPass] = useState("");
     const [newEmail, setNewEmail] =useState ("");
     const nav = useNavigate("");
-    async function registerUser(event){
-        event.preventDefault ();
+
+    async function registerUser(){
+        console.log()
+        // event.preventDefault ();
         try{
             if (newPass.length<8){
                 alert ("Your password needs to be at least 8 characters");
@@ -15,26 +17,25 @@ const Register = () => {
                 alert ("Your username needs to be at least 6 characters");
                 return;
             }
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            const response = await fetch('http://localhost:3001/api/users/register', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user:{
-                        username: newUser,
-                        password: newPass,
-                        email: newEmail
-                    }
+                    username: newUser,
+                    password: newPass,
+                    email: newEmail
+                    
                 })
 
             })
             const transData = await response.json();
             console.log (transData);
-            if (transData.success){
-                alert("Account Creation Unsucessful");
+            if (!transData.token){
+                alert(transData.message);
             }else{
-                const tokenKey = transData.data.token;
+                const tokenKey = transData.token;
                 localStorage.setItem("token", tokenKey);
                 alert ("New Account Was Successfully Created");
                 nav("/")
@@ -46,7 +47,11 @@ const Register = () => {
     return (
         <div>
             <h2>Create an Account</h2>
-                <form onSubmit= {registerUser}></form>
+                <form onSubmit= {(event) => {
+                    console.log("button clicked")
+                    event.preventDefault()
+                    registerUser()
+                }}>
                 <input
                 type="text"
                 value={newUser}
@@ -62,7 +67,8 @@ const Register = () => {
                 value={newEmail}
                 placeholder="Email"
                 onChange={(event)=> setNewEmail(event.target.value)}/>
-                <button type="submit">Register Account</button>
+                <input type="submit" value="Register Account"></input>
+                </form>
         </div>
     )
 }

@@ -33,6 +33,8 @@ const App=()=>{
                     <Homepage vinyls = {vinyls}/>
                 //INCOMPLETE
                 }/>
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
+                <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
             </Routes>
         </BrowserRouter>
     )
