@@ -1,10 +1,5 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import {Link} from "react-router-dom"
-=======
-import { Link } from "react-router-dom";
-
->>>>>>> main
 const AllProducts = (props) =>{
     const {vinyls} = props
 
@@ -16,7 +11,7 @@ const AllProducts = (props) =>{
                     vinyls ? vinyls.map((vinyl) =>{
                         return(
                             <Link to={`/vinyl/${vinyl.id}`} className="singleItem"key={vinyl.id}>
-                                <p>{vinyl.title}</p>
+                                <p className="vinylTitle">{vinyl.title}</p>
                                 <p>{vinyl.artist}</p>
                                 <p>${vinyl.price}</p>
                                 <p>{vinyl.yearReleased}</p>
