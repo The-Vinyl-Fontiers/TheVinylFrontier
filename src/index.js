@@ -23,12 +23,19 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
+<<<<<<< HEAD
             <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
+=======
+            <Header/>
+>>>>>>> main
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls}/>
                 //INCOMPLETE
                 }/>
+                <Route path="/logout" element={<Logout/>} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/orders" element={<OrderHistory />}/>
                 <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
                 <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls}/>} />

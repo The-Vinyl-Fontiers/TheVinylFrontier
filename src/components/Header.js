@@ -4,6 +4,7 @@ const Header =  (props) => {
     const {setSearchTerm} = props;
     const navigate = useNavigate();
     return (
+<<<<<<< HEAD
         <div className="title">
             <div>
                 <Link to ="/">
@@ -16,6 +17,12 @@ const Header =  (props) => {
                 setSearchTerm(event.target.value)}></input>
                 <button onClick={() => navigate("/search")}>Search</button>
             </div>
+=======
+        <div className="header">
+            <Link to ="/" className="headerLink">
+                <div className="title">Vinyls</div>
+            </Link>
+>>>>>>> main
         </div>
     )
 }
