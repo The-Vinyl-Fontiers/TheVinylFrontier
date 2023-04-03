@@ -124,6 +124,11 @@ body::-webkit-scrollbar-thumb{
     height:350px;
     padding:1.5rem;
     background:gray;
+    text-decoration:none;
+}
+.sinlgeItem:visited{
+    color:white;
+
 }
 .singleItem:hover{
     transform:translateY(-1rem);
@@ -134,7 +139,7 @@ body::-webkit-scrollbar-thumb{
 .singleItem:not(:first-child){
     margin-left:-130px;
 }
-.itemTitle{
+.vinylTitle{
     font-weight:bolder;
 }
 
