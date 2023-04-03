@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
     const [loginUser, setLoginUser] = useState("");
     const [loginPass, setLoginPass] = useState("");
 
     const nav = useNavigate();
+
+    const {setLoggedIn} = props;
 
     async function logIn(event){
         event.preventDefault();
@@ -24,16 +26,14 @@ const Login = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user: {
                         username: loginUser,
                         password: loginPass
-                    }
                 })
             });
             const transData = await response.json();
 
-            if (!transData.success){
-                alert("Login was unsuccessful. Please try again. ");
+            if (!transData.token){
+                alert(transData.message);
             } else {
                 const tokenKey = transData.token;
                 console.log(tokenKey);
