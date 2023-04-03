@@ -22,12 +22,18 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn}/>
+            <Header/>
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls}/>
                 //INCOMPLETE
                 }/>
+                <Route path="/login" element={<Login/>} />
+                <Route path="/logout" element={<Logout/>} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/orders" element={<OrderHistory />}/>
+                <Route path ="/register" element={<Register />}/>
+
             </Routes>
         </BrowserRouter>
     )
