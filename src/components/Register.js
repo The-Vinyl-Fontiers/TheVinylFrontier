@@ -28,7 +28,6 @@ const Register = (props) => {
                     username: newUser,
                     password: newPass,
                     email: newEmail
-                    
                 })
 
             })
