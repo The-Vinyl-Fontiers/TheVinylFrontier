@@ -1,18 +1,14 @@
 import { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import {AllProducts} from './index';
+import {Navbar} from '../components'
 
 const HomePage = (props) =>{
-    // const [vinyls,fetchVinyls,setLoggedIn]=props
-    // useEffect(()=>{
-    //     fetchVinyls();
-    //     if (localStorage.getItem('token')){
-    //         setLoggedIn(true);
-    //     }
-    // })
     return (
         <div>
+
             <AllProducts vinyls={props.vinyls}/>
+            <Navbar />
             <div>
                 <p>blah blah blah blah</p>
             </div>
