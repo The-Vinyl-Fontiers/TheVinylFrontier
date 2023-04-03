@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllProducts = (props) =>{
     const {vinyls} = props
@@ -10,13 +11,13 @@ const AllProducts = (props) =>{
                 {
                     vinyls ? vinyls.map((vinyl) =>{
                         return(
-                            <div className="singleItem"key={vinyl.id}>
+                            <Link to={`/vinyl/${vinyl.id}`} className="singleItem"key={vinyl.id}>
                                 <p>{vinyl.title}</p>
                                 <p>{vinyl.artist}</p>
                                 <p>${vinyl.price}</p>
                                 <p>{vinyl.yearReleased}</p>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
-                            </div>
+                            </Link>
                         )
                     }) : "No data loaded"
                 }
