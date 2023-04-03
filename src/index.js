@@ -23,11 +23,7 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
-<<<<<<< HEAD
             <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
-=======
-            <Header/>
->>>>>>> main
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls}/>
