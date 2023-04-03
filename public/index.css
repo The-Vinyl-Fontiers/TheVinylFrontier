@@ -58,7 +58,7 @@ body::-webkit-scrollbar-thumb{
     margin-bottom:25px;
 }
 .navbar-item:last-child{
-    margin-top:50vh;
+    margin-top:auto;
 }
 .navbar:hover{
     width:11rem;
@@ -88,4 +88,19 @@ body::-webkit-scrollbar-thumb{
     width:2rem;
     min-width:2rem;
     margin: 0 1.5rem;
+}
+.vinylImg{
+    width:64px;
+    height:64px;
+}
+.itemContainer{
+    border:solid black 3px;
+    margin-right:5rem;
+}
+.singleItem{
+    display:inline-flex;
+    border:solid black 3px;
+    margin:auto;
+    padding:auto;
+
 }
