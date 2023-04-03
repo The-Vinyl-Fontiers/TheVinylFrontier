@@ -1,10 +1,5 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import {Link} from "react-router-dom"
-=======
-import { Link } from "react-router-dom";
-
->>>>>>> main
 const AllProducts = (props) =>{
     const {vinyls} = props
 
