@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
 
-const Logout = () => {
+const Logout = (props) => {
+    const {setLoggedIn} = props
     const navigate = useNavigate();
 
     function logout (){
@@ -9,9 +11,9 @@ const Logout = () => {
         navigate("/")
     }
 
-    return(
-    <div onClick={logout}>
-    </div>)
+    useEffect(() =>{
+        logout()
+    },[])
 }
 
 export default Logout

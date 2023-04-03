@@ -7,7 +7,7 @@ const HomePage = (props) =>{
     return (
         <div>
             <AllProducts vinyls={props.vinyls}/>
-            <Navbar />
+            {/* <Navbar /> */}
             <div>
                 <p>blah blah blah blah</p>
             </div>
