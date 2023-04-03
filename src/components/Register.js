@@ -1,12 +1,16 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-const Register = () => {
+const Register = (props) => {
     const [newUser, setNewUser] = useState("");
     const [newPass, setNewPass] = useState("");
     const [newEmail, setNewEmail] =useState ("");
     const nav = useNavigate("");
-    async function registerUser(event){
-        event.preventDefault ();
+
+    const {setLoggedin} = props
+
+    async function registerUser(){
+        console.log()
+        // event.preventDefault ();
         try{
             if (newPass.length<8){
                 alert ("Your password needs to be at least 8 characters");
@@ -21,22 +25,21 @@ const Register = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user:{
-                        username: newUser,
-                        password: newPass,
-                        email: newEmail
-                    }
+                    username: newUser,
+                    password: newPass,
+                    email: newEmail
                 })
 
             })
             const transData = await response.json();
             console.log (transData);
-            if (transData.success){
-                alert("Account Creation Unsucessful");
+            if (!transData.token){
+                alert(transData.message);
             }else{
-                const tokenKey = transData.data.token;
+                const tokenKey = transData.token;
                 localStorage.setItem("token", tokenKey);
                 alert ("New Account Was Successfully Created");
+                setLoggedin(true)
                 nav("/")
             }
         }catch(error){
@@ -46,7 +49,11 @@ const Register = () => {
     return (
         <div>
             <h2>Create an Account</h2>
-                <form onSubmit= {registerUser}></form>
+                <form onSubmit= {(event) => {
+                    console.log("button clicked")
+                    event.preventDefault()
+                    registerUser()
+                }}>
                 <input
                 type="text"
                 value={newUser}
@@ -62,7 +69,8 @@ const Register = () => {
                 value={newEmail}
                 placeholder="Email"
                 onChange={(event)=> setNewEmail(event.target.value)}/>
-                <button type="submit">Register Account</button>
+                <input type="submit" value="Register Account"></input>
+                </form>
         </div>
     )
 }
