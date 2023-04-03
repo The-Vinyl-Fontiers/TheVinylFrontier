@@ -41,6 +41,7 @@ const Login = (props) => {
                 alert("Login was successfully.");
                 setLoginUser("")
                 setLoginPass("")
+                setLoggedIn(true)
                 nav("/")
             }
         } catch(error){
