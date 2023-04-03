@@ -7,8 +7,8 @@
     padding:1rem;
 }
 body {
-    color:black;
-    background-color:#e7e7e7;
+    color:white;
+    background-color:#484b4f;
     margin:0;
     padding:0;
 
@@ -22,15 +22,24 @@ body::-webkit-scrollbar-track{
 body::-webkit-scrollbar-thumb{
     background:white;
 }
-.Header{
+.title{
     display:flex;
     justify-content: space-between;
+    text-decoration: none;
 }
 .navbar{
-    background-color: purple;
+    position:fixed;
+    right:0;
+    top:0;
+    background-color: rgba(2, 0, 128, 0.541);
     width:5rem;
-    height:50vh;
+    height:100vh;
     transition:width 600ms ease;
+}
+.title{
+    text-decoration: none;
+    font-weight:bolder;
+    font-size:28px;
 }
 .navbar-navigate{
     list-style:none;
@@ -48,8 +57,11 @@ body::-webkit-scrollbar-thumb{
 .navbar-item:first-child{
     margin-bottom:25px;
 }
+.navbar-item:last-child{
+    margin-top:50vh;
+}
 .navbar:hover{
-    width:12rem;
+    width:11rem;
 }
 .navbar:hover .link-text{
     display:block;
@@ -65,8 +77,8 @@ body::-webkit-scrollbar-thumb{
 }
 .link:hover{
     filter:grayscale(0%) opacity(1);
-    background:red;
-    color:blue;
+    background:rgba(0, 123, 255, 0.695);
+    color:black;
 }
 .link-text{
     display:none;

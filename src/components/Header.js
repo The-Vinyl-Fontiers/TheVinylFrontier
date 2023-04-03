@@ -2,11 +2,10 @@ import {Link} from "react-router-dom"
 import {Navbar} from "../components"
 const Header =  ({loggedIn}) => {
     return (
-        <div className="Header">
+        <div className="title">
             <Link to ="/">
-                <div>Vinyls</div>
+                <div className="title">Vinyls</div>
             </Link>
-            <Navbar loggedIn={loggedIn}/>
         </div>
     )
 }
