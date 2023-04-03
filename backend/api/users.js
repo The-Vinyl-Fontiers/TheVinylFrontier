@@ -145,6 +145,8 @@ usersRouter.get("/userid/vinyl",  async (req,res,next) => {
     };
 });
 
+
+//make a user an admin
 usersRouter.post("/:userID/admin" , async(req, res) => {
     try {
         const {isAdmin, username, id} = req.user

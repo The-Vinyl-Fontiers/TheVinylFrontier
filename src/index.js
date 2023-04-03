@@ -28,6 +28,9 @@ const App=()=>{
                     <Homepage vinyls = {vinyls}/>
                 //INCOMPLETE
                 }/>
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
+                <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
+                <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls}/>} />
             </Routes>
         </BrowserRouter>
     )
