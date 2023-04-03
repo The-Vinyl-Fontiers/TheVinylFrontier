@@ -1,10 +1,11 @@
 import {useState,useEffect} from "react"
-import {AllProducts, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct} from './components'
+import {AllProducts, SingleArtist, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct, Artists, Search} from './components'
 import {BrowserRouter, Routes, Link, Route} from "react-router-dom"
 import { createRoot } from "react-dom/client";
 const App=()=>{
     const [vinyls, setVinyls] = useState([])
     const [loggedIn, setLoggedIn] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("")
     async function fetchVinyls() {
         console.log("fethcing vinyls")
         try {
@@ -22,7 +23,11 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
+<<<<<<< HEAD
+            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
+=======
             <Header/>
+>>>>>>> main
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls}/>
@@ -34,7 +39,10 @@ const App=()=>{
                 <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
                 <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls}/>} />
-            </Routes>
+                <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />
+                <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
+                <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
+             </Routes>
         </BrowserRouter>
     )
 }
