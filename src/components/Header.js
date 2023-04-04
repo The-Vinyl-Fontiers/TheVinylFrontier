@@ -2,12 +2,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 
-function SearchBar() {
+function SearchBar(props) {
   const [isActive, setIsActive] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+ const {setSearchTerm, searchTerm} = props;
+    const navigate = useNavigate()
 
   function handleSearch() {
-    ;
+    // let filtered = ""
+    //     if(searchTerm) {
+    //         filtered = vinyls.filter((vinyl) => {
+    //             //check if search term matches title or artist
+    //             return vinyl.title.toLowerCase().includes(searchTerm.toLowerCase()) || vinyl.artist.toLowerCase().includes(searchTerm.toLowerCase())
+    //         })
+    //         setSearchedProducts(filtered)
+    //     }
+    //     else{
+    //         setSearchedProducts(vinyls)
+    //     }
+    navigate("/search")
   }
 
   return (
@@ -25,7 +37,7 @@ function SearchBar() {
 }
 
 const Header=(props)=> {
-  const { setSearchTerm } = props;
+  const { setSearchTerm ,searchTerm } = props;
 
   return (
     <div className="header">
@@ -39,7 +51,7 @@ const Header=(props)=> {
         <Link to="/cart" className="headerLink">
           <div className="title">Cart</div>
         </Link>
-        <SearchBar setSearchTerm={setSearchTerm} />
+        <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={props.vinyls}/>
       </div>
     </div>
   );

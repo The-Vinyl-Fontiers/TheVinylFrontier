@@ -1,5 +1,5 @@
 import {useState,useEffect} from "react"
-import {AllProducts, SingleArtist, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct, Artists, Search, Navbar, Cart} from './components'
+import {AllProducts, SingleArtist, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct, Artists, Search, Navbar, Cart, Admin} from './components'
 import {BrowserRouter, Routes, Link, Route} from "react-router-dom"
 import { createRoot } from "react-dom/client";
 const App=()=>{
@@ -65,7 +65,7 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
+            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls}/>
             <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
@@ -82,6 +82,7 @@ const App=()=>{
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
                 <Route path="/cart" element ={<Cart cart={cart} setCart={setCart}/>} />
+                <Route path="/admin" element= {<Admin />} />
              </Routes>
         </BrowserRouter>
     )

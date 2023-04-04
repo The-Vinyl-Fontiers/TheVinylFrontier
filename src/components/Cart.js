@@ -15,6 +15,7 @@ const Cart = (props) => {
         //check that it includes two deciaml places
         setSubtotal(sum.toFixed(2))
     }
+    //TODO Add submit order funciton that changes an orders status, retrieves the newly created cart and adds the order to order history, clears the cart in js, etc
 
     useEffect(()=>{
         sumPrice()
