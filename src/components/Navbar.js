@@ -9,7 +9,7 @@ const Navbar= (props) => {
                     <li className="navbar-item">
                         <Link className="link" to="login">
                             <FaSignInAlt className="icon"/>
-                            <span class="link-text">Sign In</span>
+                            <span class="link-text">Login</span>
                         </Link>
                     </li>
                     <li className="navbar-item">

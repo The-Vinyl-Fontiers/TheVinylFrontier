@@ -8,11 +8,9 @@
 }
 body {
     color:white;
-    background-color:#484b4f;
-    margin:0;
-    margin-left:2rem;
-    padding:0;
-
+    height:100%;
+    width:100%; 
+    background-image: url('https://www.billboard.com/wp-content/uploads/media/records-vinyl-crates-stock-billboard-650.jpg');
 }
 body::-webkit-scrollbar{
     width:.5rem;
@@ -26,8 +24,17 @@ body::-webkit-scrollbar-thumb{
 .title{
     color:white;
 }
+
+.searchBar{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:auto;
+    top:0;
+}
 .headerLink{
     text-decoration: none;
+    font-family: 'Libre Baskerville', serif;    
 }
 .navbar{
     position:fixed;
@@ -99,6 +106,7 @@ body::-webkit-scrollbar-thumb{
     display:flex;
     padding:3rem;
     overflow-x:scroll;
+    background: #966926;
 }
 .itemContainer::-webkit-scrollbar{
     width:10px;
@@ -123,7 +131,7 @@ body::-webkit-scrollbar-thumb{
     width:400px;
     height:350px;
     padding:1.5rem;
-    background:gray;
+    background:#EAE1DF;
     text-decoration:none;
 }
 .sinlgeItem:visited{
@@ -141,5 +149,6 @@ body::-webkit-scrollbar-thumb{
 }
 .vinylTitle{
     font-weight:bolder;
+    font-family:'Playfair Display', serif;
 }
 
