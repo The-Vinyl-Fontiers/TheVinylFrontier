@@ -8,7 +8,7 @@ const Navbar= (props) => {
             <nav className="navbar">
                 <ul className="navbar-navigate">
                     {
-                        props.loggedin ?(
+                        props.loggedIn ?(
                             <div>
                                 <li className="navbar-item">
                                     <Link className="link" to="/profile">
