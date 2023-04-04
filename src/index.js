@@ -10,7 +10,7 @@ const App=()=>{
     const [currentUser, setCurrentUser] = useState({})
     const token = localStorage.getItem("token");
     async function fetchVinyls() {
-        console.log("fethcing vinyls")
+        console.log("fetching vinyls")
         try {
             const response=await fetch("http://localhost:3001/api/vinyls");
             const vinylData=await response.json();
@@ -71,11 +71,11 @@ const App=()=>{
                     <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart}/>
                 //INCOMPLETE
                 }/>
-                <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn}/>} />
+                <Route path="/logout" element={<Logout LoggedIn={setLoggedIn}/>} />
                 <Route path="/profile" element={<Profile />} />
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
-                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
-                <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
+                <Route path="/login" element = {<Login LoggedIn = {setLoggedIn}/>} />
+                <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart}/>} />
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
