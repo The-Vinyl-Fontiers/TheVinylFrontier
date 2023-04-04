@@ -66,6 +66,7 @@ ordersRouter.post("/" , async (req,res,next) => {
 //POST request to /:orderID/:vinylID -- add new product to order
 ordersRouter.post("/:orderID/:vinylID", async (req, res) =>{
     const {orderID, vinylID} = req.params
+    console.log("Adding vinyl with ID " + vinylID + " to order " + orderID)
     try {
         //check for logged in
         if(!req.user) {
@@ -157,6 +158,31 @@ ordersRouter.delete("/:orderID/:vinylID", async (req,res,next) => {
         res.send(error)
     }
 });
+
+
+ordersRouter.get("/me/cart", async (req, res) => {
+    try {
+        //check for logged in
+        if(!req.user) {
+            res.send({error: "NotLoggedIn", message: "You must be logged in to perform this action"})
+        } else{
+            console.log(req.user)
+            const cart = await getPendingOrderByUserID(req.user.id)
+
+            //check if current user is the owner of the order or admin
+            if(cart.userID != req.user.id && !req.user.isAdmin){
+                res.send({error: "Unauthorized", message: "You do not have the correct credentials to access this order"})
+            }else {
+                //if cart is empty, send back empty array
+                    res.send(cart)
+                
+                
+            }
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 // EXPORTING the route handler.
 module.exports = ordersRouter;

@@ -1,5 +1,5 @@
 const client = require("./client")
-const {createVinyl, getAllVinyls, getVinylByTitle, getVinylsByTagName, addTagToVinyl, getVinylsByArtist, getVinylsByTagID} = require("./index")
+const {createVinyl, getAllVinyls, getVinylByTitle, getVinylsByTagName, addTagToVinyl, getVinylsByArtist, getVinylsByTagID, createUser} = require("./index")
 
 async function dropTables() {
     try {
@@ -88,11 +88,15 @@ async function buildTables() {
 
 async function seedDB() {
     try {
-        await client.query(`
-        INSERT INTO users(username, password, email, "isAdmin") 
-        VALUES ('chase', 'chase', 'chase@chase.com', true), ('david', 'david', 'david@david.com', true), ('jacob', 'jacob', 'jacob@jacob.com', true) , ('user', 'user', 'user@user.com', false);
+        await createUser({username: 'chasetest', password: 'chasetest', email: 'chase@chase.com'})
+        await createUser({username: 'davidtest', password: 'davidtest', email: 'david@david.com'})
+        await createUser({username: 'jacobtest',password: 'jacobtest', email:'jacob@jacob.com'})
+        await createUser({username: 'usertest', password: 'usertest',email: 'user@user.com'})
+        await client.query(
+        // INSERT INTO users(username, password, email, "isAdmin") 
+        // VALUES ('chasetest', 'chasetest', 'chase@chase.com', true), ('davidtest', 'davidtest', 'david@david.com', true), ('jacobtest', 'jacobtest', 'jacob@jacob.com', true) , ('usertest', 'usertest', 'user@user.com', false);
 
-        INSERT INTO vinyls(title, artist, price, "yearReleased", "imgURL") 
+        `INSERT INTO vinyls(title, artist, price, "yearReleased", "imgURL") 
         VALUES ('Random Access Memories', 'Daft Punk', 2.14, 2013, 'https://img.audiomania.ru/pics/goods/original/d/daft_punk-random_access_memories_2_lp1.jpg'), ('Is This It', 'The Strokes', 1.00, 2001, 'https://img.discogs.com/fnIdn4eIQz6GAIox2btEQRn5O60=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-667892-1249548979.jpeg.jpg'), ('Wide Awake!', 'Parquet Courts', 5.60, 2018, 'https://thefirenote.com/wp-content/uploads/2018/05/ParquetCourts_Wide_Awake_AlbumArt.jpg');
 
         INSERT INTO tags(name)
