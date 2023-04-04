@@ -33,6 +33,8 @@ const App=()=>{
                 });
                 const data = await response.json()
                 console.log(data)
+                setCurrentUser(data)
+                setLoggedIn(true)
             } catch (error) {
                 console.log(error)
             }
@@ -64,16 +66,16 @@ const App=()=>{
     return (
         <BrowserRouter>
             <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
-            <Navbar />
+            <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart}/>
                 //INCOMPLETE
                 }/>
-                <Route path="/logout" element={<Logout LoggedIn={setLoggedIn}/>} />
+                <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn}/>} />
                 <Route path="/profile" element={<Profile />} />
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
-                <Route path="/login" element = {<Login LoggedIn = {setLoggedIn}/>} />
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
                 <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart}/>} />
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />
