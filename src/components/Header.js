@@ -1,5 +1,4 @@
 import {Link, useNavigate} from "react-router-dom"
-import {Navbar} from "../components"
 const Header =  (props) => {
     const {setSearchTerm} = props;
     const navigate = useNavigate();
@@ -12,12 +11,14 @@ const Header =  (props) => {
                 <Link to = "/artists" className="headerLink">
                     <div className="title">Artists</div>
                 </Link>
-                <Link to="/cart" >
+                <Link to="/cart" className="headerLink">
                     <div className="title">Cart</div>
                 </Link>
-                <input type="text" onChange={(event)=>
+                <div className="searchContainer">
+                <input type="text" className="searchBar" onChange={(event)=>
                 setSearchTerm(event.target.value)}></input>
-                <button onClick={() => navigate("/search")} className="searchBar">Search</button>
+                <button onClick={() => navigate("/search")}>Search</button>
+                </div>
             </div>
         </div>
     )
