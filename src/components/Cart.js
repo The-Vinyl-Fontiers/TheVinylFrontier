@@ -3,7 +3,7 @@ import RemoveFromCart from "./RemoveFromCart";
 import PaymentScreen from "./PaymentScreen";
 
 const Cart = (props) => {
-    const {cart, setCart} = props
+    const {cart, setCart, vinyls} = props
     const [products, setProducts] = useState(cart.products)
     const [subtotal, setSubtotal] = useState(0)
 
@@ -20,6 +20,10 @@ const Cart = (props) => {
     useEffect(()=>{
         sumPrice()
     },[products])
+
+    useEffect(()=>{
+        setProducts(cart.products)
+    },[vinyls])
 
     return(
         <div>

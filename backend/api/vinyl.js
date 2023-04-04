@@ -30,7 +30,7 @@ vinylRouter.post( "/", async(req,res,next) => {
 
     const {title, artist, yearReleased, price, imgURL, tags} = req.body
  
-    const {isAdmin}= req.body.user //THIS MUST BE CHANGED TO req.user WHEN WE ADD req.user 
+    const {isAdmin}= req.user 
 
     try {
         if(!isAdmin) { //checks for admin 
@@ -67,7 +67,7 @@ vinylRouter.patch("/",  async (req,res,next) => {
 
     const {title, artist, yearReleased, price, imgURL, id} = req.body
  
-    const {isAdmin}= req.body.user //THIS MUST BE CHANGED TO req.user WHEN WE ADD req.user 
+    const {isAdmin}= req.user 
 
     try {
         if(!isAdmin) { //checks for admin 
@@ -75,7 +75,7 @@ vinylRouter.patch("/",  async (req,res,next) => {
         } else  if(!title || !artist || !yearReleased || !price || !imgURL || !id) { //checks for valid fields
             res.send("Invalid vinyl data.").status(400)
         }else {
-            const vinyl = await updateVinyl({title, artist, yearReleased, price, imgURL, id})
+            const vinyl = await updateVinyl({title, artist, yearReleased, price: price.toFixed(2), imgURL, id})
 
             if(vinyl) {
                 res.send(vinyl)
@@ -92,7 +92,7 @@ vinylRouter.patch("/",  async (req,res,next) => {
 // DELETE request - Purpose: delete a vinyl
 vinylRouter.delete("/:id", async(req,res,next) => {
     console.log("A delete request is being made to /vinyl");
-    const {isAdmin}= req.body.user //THIS MUST BE CHANGED TO req.user WHEN WE ADD req.user 
+    const {isAdmin}= req.user 
     const {id} = req.params
     try {
         if(!isAdmin) { //checks for admin 
