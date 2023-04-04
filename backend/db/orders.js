@@ -95,9 +95,9 @@ async function getPendingOrderByUserID(userID) {
         WHERE "userID" = $1 AND status = 'pending';
         `,[userID])
 
-        if(!order) return undefined
+        const pendingOrder = await getOrderByID(order.id)
 
-        return order
+        return pendingOrder
     } catch (error) {
         
     }

@@ -12,7 +12,10 @@ const Header =  (props) => {
                 <Link to = "/artists" className="headerLink">
                     <div className="title">Artists</div>
                 </Link>
-                <input type="text"className="searchBar" onChange={(event)=>
+                <Link to="/cart" >
+                    <div className="title">Cart</div>
+                </Link>
+                <input type="text" onChange={(event)=>
                 setSearchTerm(event.target.value)}></input>
                 <button onClick={() => navigate("/search")} className="searchBar">Search</button>
             </div>
