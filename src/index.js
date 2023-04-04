@@ -81,8 +81,8 @@ const App=()=>{
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
-                <Route path="/cart" element ={<Cart cart={cart} setCart={setCart}/>} />
-                <Route path="/admin" element= {<Admin />} />
+                <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls}/>} />
+                <Route path="/admin" element= {<Admin currentUser={currentUser} vinyls={vinyls} setVinyls={setVinyls}/>} />
              </Routes>
         </BrowserRouter>
     )

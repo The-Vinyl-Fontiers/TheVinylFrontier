@@ -110,7 +110,7 @@ usersRouter.get("/me",  async (req,res,next) => {
             res.send({
                 id: user.id,
                 username: username,
-                idAdmin: user.isAdmin
+                isAdmin: user.isAdmin
             });
         } else {
             res.send({
