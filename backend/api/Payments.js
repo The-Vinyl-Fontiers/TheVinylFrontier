@@ -1,11 +1,11 @@
 // IMPORTING necessary modules & database functions.
 const express = require('express');
-const creditCardInfoRouter = express.Router();
+const paymentsRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const {} = require("../db");
+const { getCreditCardInfo, createPaymentInfo, deleteCreditCardInfo, updatePaymentInfo } = require('../db/Payments');
 
 // Middleware to test api/credCardInfo
-creditCardInfoRouter.use((req,res,next) => {
+paymentsRouter.use((req,res,next) => {
     console.log("A request is being made to /creditCardInfo");
 
     next();
@@ -13,35 +13,89 @@ creditCardInfoRouter.use((req,res,next) => {
 });
 
 // GET request - 
-creditCardInfoRouter.get((req,res,next) => {
-    console.log("A get request is being made to /creditCardInfo");
+paymentsRouter.get("/" , async (req,res,next) => {
+    try {
+        if (!req.user) {
+            res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
+        } else {
+            const ccinfo = await getCreditCardInfo(id, UserID)
 
-    next();
+            if (ccinfo.userID != req.user.id || !req.user.isAdmin) {
+                res.send ({error: "Unauthorized", message: "You do not have permission to view this information."})
+            } else {
+                res.send(ccinfo)
+            }
+        }
+    } catch (error) {
+        next (error) 
+    }
 
 });
 
 // POST request - Purpose: 
-creditCardInfoRouter.post((req,res,next) => {
-    console.log("A post request is being made to /creditCardInfo");
+paymentsRouter.post("/" , async (req,res,next) => {
 
-    next();
+    const {UserID, Address, CCNum, cardholderName, CVVNum} = req.body
 
+    try {
+        if (!req.user) {
+            res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
+        } else if (!Address || !CCNum || !cardholderName || !CVVNum ) {
+            res.send ("Invalid credit card info data.").status(400) ;
+        }else {
+            const newCCInfo = await createPaymentInfo(UserID, Address, CCNum, cardholderName, CVVNum)
+
+            res.send(newCCInfo) ;
+        } 
+    } catch (error) {
+        next (error)
+    }
 });
 
 // PATCH request - Purpose:
-creditCardInfoRouter.patch((req,res,next) => {
-    console.log("A patch request is being made to /creditCardInfo");
+paymentsRouter.patch("/", async (req,res,next) => {
+    const { Address, CCNum, cardholderName, CVVNum } = req.body
 
-    next();
+    try {
+        if (!req.user) {
+            res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
+        } else if (!Address || !CCNum || !cardholderName || !CVVNum ) {
+            res.send ("Invalid credit card info data.").status(400) ;
+        } else {
+            const newInfo = await updatePaymentInfo({ Address, CCNum, cardholderName, CVVNum })
+            
+            if (newInfo) {
+                res.send(newInfo)
+            } else {
+                res.send("Your credit card info was unable to be updated.").status(500)
+            }
+        }
+    } catch (error) {
+        
+    }
 
 });
 
 // DELETE request - Purpose:
-creditCardInfoRouter.delete((req,res,next) => {
-    console.log("A delete request is being made to /creditCardInfo");
+paymentsRouter.delete("/:UserID/:CCInfoID" , async (req,res,next) => {
+    const { UserID, CCInfoID } = req.params
 
-    next();
+    try {
+        if (!req.user) {
+            res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
+        }else {
+            const ccinfo = await getCreditCardInfo(id, UserID)
 
+            if (ccinfo.userID != req.user.id || !req.user.isAdmin) {
+                res.send ({error: "Unauthorized", message: "You do not have permission to view this information."})
+            } else {
+                const deletedCCInfo = await deleteCreditCardInfo (UserID, CCInfoID)
+                res.send(deletedCCInfo)
+            }
+        } 
+    } catch (error) {
+        next (error)
+    }
 });
 
 // EXPORTING the route handler.
