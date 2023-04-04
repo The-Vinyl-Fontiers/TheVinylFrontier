@@ -65,7 +65,7 @@ const App=()=>{
     },[])
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm}/>
+            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls}/>
             <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
