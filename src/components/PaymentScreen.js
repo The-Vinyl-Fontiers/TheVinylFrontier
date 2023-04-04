@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+//TODO Add inputs and state for address
 
 const PaymentScreen = () => {
     const [cardNumber, setCardNumber] = useState();
@@ -6,6 +7,8 @@ const PaymentScreen = () => {
     const [expMonth, setExpMonth] = useState(1);
     const [expYear, setExpYear] = useState(2023);
     const [payment, setPayment] = useState({})
+    //toggle for showing form to input a new payment option
+    const [showPaymentForm, setShowPaymentForm] = useState(false);
 
     async function submitPayment () {
         const expDate = new Date(expYear, expMonth)
@@ -17,9 +20,18 @@ const PaymentScreen = () => {
                 hiddenCard += cardNumber[i]
             }
         }
-        setPayment({hiddenCard, cardName, expDate})
+        try {
+            //TODO Add payment to db
+            // const response = await fetch()
+
+            setPayment({hiddenCard, cardName, expDate})
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
+    //TODO Check for payment in payments table
     async function checkForPaymentOnFile () {
         try {
             // const response = await fetch("http://localhost:3001/api/payments/")
@@ -41,11 +53,17 @@ const PaymentScreen = () => {
                         <p>Cardholder Name: {payment.cardName}</p>
                         <p>Card Number: {payment.hiddenCard}</p>
                         <p>Expiration Date: {payment.expDate.getMonth()}/{payment.expDate.getFullYear()}</p>
-                    </div> :
-                    <div>
-                    <h3>Evnter a new payment</h3>
+                    </div> : "No payment on file" 
+                    
+            }
+
+            {
+                showPaymentForm ? 
+                <div>
+                    <h3>Enter a new payment</h3>
                     <form onSubmit={(event) => {
                         event.preventDefault();
+                        setShowPaymentForm(false)
                         submitPayment()
                     }}>
                         <input type="text" placeholder="Card Number" onChange={(event) => setCardNumber(event.target.value)}></input>
@@ -75,8 +93,13 @@ const PaymentScreen = () => {
                         </select>
                         <button type="submit">Submit</button>
                     </form>
-                    </div>
+                    </div> :
+                    <button onClick={(event) => {
+                        setShowPaymentForm(true)
+                        event.preventDefault()
+                    }}>Add new payment method</button>
             }
+            
             
         </div>
     )
