@@ -3,32 +3,19 @@ const client = require('./client');
 
 // tags FUNCTIONS
 
-async function createTags(tagList) {
-    if (tagList.length === 0) {
-        return;
-    }
-    const insertValues = tagList.map(
-        (_, index) => `$${index + 1}`).join('), (');
-    const selectValues = tagList.map(
-        (_, index) => `$${index + 1}`).join(', ');
+async function createTag(name) {
     try {
-        await client.query(`
-        INSERT INTO tags(name)
-        VALUES (${insertValues})
-        ON CONFLICT (name) DO NOTHING;
-        `, Object.values(tagList));
+        const { rows: [tag] } = await client.query(`
+      INSERT INTO tags(name) 
+      VALUES ($1)
+      RETURNING *;
+      `, [name]);
 
-        const { rows } = await client.query(`
-        SELECT * FROM tags
-        WHERE name
-        IN (${selectValues});
-        `, Object.values(tagList));
-
-        return rows;
+        return tag;
     } catch (error) {
         throw error;
-    }
-}
+    };
+};
 
 async function getAllTags() {
     try {
@@ -50,9 +37,9 @@ async function deleteTag(id) {
             DELETE FROM tags
             WHERE id=$1;
         `, [id]);
-        
+
         return `DELETED TAG NUMBER: ${id}`
-    } catch(error) {
+    } catch (error) {
         next(error);
     };
 };
@@ -100,7 +87,7 @@ async function getTagById(id) {
 // EXPORTING the tags functions.
 
 module.exports = {
-    createTags,
+    createTag,
     getAllTags,
     deleteTag,
     getTagByName,
