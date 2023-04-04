@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import AddToCart from "./AddToCart";
 
 const SingleProduct = (props) => {
-    const {vinyls} = props;
+    const {vinyls,cart, setCart} = props;
     const {vinylID} = useParams();
 
     const [thisVinyl, setThisVinyl] = useState("")
@@ -39,6 +40,7 @@ const SingleProduct = (props) => {
                         <span key={tag}>{tag}</span>
                         ) : "No tags"
                      }
+                     <AddToCart vinyl = {thisVinyl} setCart={setCart} cart= {cart}/>
                      </div>
                 </div>) : 
                 "Data Loading..."

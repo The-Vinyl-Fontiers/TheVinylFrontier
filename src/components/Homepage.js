@@ -6,7 +6,7 @@ import {Navbar} from '../components'
 const HomePage = (props) =>{
     return (
         <div>
-            <AllProducts vinyls={props.vinyls}/>
+            <AllProducts vinyls={props.vinyls} cart={props.cart} setCart= {props.setCart}/>
             {/* <Navbar /> */}
             <div>
                 <p>blah blah blah blah</p>
