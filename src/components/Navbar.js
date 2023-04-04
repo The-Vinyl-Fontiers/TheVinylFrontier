@@ -1,11 +1,17 @@
 import {Link} from "react-router-dom";
 import Logout from "./Logout";
-import {FaUserAlt, FaHistory, FaDoorClosed} from "react-icons/fa";
+import {FaUserAlt, FaHistory, FaSignOutAlt, FaSignInAlt,FaPlusSquare} from "react-icons/fa";
 const Navbar= (props) => {
     return(
         <div>
             <nav className="navbar">
                 <ul className="navbar-navigate">
+                    <li className="navbar-item">
+                        <Link className="link" to="login">
+                            <FaSignInAlt className="icon"/>
+                            <span class="link-text">Sign In</span>
+                        </Link>
+                    </li>
                     <li className="navbar-item">
                         <Link className="link" to="/profile">
                         <FaUserAlt className="icon"/>
@@ -19,8 +25,14 @@ const Navbar= (props) => {
                         </Link>
                     </li>
                     <li className="navbar-item">
+                        <Link className="link" to="/register">
+                        <FaPlusSquare className="icon"/>
+                        <span class="link-text">Register</span>
+                        </Link>
+                    </li>
+                    <li className="navbar-item">
                         <Link className= "link" to="/logout">
-                        <FaDoorClosed className="icon"/>
+                        <FaSignOutAlt className="icon"/>
                         <span class="link-text">Logout</span>
                         </Link>
                     </li>

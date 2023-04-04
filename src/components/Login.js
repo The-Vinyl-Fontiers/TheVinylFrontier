@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
     const [loginUser, setLoginUser] = useState("");
     const [loginPass, setLoginPass] = useState("");
 
     const nav = useNavigate();
+
+    const {setLoggedIn} = props;
 
     async function logIn(event){
         event.preventDefault();
@@ -18,29 +20,28 @@ const Login = () => {
                 alert("Password is too short. 8 Character Minimum")
                 return;
             };
-            const response = await fetch(`http://localhost:3000/api/users/login`, {
+            const response = await fetch(`http://localhost:3001/api/users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user: {
                         username: loginUser,
                         password: loginPass
-                    }
                 })
             });
             const transData = await response.json();
 
-            if (!transData.success){
-                alert("Login was unsuccessful. Please try again. ");
+            if (!transData.token){
+                alert(transData.message);
             } else {
                 const tokenKey = transData.token;
-                console.log(tokenKey);
+                // console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("Login was successfully.");
                 setLoginUser("")
                 setLoginPass("")
+                setLoggedIn(true)
                 nav("/")
             }
         } catch(error){
