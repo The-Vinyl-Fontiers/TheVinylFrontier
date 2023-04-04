@@ -56,8 +56,8 @@ router.use('/orders', ordersRouter);
 const vinylRouter = require('./vinyl');
 router.use('/vinyls', vinylRouter);
 
-// const paymentsRouter = require('./Payments');
-// router.use('/Payments', paymentsRouter);
+const paymentsRouter = require('./Payments');
+router.use('/Payments', paymentsRouter);
 
 const orderProductsRouter = require('./order_products');
 router.use('/order_products', orderProductsRouter);

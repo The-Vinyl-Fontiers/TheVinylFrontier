@@ -1,11 +1,11 @@
 // IMPORTING necessary modules & database functions.
 const express = require('express');
-const creditCardInfoRouter = express.Router();
+const paymentsRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { getCreditCardInfo, createPaymentInfo, deleteCreditCardInfo, updatePaymentInfo } = require('../db/Payments');
 
 // Middleware to test api/credCardInfo
-creditCardInfoRouter.use((req,res,next) => {
+paymentsRouter.use((req,res,next) => {
     console.log("A request is being made to /creditCardInfo");
 
     next();
@@ -13,7 +13,7 @@ creditCardInfoRouter.use((req,res,next) => {
 });
 
 // GET request - 
-creditCardInfoRouter.get("/" , async (req,res,next) => {
+paymentsRouter.get("/" , async (req,res,next) => {
     try {
         if (!req.user) {
             res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
@@ -33,7 +33,7 @@ creditCardInfoRouter.get("/" , async (req,res,next) => {
 });
 
 // POST request - Purpose: 
-creditCardInfoRouter.post("/" , async (req,res,next) => {
+paymentsRouter.post("/" , async (req,res,next) => {
 
     const {UserID, Address, CCNum, cardholderName, CVVNum} = req.body
 
@@ -41,7 +41,7 @@ creditCardInfoRouter.post("/" , async (req,res,next) => {
         if (!req.user) {
             res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
         } else if (!Address || !CCNum || !cardholderName || !CVVNum ) {
-            res.send ("Invalid vinyl data.").status(400) ;
+            res.send ("Invalid credit card info data.").status(400) ;
         }else {
             const newCCInfo = await createPaymentInfo(UserID, Address, CCNum, cardholderName, CVVNum)
 
@@ -53,14 +53,14 @@ creditCardInfoRouter.post("/" , async (req,res,next) => {
 });
 
 // PATCH request - Purpose:
-creditCardInfoRouter.patch("/", async (req,res,next) => {
+paymentsRouter.patch("/", async (req,res,next) => {
     const { Address, CCNum, cardholderName, CVVNum } = req.body
 
     try {
         if (!req.user) {
             res.send ({error: "NotLoggedIn", message: "You must log in to perform this action."})
         } else if (!Address || !CCNum || !cardholderName || !CVVNum ) {
-            res.send ("Invalid vinyl data.").status(400) ;
+            res.send ("Invalid credit card info data.").status(400) ;
         } else {
             const newInfo = await updatePaymentInfo({ Address, CCNum, cardholderName, CVVNum })
             
@@ -77,7 +77,7 @@ creditCardInfoRouter.patch("/", async (req,res,next) => {
 });
 
 // DELETE request - Purpose:
-creditCardInfoRouter.delete("/:UserID/:CCInfoID" , async (req,res,next) => {
+paymentsRouter.delete("/:UserID/:CCInfoID" , async (req,res,next) => {
     const { UserID, CCInfoID } = req.params
 
     try {
