@@ -20,7 +20,6 @@ const App=()=>{
             console.log(error)
         }
     }
-
     async function fetchCurrentUser() {
         console.log("fetching user data")
         if(token) {
