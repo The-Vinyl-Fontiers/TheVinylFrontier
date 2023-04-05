@@ -56,6 +56,33 @@ body::-webkit-scrollbar-thumb{
     opacity: 1;
     z-index: 2;
   }
+.searchIcon{
+    cursor: pointer;
+}
+.searchIcon:hover{
+    opacity:.7
+}
+.filtersContainer{
+    display:inline-flex;
+    position:fixed;
+    left:0;
+    z-index: 2;
+    flex-direction: column;
+    background:red;
+    margin:0;
+    padding:0;  
+    border:solid black 3px;
+    width:120px;
+    top:0;
+    height:100vh;
+    transition:600ms ease;
+    z-index:2;
+    opacity:.2
+}
+.filtersContainer:hover{
+    width:12rem;
+
+}
 .headerLink{
     text-decoration: none;
     font-family: 'Libre Baskerville', serif;    

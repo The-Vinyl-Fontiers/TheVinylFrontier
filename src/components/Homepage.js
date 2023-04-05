@@ -1,28 +1,50 @@
-import { useEffect, useState} from 'react';
-import { Link } from "react-router-dom";
-import {AllProducts} from './index';
-import {Navbar} from '../components'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { AllProducts, Navbar } from './index';
+import { AddToCart } from '../components';
+import {Filterbar} from '../components';
 
-const HomePage = (props) =>{
-    return (
-        <div>
-            <AllProducts vinyls={props.vinyls} cart={props.cart} setCart= {props.setCart}/>
-            {/* <Navbar /> */}
-            <div>
-                <p>blah blah blah blah</p>
-            </div>
-            {
-                props.LoggedIn ? (
-                <div>
-                    {
-                        //Cart , logout, profile shows up, register leaves
-                    }
-                </div>
-                ) : <div>
-                    Please Login to access more features blah blah blah
-                </div>
-            }
-        </div>
-    )
-}
-export default HomePage
+const HomePage = (props) => {
+  const { vinyls } = props;
+  const [filters, setFilters] = useState([]);
+  const [filteredVinyls, setFilteredVinyls] = useState(vinyls);
+
+  const handleFilterChange = (event) => {
+    const selectedFilter = event.target.value;
+
+    if (filters.includes(selectedFilter)) {
+      setFilters(filters.filter(filter => filter !== selectedFilter));
+    } else {
+      setFilters([...filters, selectedFilter]);
+    }
+  };
+
+  useEffect(() => {
+    const filtered = vinyls.filter(vinyl => filters.every(filter => vinyl.tags.includes(filter)));
+    setFilteredVinyls(filtered);
+  }, [filters, vinyls]);
+
+  return (
+    <div>
+      <Filterbar filters={filters} onFilterChange={handleFilterChange} />
+      <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} />
+      <Navbar />
+      <div>
+        <p>blah blah blah blah</p>
+      </div>
+      {
+        props.loggedIn ? (
+          <div>
+            {/* Cart, logout, profile shows up, register leaves */}
+          </div>
+        ) : (
+          <div>
+            Please log in to access more features blah blah blah
+          </div>
+        )
+      }
+    </div>
+  );
+};
+
+export default HomePage;
