@@ -31,7 +31,7 @@ function SearchBar(props) {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button className="button"onClick={handleSearch}>Search</button>
     </div>
   );
 }

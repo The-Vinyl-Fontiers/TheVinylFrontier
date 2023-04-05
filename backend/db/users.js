@@ -84,6 +84,18 @@ async function getUserByUsername(username) {
         throw error;
     };
 };
+async function updateUser(username, password, email){
+    try {
+        const {rows: [user]} =await client.query(`
+        UPDATE username, password, email
+        FROM users
+        WHERE username=$1,
+        `,[username, password, email]);
+        return user;
+    } catch(error){
+        throw error;
+    };
+}
 
 async function makeUserAdmin(userID) {
     try {
@@ -103,6 +115,7 @@ async function makeUserAdmin(userID) {
 // EXPORTING the users functions.
 
 module.exports = {
+    updateUser,
     createUser,
     getUser,
     getUserById,
