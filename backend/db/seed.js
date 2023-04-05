@@ -37,7 +37,7 @@ async function buildTables() {
             artist VARCHAR(255) NOT NULL,
             price DECIMAL NOT NULL,
             "yearReleased" INTEGER NOT NULL,
-            "imgURL" VARCHAR(255) DEFAULT 'https://pngimg.com/uploads/vinyl/vinyl_PNG21.png'
+            "imgURL" TEXT DEFAULT 'https://pngimg.com/uploads/vinyl/vinyl_PNG21.png'
         );
         `);
 
@@ -62,7 +62,7 @@ async function buildTables() {
             address VARCHAR(255) NOT NULL,
             "CCNum" VARCHAR(255) NOT NULL,
             "cardholderName" VARCHAR(255) NOT NULL,
-            "CVVNum" INTEGER NOT NULL
+            "CVVNum" VARCHAR(255) NOT NULL
         );`);
 
         await client.query(`

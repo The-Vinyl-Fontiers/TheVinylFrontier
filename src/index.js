@@ -63,19 +63,25 @@ const App=()=>{
         fetchCurrentUser()
         fetchCurrentCart()
     },[])
+
+    //fetch the current user data anytime the token is changed, i.e. deleted or added
+    useEffect(()=>{
+        fetchCurrentUser()
+    },[token])
+
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls}/>
+            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser}/>
             <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart}/>
                 //INCOMPLETE
                 }/>
-                <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn}/>} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser}/>} />
+                <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
-                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn}/>} />
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser}/>} />
                 <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart}/>} />
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />

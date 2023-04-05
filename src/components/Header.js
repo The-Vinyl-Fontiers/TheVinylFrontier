@@ -37,7 +37,7 @@ function SearchBar(props) {
 }
 
 const Header=(props)=> {
-  const { setSearchTerm ,searchTerm } = props;
+  const { setSearchTerm ,searchTerm, currentUser } = props;
 
   return (
     <div className="header">
@@ -51,6 +51,12 @@ const Header=(props)=> {
         <Link to="/cart" className="headerLink">
           <div className="title">Cart</div>
         </Link>
+        {
+          currentUser.isAdmin ? 
+          <Link to="/admin" className="headerLink">
+          <div className="title">Admin</div>
+        </Link> : ""
+        }
         <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={props.vinyls}/>
       </div>
     </div>

@@ -63,6 +63,10 @@ const EditVinyl = (props) => {
                     <input type="text" value={editYear} onChange={(event) => setEditYear(event.target.value)}></input>
                     <input type="text" value={editImgURL} onChange={(event) => setEditImgURL(event.target.value)}></input>
                     <button type="submit">Save</button>
+                    <button onClick={(event) => {
+                        event.preventDefault();
+                        setEditFormShown(false)
+                    }}>Cancel</button>
                 </form>
             </div> : <button onClick={(event)=>{
                 event.preventDefault()
