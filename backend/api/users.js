@@ -177,7 +177,7 @@ usersRouter.patch('/:username', async (req, res) => {
 
             res.send(updatedUser);
         } else {
-            res.status(500).json({ message: 'Unable to update user.' })
+            res.status(500).send({ message: 'Unable to update user.' })
         }
     } catch (error) {
         res.send(error);
