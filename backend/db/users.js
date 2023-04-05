@@ -84,18 +84,21 @@ async function getUserByUsername(username) {
         throw error;
     };
 };
+
 async function updateUser(username, password, email){
     try {
-        const {rows: [user]} =await client.query(`
-        UPDATE username, password, email
-        FROM users
-        WHERE username=$1,
-        `,[username, password, email]);
+        const {rows: [user]} = await client.query(`
+        UPDATE users
+        SET username = $1, password = $2, email = $3
+        WHERE username = $4
+        RETURNING *;
+        `, [username, password, email, username]);
         return user;
     } catch(error){
         throw error;
     };
 }
+
 
 async function makeUserAdmin(userID) {
     try {
