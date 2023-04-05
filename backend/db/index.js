@@ -6,5 +6,5 @@ module.exports = {
     ...require('./order_products'),
     ...require('./tags'), 
     ...require('./vinyl'), 
-    ...require('./vinyl_tags')
+    // ...require('./vinyl_tags')
   }

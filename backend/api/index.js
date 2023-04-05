@@ -65,7 +65,7 @@ router.use('/order_products', orderProductsRouter);
 const tagsRouter = require('./tags');
 router.use('/tags', tagsRouter);
 
-const vinylTagsRouter = require('./vinyl_tags');
-router.use('/vinyl_tags', vinylTagsRouter);
+// const vinylTagsRouter = require('./vinyl_tags');
+// router.use('/vinyl_tags', vinylTagsRouter);
 // EXPORTING the route handler.
 module.exports = router;
