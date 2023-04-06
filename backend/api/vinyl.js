@@ -34,11 +34,11 @@ vinylRouter.post( "/", async(req,res,next) => {
 
     try {
         if(!isAdmin) { //checks for admin 
-            res.send("You must be an admin to perform this action")
+            res.send({message: "You must be an admin to perform this action"})
         } else  if(!title || !artist || !yearReleased || !price || !imgURL) { //checks for valid fields
-            res.send("Invalid vinyl data.").status(400)
+            res.send({message: "Invalid vinyl data."}).status(400)
         }else {
-            const createdVinyl = await createVinyl({title, artist, yearReleased, price, imgURL})
+            const createdVinyl = await createVinyl({title, artist, yearReleased, price: price.toFixed(2), imgURL})
 
             if(tags) { //if tags were included add them to the created vinyl
                 await Promise.all(tags.map(
@@ -92,20 +92,23 @@ vinylRouter.patch("/",  async (req,res,next) => {
 // DELETE request - Purpose: delete a vinyl
 vinylRouter.delete("/:id", async(req,res,next) => {
     console.log("A delete request is being made to /vinyl");
-    const {isAdmin}= req.user 
+    const {isAdmin} = req.user 
     const {id} = req.params
+    console.log(isAdmin, id)
     try {
         if(!isAdmin) { //checks for admin 
-            res.send("You must be an admin to perform this action")
-        } else  if(!id) { //checks for valid fields
-            res.send("A vinyl ID must be provided.").status(400)
+            res.send({message: "You must be an admin to perform this action"})
+        } else  if(!id.length) { //checks for valid fields
+            res.send({ message: "A vinyl ID must be provided."}).status(400)
         }else {
+            console.log("calling function")
             const vinyl = await deleteVinyl(id)
+            console.log(vinyl)
 
             if(vinyl) {
                 res.send(vinyl)
             }else { //if vinyl wasn't able to be deleted
-                res.send("No vinyl was found with that ID.").status(500)
+                res.send({message: "No vinyl was found with that ID."}).status(500)
             }
         }
     } catch (error) {

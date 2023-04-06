@@ -35,7 +35,8 @@ paymentsRouter.get("/" , async (req,res,next) => {
 // POST request - Purpose: 
 paymentsRouter.post("/" , async (req,res,next) => {
 
-    const {UserID, Address, CCNum, cardholderName, CVVNum} = req.body
+    const {Address, CCNum, cardholderName, CVVNum} = req.body
+    const {id} = req.user;
 
     try {
         if (!req.user) {
@@ -43,7 +44,7 @@ paymentsRouter.post("/" , async (req,res,next) => {
         } else if (!Address || !CCNum || !cardholderName || !CVVNum ) {
             res.send ("Invalid credit card info data.").status(400) ;
         }else {
-            const newCCInfo = await createPaymentInfo(UserID, Address, CCNum, cardholderName, CVVNum)
+            const newCCInfo = await createPaymentInfo({UserID: id, Address, CCNum, cardholderName, CVVNum})
 
             res.send(newCCInfo) ;
         } 
