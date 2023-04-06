@@ -4,7 +4,7 @@ const RemoveFromCart = (props) => {
 
     async function removeProduct () {
         try {
-            const response = await fetch(`http://localhost:3001/api/orders/${cart.id}/${vinyl.id}`,{
+            const response = await fetch(`http://localhost:3001/api/orders/${cart.id}/${vinyl.id}/remove`,{
                 method: 'DELETE',
                 headers : {
                     'Content-Type' : 'application/json',

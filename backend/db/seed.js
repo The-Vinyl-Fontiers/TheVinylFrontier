@@ -116,6 +116,18 @@ async function seedDB() {
         INSERT INTO order_products ("orderID", "vinylID") 
         VALUES (1, 1), (1,2) ,(1,3), (2, 2), (3, 1), (3,3), (4,2);
         `)
+
+        await createVinyl({title: "Hozier", artist: "Hozier", price: "6.99", yearReleased: 2014, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51f31gDFLNL._AC_SX522_.jpg'})
+        await createVinyl({title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", price: "7.99", yearReleased: 2012, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/91u1XVc%2B8iL._SL1500_.jpg'})
+        await createVinyl({title: "The Eminem Show", artist: "Eminem", price: "5.99", yearReleased: 2002, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61YQjKkrsWL._SL1400_.jpg'})
+        await createVinyl({title: "Dark Side of the Moon", artist: "Pink Floyd", price: "9.99", yearReleased: 1973, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/81Y%2BjnfuJ9L._SL1500_.jpg'})
+        await createVinyl({title: "Born in the U.S.A.", artist: "Bruce Springsteen", price: "6.99", yearReleased: 1984, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/81NlF60G6eL._SL1500_.jpg'})
+        await createVinyl({title: "Bad", artist: "Michael Jackson", price: "4.99", yearReleased: 1987, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/81TWG2%2BzIgL._SL1425_.jpg'})
+        await createVinyl({title: "Back in Black", artist: "AC/DC", price: "7.99", yearReleased: 1980, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/71e-n3K0MRL._SL1500_.jpg'})
+        await createVinyl({title: "American Idiot", artist: "Green Day", price: "5.99", yearReleased: 2004, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/71gofh6zCJL._SL1200_.jpg'})
+        await createVinyl({title: "25", artist: "Adele", price: "9.99", yearReleased: 2015, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61YKzwNZI3L._AC_SX522_.jpg'})
+        await createVinyl({title: "1989", artist: "Taylor Swift", price: "6.99", yearReleased: 2014, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/71%2BDTJZgT7L._SL1400_.jpg'})
+
     } catch (error) {
         console.log(error)
     }
