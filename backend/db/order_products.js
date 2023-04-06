@@ -49,6 +49,26 @@ async function deleteOrderProduct(orderID, vinylID) {
     }
 }
 
+async function incrementOrderProduct(orderID, vinylID) {
+    try {
+
+        console.log("adding one to " + orderID + " with vinyl " + vinylID)
+        await client.query(`
+        UPDATE order_products
+        SET quantity = quantity + 1
+        WHERE "orderID" = $1 AND "vinylID" = $2;
+        `,[orderID, vinylID])
+        console.log("success")
+
+        //get the updated order
+        const order = await getOrderByID(orderID);
+
+        return order;
+    } catch (error) {
+        
+    }
+}
+
 async function getOrdersProducts({}) {
     try {
         
@@ -74,4 +94,5 @@ module.exports = {
     getOrdersProducts,
     updateOrdersProducts,
     deleteOrderProduct,
+    incrementOrderProduct
 }

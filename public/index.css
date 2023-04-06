@@ -26,6 +26,9 @@ body::-webkit-scrollbar-thumb{
 .title{
     color:white;
 }
+.header{
+    margin-left:3.75cm;
+}
 .searchContainer {
     display:flex;
     align-items: left;
@@ -45,7 +48,7 @@ body::-webkit-scrollbar-thumb{
     outline: none;
     position: absolute;
     top: 50%;
-    left: 23%;
+    left: 30%;
     transform: translate(-50%, -50%);
     opacity: 0;
     z-index: -1;
@@ -56,6 +59,32 @@ body::-webkit-scrollbar-thumb{
     opacity: 1;
     z-index: 2;
   }
+.searchIcon{
+    cursor: pointer;
+}
+.searchIcon:hover{
+    opacity:.7
+}
+.filtersContainer{
+    display:inline-flex;
+    position:fixed;
+    left:0;
+    z-index: 2;
+    flex-direction: column;
+    background:red;
+    margin:0;
+    padding:0;  
+    border:solid black 3px;
+    width:120px;
+    top:0;
+    height:100vh;
+    transition:600ms ease;
+    z-index:2;
+}
+.filtersContainer:hover{
+    width:12rem;
+
+}
 .headerLink{
     text-decoration: none;
     font-family: 'Libre Baskerville', serif;    
@@ -133,7 +162,9 @@ body::-webkit-scrollbar-thumb{
     overflow-x:scroll;
     background-image: linear-gradient(45deg,brown,gray,white,black);
     animation: gradient 15s ease infinite;
-    height:100%;
+    height:50%;
+    margin:8rem;
+    margin-top:0;
     background-size:auto;
     
 }
@@ -166,7 +197,7 @@ body::-webkit-scrollbar-thumb{
     position:relative;
     flex-direction:column;
     border-radius:16px;
-    box-shadow: -1rem 0 1rem #000;
+    box-shadow: -.5rem 0 .5rem #000;
     transition:.2s;
     width:400px;
     height:350px;

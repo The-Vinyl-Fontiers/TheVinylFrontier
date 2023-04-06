@@ -2,7 +2,7 @@
 const express = require('express');
 const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct } = require("../db");
+const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct, incrementOrderProduct } = require("../db");
 
 // Middleware to test api/orders
 ordersRouter.use((req,res,next) => {
@@ -78,10 +78,25 @@ ordersRouter.post("/:orderID/:vinylID", async (req, res) =>{
             if(order.userID != req.user.id && !req.user.isAdmin){
                 res.send({error: "Unauthorized", message: "You do not have the correct credentials to access this order"})
             }else {
-                //create the new order_product and send back the new order
-                const updatedOrder = await createOrderProduct(orderID, vinylID)
+                //check whether the order already contains the vinyl
+                let containsProduct = false;
+                for(let i = 0; i < order.products.length; i++) {
+                    if(order.products[i].id == vinylID) {
+                        containsProduct = true;
+                        break;
+                    }
+                }
+                console.log(containsProduct)
+                if(containsProduct) { //if it does, increment the quantity by one
+                    const order = await incrementOrderProduct(orderID, vinylID)
 
-                res.send(updatedOrder)
+                    res.send(order)
+                }else {
+                     //create the new order_product and send back the new order
+                    const updatedOrder = await createOrderProduct(orderID, vinylID)
+
+                    res.send(updatedOrder)
+                }
             }
         }
     } catch (error) {

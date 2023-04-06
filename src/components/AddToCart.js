@@ -15,6 +15,7 @@ const AddToCart = (props) => {
             // let newCart = cart;
             // // console.log(newCart.products)
             // newCart.products.push(vinyl)
+            console.log(data)
             setCart(data)
         } catch (error) {
             console.log(error)

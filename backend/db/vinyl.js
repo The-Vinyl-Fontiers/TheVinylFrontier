@@ -201,18 +201,20 @@ async function updateVinyl({id, title, artist, price, yearReleased, imgURL}) {
 
 async function deleteVinyl(id) {
     try {
-        const {rows: [vinyl]} = await getVinylByID(id)
+        console.log("fetching vinyl")
+        const vinyl = await getVinylByID(id)
 
+        console.log("staring to delete vinyl...")
         await client.query(`
         DELETE FROM vinyls 
         WHERE id = $1;
         `,[id])
-
+        console.log("deleted vinyl, starting to delete tags...")
         await client.query(`
         DELETE FROM vinyl_tags
         WHERE "vinylID" = $1;       
         `,[id])
-
+        console.log("deleted tags")
         return vinyl;
     } catch (error) {
         throw error

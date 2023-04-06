@@ -38,7 +38,7 @@ async function getOrderByID(orderID) {
 
         //add products
         const {rows: products} = await client.query(`
-        SELECT vinyls.* FROM vinyls
+        SELECT vinyls.*, order_products.quantity FROM vinyls
         JOIN order_products on order_products."vinylID" = vinyls.id
         WHERE "orderID" = $1;
         `,[orderID])
