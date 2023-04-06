@@ -52,35 +52,35 @@ const Cart = (props) => {
                 
         //     }
         // }
-        let joinedCart = {}
-        for(let i = 0; i < products.length; i++) {
-            let singleVinyl = products[i]
-            let title = singleVinyl.title
-            if(joinedCart[title]){
-                joinedCart[title].quantity++
-            }else {
-                joinedCart[title] = singleVinyl
-                joinedCart[title].quantity = 1
-            }
-        }
-        console.log(joinedCart)
-        // setGroupedProducts(joinedCart)
-
+        // let joinedCart = {}
+        // for(let i = 0; i < products.length; i++) {
+        //     let singleVinyl = products[i]
+        //     let title = singleVinyl.title
+        //     if(joinedCart[title]){
+        //         joinedCart[title].quantity++
+        //     }else {
+        //         joinedCart[title] = singleVinyl
+        //         joinedCart[title].quantity = 1
+        //     }
+        // }
         // console.log(joinedCart)
-        let arrayCart = []
-        for(const thing in joinedCart) {
-            arrayCart.push(joinedCart[thing])
-        }
-        console.log(arrayCart)
-        setGroupedProducts(arrayCart)
+        // // setGroupedProducts(joinedCart)
+
+        // // console.log(joinedCart)
+        // let arrayCart = []
+        // for(const thing in joinedCart) {
+        //     arrayCart.push(joinedCart[thing])
+        // }
+        // console.log(arrayCart)
+        // setGroupedProducts(arrayCart)
     }
     //TODO Add submit order funciton that changes an orders status, retrieves the newly created cart and adds the order to order history, clears the cart in js, etc
-    useEffect(()=> {
-        mergeDuplicates()
-    }, [])
+    // useEffect(()=> {
+    //     mergeDuplicates()
+    // }, [])
 
     useEffect(()=>{
-        mergeDuplicates()
+        // mergeDuplicates()
         sumPrice()
     },[products, vinyls])
 
@@ -91,11 +91,12 @@ const Cart = (props) => {
     return(
         <div>
             {
-                groupedProducts ? groupedProducts.map((vinyl) => {
+                products ? products.map((vinyl) => {
                     return(
                         <div key={vinyl.id}>
                             <p>{vinyl.title}</p>
                             <p>{vinyl.price}</p>
+                            <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                             <p>Quantity: {vinyl.quantity}</p>
                             <RemoveFromCart vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                         </div>

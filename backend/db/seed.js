@@ -77,7 +77,9 @@ async function buildTables() {
         CREATE TABLE order_products (
             id SERIAL PRIMARY KEY,
             "orderID" INTEGER REFERENCES orders(id),
-            "vinylID" INTEGER REFERENCES vinyls(id)
+            "vinylID" INTEGER REFERENCES vinyls(id),
+            quantity INTEGER NOT NULL DEFAULT 1,
+            UNIQUE ("orderID", "vinylID")
         );`);
         
     } catch (error) {
