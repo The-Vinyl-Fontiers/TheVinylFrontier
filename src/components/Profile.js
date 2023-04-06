@@ -1,42 +1,32 @@
 import { useEffect, useState } from "react";
 
 const Profile = (props) => {
-    const [myData, setMyData] = useState({})
+    const {currentUser, setCurrentUser, loggedIn, setLoggedIn} = props;
     const [updateUsername, setUpdateUsername] = useState("");
     const [updatePassword, setUpdatePassword] = useState("");
     const [updateEmail, setUpdateEmail] = useState("");
 
-    useEffect(() => {
-        console.log(localStorage.getItem("token"))
-        if (localStorage.getItem("token")) {
 
-            props.setIsLoggedIn(true)
-            fetchMyData();
-        } else {
-            props.setIsLoggedIn(false)
-            console.log("No token exists!")
-        }
+        // async function fetchMyData() {
+        //     try {
 
-        async function fetchMyData() {
-            try {
-
-                const response = await fetch("http://localhost:3000/users/me", {
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': `Bearer ${localStorage.getItem("token")}`
-                    }
-                })
+        //         const response = await fetch("http://localhost:3000/users/me", {
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 'Authorization': `Bearer ${localStorage.getItem("token")}`
+        //             }
+        //         })
 
 
-                const translatedData = await response.json();
+        //         const translatedData = await response.json();
 
-                console.log("Below is our personal account data:")
-                console.log(translatedData)
-                setMyData(translatedData.data)
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        //         console.log("Below is our personal account data:")
+        //         console.log(translatedData)
+        //         setCurrentUser(translatedData.data)
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
 
         const updateUser = async (userID) => {
             console.log("userID", userID)
@@ -45,7 +35,7 @@ const Profile = (props) => {
                     method: "PATCH",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${myJWT}`
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
                     },
                     body: JSON.stringify({
                         username: updateUsername,
@@ -57,29 +47,39 @@ const Profile = (props) => {
                 const translatedData = await response.json();
                 console.log(translatedData);
                 if (translatedData) {
-                    setMyData(translatedData)
+                    setCurrentUser(translatedData)
                 }
             } catch (error) {
                 console.log(error);
             }
         }
-        function updateButton(event) {
-            console.log("Button is clicked");
-            updateUser(event.target.value)
-        };
-    }, [])
 
-    return (
-        <div>
-            {/* Render the profile data here */}
+
+        return (
             <div>
-                <input type="text" value={updateUsername} onChange={(event) => setUpdateUsername(event.target.value)} />
-                <input type="text" value={updateEmail} onChange={(event) => setUpdateEmail(event.target.value)} />
-                <input type="password" value={updatePassword} onChange={(event) => setUpdatePassword(event.target.value)} />
-                <button value={myData.id} onClick={updateButton}>Update</button>
+                {/* Render the profile data here */}
+                
+                    // loggedIn ?
+                        <div>
+                            <h3>Welcome, {currentUser.username}</h3>
+    
+                            <form onSubmit={(event) => {event.preventDefault() 
+                                updateUser(currentUser.id)}}>
+                                <input type="text" value={updateUsername} onChange={(event) => setUpdateUsername(event.target.value)} />
+                                <input type="text" value={updateEmail} onChange={(event) => setUpdateEmail(event.target.value)} />
+                                <input type="password" value={updatePassword} onChange={(event) => setUpdatePassword(event.target.value)} />
+                                <button type="submit">Update</button>
+                            </form>
+                        </div>
+    
+                        
+                        <h3>Please login or register for a new account!</h3>
+    
+                
             </div>
-        </div>
-    )
-}
+        )
+    }
+
+
 
 export default Profile; 

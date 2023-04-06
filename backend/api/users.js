@@ -3,7 +3,7 @@ const express = require('express');
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { getUserByUsername, createUser, makeUserAdmin, createOrder } = require("../db");
+const { getUserByUsername, createUser, makeUserAdmin, createOrder, updateUser } = require("../db");
 
 // Middleware to test api/users
 // usersRouter.use((req,res,next) => {
