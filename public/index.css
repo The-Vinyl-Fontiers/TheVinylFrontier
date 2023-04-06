@@ -26,6 +26,9 @@ body::-webkit-scrollbar-thumb{
 .title{
     color:white;
 }
+.header{
+    margin-left:3.75cm;
+}
 .searchContainer {
     display:flex;
     align-items: left;
@@ -45,7 +48,7 @@ body::-webkit-scrollbar-thumb{
     outline: none;
     position: absolute;
     top: 50%;
-    left: 23%;
+    left: 30%;
     transform: translate(-50%, -50%);
     opacity: 0;
     z-index: -1;
@@ -77,7 +80,6 @@ body::-webkit-scrollbar-thumb{
     height:100vh;
     transition:600ms ease;
     z-index:2;
-    opacity:.2
 }
 .filtersContainer:hover{
     width:12rem;
@@ -160,7 +162,9 @@ body::-webkit-scrollbar-thumb{
     overflow-x:scroll;
     background-image: linear-gradient(45deg,brown,gray,white,black);
     animation: gradient 15s ease infinite;
-    height:100%;
+    height:50%;
+    margin:8rem;
+    margin-top:0;
     background-size:auto;
     
 }
@@ -193,7 +197,7 @@ body::-webkit-scrollbar-thumb{
     position:relative;
     flex-direction:column;
     border-radius:16px;
-    box-shadow: -1rem 0 1rem #000;
+    box-shadow: -.5rem 0 .5rem #000;
     transition:.2s;
     width:400px;
     height:350px;
