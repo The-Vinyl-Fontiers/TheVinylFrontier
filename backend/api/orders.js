@@ -35,6 +35,29 @@ ordersRouter.get("/:orderID" , async (req,res,next) => {
     }
 });
 
+// GET request - 
+ordersRouter.get("/:orderID" , async (req,res,next) => {
+    const {orderID} = req.params
+
+    try {
+        //check for logged in
+        if(!req.user) {
+            res.send({error: "NotLoggedIn", message: "You must be logged in to perform this action"})
+        } else{
+            const order = await getOrderByID(orderID)
+
+            //check if current user is the owner of the order or admin
+            if(order.userID != req.user.id && !req.user.isAdmin){
+                res.send({error: "Unauthorized", message: "You do not have the correct credentials to access this order"})
+            }else {
+                res.send(order)
+            }
+        }
+    } catch (error) {
+        res.send(error)
+    }
+});
+
 // POST request - Purpose: create a new pending order for a user
 ordersRouter.post("/" , async (req,res,next) => {
     console.log("A post request is being made to /orders");

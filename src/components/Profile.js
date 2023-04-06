@@ -31,7 +31,7 @@ const Profile = (props) => {
         const updateUser = async (userID) => {
             console.log("userID", userID)
             try {
-                const response = await fetch(`http://localhost:3000/users/${username}`, {
+                const response = await fetch(`http://localhost:3001/api/users/${currentUser.username}`, {
                     method: "PATCH",
                     headers: {
                         'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const Profile = (props) => {
                     },
                     body: JSON.stringify({
                         username: updateUsername,
-                        password: updateDescription,
+                        password: updatePassword,
                         email: updateEmail
                     })
                 });

@@ -85,14 +85,14 @@ async function getUserByUsername(username) {
     };
 };
 
-async function updateUser(username, password, email){
+async function updateUser(id, username, password, email){
     try {
         const {rows: [user]} = await client.query(`
         UPDATE users
         SET username = $1, password = $2, email = $3
-        WHERE username = $4
+        WHERE id = $4
         RETURNING *;
-        `, [username, password, email, username]);
+        `, [username, password, email, id]);
         return user;
     } catch(error){
         throw error;
