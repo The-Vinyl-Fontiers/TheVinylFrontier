@@ -169,12 +169,17 @@ usersRouter.post("/:userID/admin", async (req, res) => {
 
 usersRouter.patch('/:username', async (req, res) => {
     const { username } = req.params;
-    const { password, email } = req.body;
+    const { email, password } = req.body;
+    const newUsername = req.body.username;
+
+    const saltCount = 12;
+    const hashedPassword = await bcrypt.hash(password, saltCount);
+    const hashedEmail = await bcrypt.hash(email, saltCount)
 
     try {
-        if (user.username == username) {
-            const updatedUser = await updateUser(username, password, email);
-
+        if (req.user.username === username) {
+            const updatedUser = await updateUser(req.user.id, newUsername, hashedPassword, hashedEmail);
+            console.log(updatedUser);
             res.send(updatedUser);
         } else {
             res.status(500).send({ message: 'Unable to update user.' })
