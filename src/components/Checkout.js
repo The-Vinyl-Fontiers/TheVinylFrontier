@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import StripeCheckout from 'react-stripe-checkout';
+import React from 'react';
+import { useStripe } from '@stripe/react-stripe-js';
 
-const Checkout = ({ cartTotal }) => {
-    const [cart] = useState({
-        name: 'My cart',
-        price: cartTotal,
-        description: 'My Product Description'
-    });
+const StripeCheckoutButton = ({ cartSubtotal, cartTaxTotal }) => {
+    const stripe = useStripe();
 
-    const handleToken = (token) => {
-        console.log(token);
-        alert('Payment Successful!');
-    }
+    const handleClick = async (event) => {
+        // Call your backend to create a Stripe Checkout Session
+        const response = await fetch('/api/create-checkout-session', {
+            method: 'POST',
+            body: JSON.stringify({
+                amount: (cartSubtotal + cartTaxTotal) * 100, // Stripe expects amount in cents
+                // Add any additional information here that you need to pass to your backend
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const { sessionId } = await response.json();
 
-    return (
-        <div>
-            <h1>{cart.name}</h1>
-            <h3>Price: ${cart.price}</h3>
-            <StripeCheckout
-                stripeKey={process.env.STRIPE_API_KEY}
-                token={handleToken}
-                amount={cart.price * 100}
-                name={cart.name}
-                description={cart.description}
-                billingAddress={true}
-                shippingAddress={true}
+        // Redirect the user to the Stripe Checkout page
+        const result = await stripe.redirectToCheckout({
+            sessionId,
+        });
 
-            />
-        </div>
-    );
+        if (result.error) {
+            console.error(result.error);
+        }
+    };
+
+    return <button onClick={handleClick}>Checkout</button>;
 };
 
-export default Checkout;
+export default StripeCheckoutButton;
