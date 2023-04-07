@@ -1,5 +1,5 @@
 const AddToCart = (props) => {
-    const {vinyl, cart, setCart} = props
+    const {vinyl, cart, setCart, currentUser} = props
     const token = localStorage.getItem("token");
 
     async function addProduct() {
@@ -23,9 +23,12 @@ const AddToCart = (props) => {
     }
 
     return(
-        <button onClick={addProduct}>
-            Add to cart
-        </button>
+        <div>
+        {
+            currentUser.id ? 
+            <button onClick={addProduct}>Add to cart</button> : ""
+        }
+        </div>
     )
 }
 

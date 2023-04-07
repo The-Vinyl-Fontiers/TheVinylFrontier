@@ -1,5 +1,6 @@
 // IMPORTING the client
 const client = require('./client');
+const { getTagByName } = require('./tags');
 
 // vinyl FUNCTIONS
 
@@ -47,13 +48,15 @@ async function getAllVinyls() {
 }
 
 async function getVinylByTitle(title) {
+    console.log("Looking for vinyl with title: " + title)
     try {
         const {rows : [id]} = await client.query(`
         SELECT id FROM vinyls
         WHERE title = $1;
         `,[title])
+        console.log(id)
 
-        const vinyl = await getVinylByID(parseInt(id.id));
+        const vinyl = await getVinylByID(id.id);
 
 
         return vinyl
@@ -144,18 +147,21 @@ async function getVinylsByTagID (tagID) {
     }
 }
 
-async function addTagToVinyl (tagID, vinylID) {
+async function addTagToVinyl (vinylName, tagName) {
     try {
+        const vinyl = await getVinylByTitle(vinylName)
+        const tag = await getTagByName(tagName)
+
         const {rows : [vinylTag]} = await client.query(`
         INSERT INTO "vinyl_tags"("tagID", "vinylID")
         VALUES ($1, $2)
         RETURNING *;
-        `,[tagID, vinylID])      
+        `,[tag.id, vinyl.id])      
 
 
-        const vinyl = await getVinylByID(vinylID)
+        const updatedVinyl = await getVinylByID(vinyl.id)
         
-        return vinyl;
+        return updatedVinyl;
     } catch (error) {
         throw error
     }

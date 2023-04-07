@@ -27,8 +27,8 @@ const HomePage = (props) => {
   return (
     <div>
       <Filterbar filters={filters} onFilterChange={handleFilterChange} />
-      <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} />
-      <Navbar />
+      <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
+      {/* <Navbar /> */}
       <div>
         <p>blah blah blah blah</p>
       </div>

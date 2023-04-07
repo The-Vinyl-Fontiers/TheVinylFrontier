@@ -64,6 +64,10 @@ const App=()=>{
         fetchCurrentCart()
     },[])
 
+    useEffect(()=> {
+        fetchCurrentCart
+    },[currentUser])
+
     //fetch the current user data anytime the token is changed, i.e. deleted or added
     useEffect(()=>{
         fetchCurrentUser()
@@ -75,16 +79,16 @@ const App=()=>{
             <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
-                    <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart}/>
+                    <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart} currentUser={currentUser}/>
                 //INCOMPLETE
                 }/>
                 <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser}/>} />
                 <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
-                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser}/>} />
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser} fetchCurrentUser={fetchCurrentUser}/>} />
                 <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
-                <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart}/>} />
-                <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls}/>} />
+                <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
+                <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
                 <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls}/>} />

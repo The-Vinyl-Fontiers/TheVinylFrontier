@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import AddToCart from "./AddToCart";
 
 const SingleArtist = (props) => {
     const {vinyls} = props;
@@ -31,9 +32,12 @@ const SingleArtist = (props) => {
                 artistVinyls ? artistVinyls.map((vinyl) => {
                     return (
                         <div key={vinyl.id}>
-                            <img src={vinyl.imgURL} />
+                            <Link to={`/vinyl/${vinyl.id}`} >
+                                <img src={vinyl.imgURL} className="vinylImg"/>
+                            </Link>
                             <p>{vinyl.title}</p>
                             <p>${vinyl.price}</p>
+                            <AddToCart vinyl = {vinyl} setCart={props.setCart} cart= {props.cart} currentUser={props.currentUser}/>
                         </div>
                     )
                 }) :"Data loading..."

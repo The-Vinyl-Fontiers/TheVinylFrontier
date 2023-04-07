@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RemoveFromCart from "./RemoveFromCart";
 import PaymentScreen from "./PaymentScreen";
 import ChangeQuantity from "./ChangeQuantity";
+import { Link } from "react-router-dom";
 
 const Cart = (props) => {
     const {cart, setCart, vinyls} = props
@@ -16,7 +17,6 @@ const Cart = (props) => {
         }
         //check that it includes two deciaml places
         let taxAmnt = sum * 0.07
-        console.log(taxAmnt)
         setTax(taxAmnt.toFixed(2))
         setSubtotal(sum.toFixed(2))
     }
@@ -36,12 +36,14 @@ const Cart = (props) => {
     return(
         <div>
             {
-                products ? products.map((vinyl) => {
+                products.length ? products.map((vinyl) => {
                     return(
                         <div key={vinyl.id}>
                             <p>{vinyl.title}</p>
                             <p>{vinyl.price}</p>
-                            <img src={`${vinyl.imgURL}`} className="vinylImg"/>
+                            <Link to={`/vinyl/${vinyl.id}`}>
+                                <img src={`${vinyl.imgURL}`} className="vinylImg"/>
+                            </Link>
                             <ChangeQuantity quantity = {vinyl.quantity} vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                             <RemoveFromCart vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                         </div>
