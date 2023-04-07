@@ -155,19 +155,20 @@ vinylRouter.get("/artist/:artist", async (req, res) =>{
 vinylRouter.post("/:id" , async(req, res) =>{
     const {id} = req.params;
     const {tagID} = req.body;
+    console.log(id, tagID)
     try {
         if(!tagID) {
-            res.send("You must include a tag ID to add.").status(400)
+            res.send({message: "You must include a tag ID to add."}).status(400)
         }else {
             const tag = await getTagById(tagID)
             if(!tag){
-                res.send("No tag was found with that ID").status(404)
+                res.send({message: "No tag was found with that ID"}).status(404)
             } else {
                 const vinyl = await getVinylByID(id);
                 if(!vinyl) {
-                    res.send("No vinyl was found with that ID").status(404)
+                    res.send({message: "No vinyl was found with that ID"}).status(404)
                 } else {
-                    const vinylTag = await addTagToVinyl(tagID, id)
+                    const vinylTag = await addTagToVinyl(vinyl.title, tag.name)
 
                     res.send(vinylTag)
                 }

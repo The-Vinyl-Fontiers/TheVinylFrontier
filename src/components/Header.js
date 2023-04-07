@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SearchBar(props) {
   const [isActive, setIsActive] = useState(false);
@@ -37,7 +37,23 @@ function SearchBar(props) {
 }
 
 const Header=(props)=> {
-  const { setSearchTerm ,searchTerm, currentUser } = props;
+  const { setSearchTerm ,searchTerm, currentUser, cart } = props;
+  const [itemCount, setItemCount] = useState();
+
+  function countProducts() {
+    let num = 0;
+    if(cart.products) {
+      for(let i = 0; i < cart.products.length; i++) {
+        num += cart.products[i].quantity
+      }
+      setItemCount(num)
+    }
+    
+  }
+  
+  useEffect(()=> {
+    countProducts()
+  }, [cart])
 
   return (
     <div className="header">
@@ -52,7 +68,7 @@ const Header=(props)=> {
         {
           currentUser.id ? 
           <Link to="/cart" className="headerLink">
-            <div className="title">Cart</div>
+            <div className="title">Cart [{itemCount}]</div>
           </Link> : ""
         }
         {
