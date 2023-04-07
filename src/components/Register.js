@@ -4,9 +4,9 @@ const Register = (props) => {
     const [newUser, setNewUser] = useState("");
     const [newPass, setNewPass] = useState("");
     const [newEmail, setNewEmail] =useState ("");
-    const nav = useNavigate("");
+    const nav = useNavigate();
 
-    const {setLoggedin} = props
+    const {setLoggedIn} = props
 
     async function registerUser(){
         console.log()
@@ -39,7 +39,7 @@ const Register = (props) => {
                 const tokenKey = transData.token;
                 localStorage.setItem("token", tokenKey);
                 alert ("New Account Was Successfully Created");
-                setLoggedin(true)
+                setLoggedIn(true)
                 nav("/")
             }
         }catch(error){

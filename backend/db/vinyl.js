@@ -12,7 +12,7 @@ async function createVinyl({title, artist, price, yearReleased, imgURL}) {
             INSERT INTO vinyls(title, artist, price, "yearReleased", "imgURL")
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
-            `,[title, artist, price, yearReleased, imgURL])
+            `,[title, artist, parseFloat(price), yearReleased, imgURL])
 
             return vinyl
         }else {
@@ -156,7 +156,7 @@ async function addTagToVinyl (vinylName, tagName) {
         INSERT INTO "vinyl_tags"("tagID", "vinylID")
         VALUES ($1, $2)
         RETURNING *;
-        `,[tag.id, vinyl.id])      
+        `,[tag.id, vinyl.id])         
 
 
         const updatedVinyl = await getVinylByID(vinyl.id)

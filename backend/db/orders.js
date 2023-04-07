@@ -5,25 +5,17 @@ const client = require('./client');
 
 async function createOrder(userID) {
     try {
-        //find payment for user
-        const {rows: [payment]} = await client.query(`
-        SELECT * FROM payments
-        WHERE "userID" = ${userID};
-        `)
-        if(!payment){ //check if user has payment info
-            return("No payment found for this user")
-        } else {
             //create a pending order 
             //status is default pending
             const {rows: [order]} = await client.query(`
-            INSERT INTO orders("paymentID", "userID")
-            VALUES ($1, $2)
+            INSERT INTO orders("userID")
+            VALUES ($1)
             RETURNING *;
-            `,[payment.id, userID])
+            `,[ userID])
 
             return order
         }
-    } catch (error) {
+     catch (error) {
         throw error
     }
 }

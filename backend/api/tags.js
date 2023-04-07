@@ -63,6 +63,7 @@ tagsRouter.get("/:name", async (req,res,next) => {
 // POST request - Purpose: 
 tagsRouter.post("/", async (req,res,next) => {
     const {name} = req.body
+    const {isAdmin} =req.user
 
     try {
         if(!isAdmin) { //checks for admin 
@@ -86,6 +87,7 @@ tagsRouter.post("/", async (req,res,next) => {
 // DELETE request - Purpose:
 tagsRouter.delete("/:id", async (req,res,next) => {
     const {id} = req.params
+    const {isAdmin} = req.user
 
     try {
         if(!isAdmin) { //checks for admin 
