@@ -7,7 +7,7 @@ const Login = (props) => {
 
     const nav = useNavigate();
 
-    const {setLoggedIn} = props;
+    const {setLoggedIn, fetchCurrentUser} = props;
 
     async function logIn(event){
         event.preventDefault();
@@ -42,6 +42,7 @@ const Login = (props) => {
                 setLoginUser("")
                 setLoginPass("")
                 setLoggedIn(true)
+                // fetchCurrentUser()
                 nav("/")
             }
         } catch(error){

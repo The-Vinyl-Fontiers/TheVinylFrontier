@@ -2,7 +2,7 @@
 const express = require('express');
 const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct, incrementOrderProduct } = require("../db");
+const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct, incrementOrderProduct, getOrderProduct, deductOrderProduct } = require("../db");
 
 // Middleware to test api/orders
 ordersRouter.use((req,res,next) => {
@@ -172,8 +172,8 @@ ordersRouter.patch("/:orderID" , async(req,res,next) => {
     }
 });
 
-// DELETE request - Purpose: to remove a product from an order
-ordersRouter.delete("/:orderID/:vinylID", async (req,res,next) => {
+// DELETE request - Purpose: to remove all quantities of a product from an order
+ordersRouter.delete("/:orderID/:vinylID/remove", async (req,res,next) => {
     const {orderID, vinylID} = req.params
     try {
         //check for logged in
@@ -197,6 +197,40 @@ ordersRouter.delete("/:orderID/:vinylID", async (req,res,next) => {
     }
 });
 
+//purpose - to remove a single quantitiy from an order
+ordersRouter.delete("/:orderID/:vinylID/", async (req,res) => {
+    const {orderID, vinylID} = req.params
+    console.log("removing vinyl with ID " + vinylID + " to order " + orderID)
+    try {
+        //check for logged in
+        if(!req.user) {
+            res.send({error: "NotLoggedIn", message: "You must be logged in to perform this action"})
+        } else{
+            const order = await getOrderByID(orderID)
+
+            //check if current user is the owner of the order or admin
+            if(order.userID != req.user.id && !req.user.isAdmin){
+                res.send({error: "Unauthorized", message: "You do not have the correct credentials to access this order"})
+            }else {
+                const orderProd = await getOrderProduct(orderID, vinylID)
+
+                if(orderProd.quantity > 1) { //if it does, deduct the quantity by one
+                    const order = await deductOrderProduct(orderID, vinylID)
+
+                    res.send(order)
+                }else {
+                     //delete the order entirely
+                    const deletedOrder = await deleteOrderProduct(orderID, vinylID)
+
+                    res.send(deletedOrder)
+                }
+            }
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 
 ordersRouter.get("/me/cart", async (req, res) => {
     try {
@@ -213,8 +247,6 @@ ordersRouter.get("/me/cart", async (req, res) => {
             }else {
                 //if cart is empty, send back empty array
                     res.send(cart)
-                
-                
             }
         }
     } catch (error) {

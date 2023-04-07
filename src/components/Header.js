@@ -41,21 +41,25 @@ const Header=(props)=> {
 
   return (
     <div className="header">
-      <div>
+      <div style={{display: "flex"}}>
         <Link to="/" className="headerLink">
           <div className="title">Vinyls</div>
         </Link>
         <Link to="/artists" className="headerLink">
           <div className="title">Artists</div>
         </Link>
-        <Link to="/cart" className="headerLink">
-          <div className="title">Cart</div>
-        </Link>
+        
+        {
+          currentUser.id ? 
+          <Link to="/cart" className="headerLink">
+            <div className="title">Cart</div>
+          </Link> : ""
+        }
         {
           currentUser.isAdmin ? 
           <Link to="/admin" className="headerLink">
-          <div className="title">Admin</div>
-        </Link> : ""
+            <div className="title">Admin</div>
+          </Link> : ""
         }
         <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={props.vinyls}/>
       </div>

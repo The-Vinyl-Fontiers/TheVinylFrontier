@@ -69,9 +69,33 @@ async function incrementOrderProduct(orderID, vinylID) {
     }
 }
 
-async function getOrdersProducts({}) {
+async function deductOrderProduct(orderID, vinylID) {
     try {
+        console.log("removing one to " + orderID + " with vinyl " + vinylID)
+        await client.query(`
+        UPDATE order_products
+        SET quantity = quantity - 1
+        WHERE "orderID" = $1 AND "vinylID" = $2;
+        `,[orderID, vinylID])
+        console.log("success")
+
+        //get the updated order
+        const order = await getOrderByID(orderID);
+
+        return order;
+    } catch (error) {
         
+    }
+}
+
+async function getOrderProduct(orderID, vinylID) {
+    try {
+        const {rows: [orderProd]} = await client.query(`
+        SELECT * FROM order_products
+        WHERE "orderID" = $1 AND "vinylID" = $2;
+        `,[orderID, vinylID])
+
+        return orderProd
     } catch (error) {
         throw error
     }
@@ -91,8 +115,9 @@ async function updateOrdersProducts({}) {
 
 module.exports = {
     createOrderProduct,
-    getOrdersProducts,
+    getOrderProduct,
     updateOrdersProducts,
     deleteOrderProduct,
-    incrementOrderProduct
+    incrementOrderProduct,
+    deductOrderProduct
 }

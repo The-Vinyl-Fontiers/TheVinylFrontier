@@ -28,7 +28,7 @@ const SingleProduct = (props) => {
             {
                 thisVinyl ? (
                 <div>
-                    <img src={imgURL} />
+                    <img src={imgURL} className="vinylImg"/>
                     <p>{title}</p>
                     <Link to={`/artists/${artist}`}> {artist}</Link>
                     <p>${price}</p>
@@ -37,10 +37,10 @@ const SingleProduct = (props) => {
                         Tags: 
                      {
                         tags ? tags.map((tag) => 
-                        <span key={tag}>{tag}</span>
+                        <span key={tag}>{tag} </span>
                         ) : "No tags"
                      }
-                     <AddToCart vinyl = {thisVinyl} setCart={setCart} cart= {cart}/>
+                     <AddToCart vinyl = {thisVinyl} setCart={setCart} cart= {cart} currentUser={props.currentUser}/>
                      </div>
                 </div>) : 
                 "Data Loading..."

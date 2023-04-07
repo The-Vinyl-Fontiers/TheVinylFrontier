@@ -18,7 +18,7 @@ const AllProducts = (props) =>{
                                 <p>{vinyl.yearReleased}</p>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                             </Link>
-                            <AddToCart vinyl = {vinyl} cart={props.cart} setCart= {props.setCart}/>
+                            <AddToCart vinyl = {vinyl} cart={props.cart} setCart= {props.setCart} currentUser= {props.currentUser}/>
                             </div>
                         )
                     }) : "No data loaded"
