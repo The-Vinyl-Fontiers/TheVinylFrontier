@@ -6,7 +6,7 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/orders?userId=${userId}`, {
+        const response = await fetch(`http://localhost:3001/api/orders?userId=${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
