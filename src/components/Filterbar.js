@@ -1,6 +1,6 @@
 
 const Filterbar = ({ filters, onFilterChange }) => {
-    const availableFilters = ['rock', 'pop', 'jazz', 'hip hop','electronic','indie'];
+    const availableFilters = ['rock', 'pop', 'jazz', 'hip hop','electronic','indie','featured'];
   
     return (
       <div className="filtersContainer">
