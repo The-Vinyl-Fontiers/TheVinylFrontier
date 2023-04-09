@@ -43,12 +43,14 @@ const Header=(props)=> {
     <div className="header">
       <div>
         <Link to="/" className="headerLink">
-          <div className="title">Vinyls</div>
+          <div className="title">Home</div>
         </Link>
         <Link to="/artists" className="headerLink">
           <div className="title">Artists</div>
         </Link>
-        
+        <Link to ="/vinyls" className="headerLink">
+          <div className="title">Vinyls</div>
+        </Link>
         {
           currentUser.id ? 
           <Link to="/cart" className="headerLink">

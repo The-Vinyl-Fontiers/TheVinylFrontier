@@ -26,7 +26,7 @@ const Artists = (props) => {
 
 
     return(
-        <div>
+        <div className="artistList">
             {
                 artists ? artists.map((artist) => {
                     return(
