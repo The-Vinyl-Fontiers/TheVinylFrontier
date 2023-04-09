@@ -38,9 +38,12 @@ body::-webkit-scrollbar-thumb{
     font-weight:bolder;
     font-size:28px;
 }
+.title:hover{
+    opacity:0.7;
+}
 .header{
     margin-left:3.75cm;
-    display:flex;
+    display:inline-flex;
     flex-direction: column;
 }
 .searchContainer {
@@ -165,8 +168,8 @@ body::-webkit-scrollbar-thumb{
     margin: 0 1.5rem;
 }
 .vinylImg{
-    width:128px;
-    height:128px;
+    width:140px;
+    height:140px
 }
 .itemContainer {
     display: flex;
@@ -177,6 +180,7 @@ body::-webkit-scrollbar-thumb{
     height: 50%;
     margin: 8rem;
     margin-top: 0;
+    border:black solid 3px;
     background-size: 100% 100%;
   }
   
