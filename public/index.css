@@ -5,7 +5,7 @@
 .main{
     margin-left: 5rem;
     padding:1rem;
-    color:white;
+    color:black;
     height:100%;
     width:100%; 
     background-image: linear-gradient(45deg,#e3d26f,#a15e49,#4e3822,#e3d26f);
@@ -13,10 +13,10 @@
 }
 
 body {
-    color:white;
+    color:black;
     height:100%;
     width:100%; 
-    background-image: linear-gradient(45deg,#e3d26f,#a15e49,#4e3822,#e3d26f);
+    background: #FFFBE5;
     background-size:cover;
 }
 body::-webkit-scrollbar{
@@ -29,10 +29,11 @@ body::-webkit-scrollbar-thumb{
     background:white;
 }
 .title{
-    color:white;
+    color:black;
     display:inline-flex;
     margin-right:1cm;
-    display:flex;
+    flex-direction: row;
+    
     text-decoration: none;
     font-weight:bolder;
     font-size:28px;
@@ -42,7 +43,7 @@ body::-webkit-scrollbar-thumb{
 }
 .header{
     margin-left:3.75cm;
-    display:inline-flex;
+    display:inline-flex;;
 }
 .searchContainer {
     display:flex;
@@ -59,6 +60,7 @@ body::-webkit-scrollbar-thumb{
     transition: width 0.3s ease-in-out;
     padding: 8px;
     border: none;
+    background-color: #e7e7e7;
     border-radius: 4px;
     outline: none;
     position: absolute;
@@ -171,7 +173,7 @@ body::-webkit-scrollbar-thumb{
     position:relative;
     top:0;
     overflow-x: scroll;
-    background: linear-gradient(45deg, #a15e49, #e3d26f, #4e3822, #e3d26f);
+    background: #b0403c;
     height: 50%;
     margin: 8rem;
     margin-top: 0;
@@ -203,7 +205,7 @@ body::-webkit-scrollbar-thumb{
     height:350px;
     padding:1.5rem;
     color:white;
-    background:#76462f;
+    background:#E69F4D;
     z-index:1;
 }
 .itemLink{
@@ -228,7 +230,7 @@ body::-webkit-scrollbar-thumb{
     padding: 1.5rem;
     left:5rem;
     color: white;
-    background: #76462f;
+    background: #E69F4D;
     text-decoration: none;
     z-index: 1;
   }

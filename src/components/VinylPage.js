@@ -14,7 +14,7 @@ const VinylPage = (props) =>{
       if (filters.includes(filterSelected)) {
         setFilters(filters.filter(filter => filter !== filterSelected));
       } else {
-        setFilters([filters, filterSelected]);
+        setFilters([...filters, filterSelected]);
       }
     };
   
