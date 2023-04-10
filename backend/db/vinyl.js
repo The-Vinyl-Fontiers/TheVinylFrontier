@@ -12,7 +12,7 @@ async function createVinyl({title, artist, price, yearReleased, imgURL}) {
             INSERT INTO vinyls(title, artist, price, "yearReleased", "imgURL")
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
-            `,[title, artist, parseFloat(price), yearReleased, imgURL])
+            `,[title, artist, parseFloat(price).toFixed(2), yearReleased, imgURL])
 
             return vinyl
         }else {
@@ -20,7 +20,7 @@ async function createVinyl({title, artist, price, yearReleased, imgURL}) {
             INSERT INTO vinyls(title, artist, price, "yearReleased")
             VALUES ($1, $2, $3, $4)
             RETURNING *;
-            `,[title, artist, price, yearReleased])
+            `,[title, artist, parseFloat(price).toFixed(2), yearReleased])
 
             return vinyl
         }

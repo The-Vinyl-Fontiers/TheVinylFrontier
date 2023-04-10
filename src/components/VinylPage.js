@@ -30,8 +30,8 @@ const VinylPage = (props) =>{
                 {
                     filteredVinyls ? filteredVinyls.map((vinyl) =>{
                         return(
-                            <div key={vinyl.id}>
-                                <Link to={`/vinyl/${vinyl.id}`} className="singleItem2">
+                            <div key={vinyl.id} className="singleItem2">
+                                <Link to={`/vinyl/${vinyl.id}`} >
                                     <p className="vinylTitle">{vinyl.title}</p>
                                     <p>{vinyl.artist}</p>
                                     <p>${vinyl.price}</p>

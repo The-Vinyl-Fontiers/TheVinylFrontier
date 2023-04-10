@@ -26,7 +26,7 @@ const AddToCart = (props) => {
         <div>
         {
             currentUser.id ? 
-            <button onClick={addProduct}>Add to cart</button> : ""
+            <button onClick={addProduct} >Add to cart</button> : ""
         }
         </div>
     )

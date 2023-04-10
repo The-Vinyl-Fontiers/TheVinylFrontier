@@ -52,15 +52,24 @@ const Cart = (props) => {
                             <RemoveFromCart vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                         </div>
                     )
-                }) : "No items in cart"
+                })
+                
+                
+                
+                : "No items in cart"
             }
-            <div>
-                <p>Subtotal: ${subtotal}</p>
-                <p>Tax: ${tax}</p>
-                <p>Final: ${(parseFloat(tax) + parseFloat(subtotal)).toFixed(2)}</p>
-            </div>
-            <Link to="/checkout" >Checkout</Link>
-            <PaymentScreen /> 
+
+            {
+                 products.length ? <div>
+                 <p>Subtotal: ${subtotal}</p>
+                 <p>Tax: ${tax}</p>
+                 <p>Final: ${(parseFloat(tax) + parseFloat(subtotal)).toFixed(2)}</p>
+                 <button><Link to="/checkout" >Checkout</Link></button>
+             </div> : ""
+            }
+            
+           
+            
         </div>
     )
 }
