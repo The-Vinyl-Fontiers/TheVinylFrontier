@@ -6,6 +6,7 @@ import RemoveTag from "./RemoveTag";
 import "./Admin.css"
 import ChangeUserAdmin from "./ChangeUserAdmin";
 import DeleteUser from "./DeleteUser";
+import EditUser from "./EditUser";
 
 const Admin = (props) => {
     const {currentUser, vinyls, setVinyls, fetchCurrentCart ,fetchVinyls} = props;
@@ -284,6 +285,7 @@ const Admin = (props) => {
                                         <p>Admin</p>
                                         <p>Change Admin Status</p>
                                         <p>Delete User</p>
+                                        <p>Edit</p>
                         </div>
                         {
                             allUsers.length ? allUsers.map((user) => {
@@ -294,6 +296,7 @@ const Admin = (props) => {
                                         <p>{`${user.isAdmin}`}</p>
                                         <ChangeUserAdmin user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                         <DeleteUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
+                                        <EditUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                     </div>
                                 )
                             }): "Loading users..."

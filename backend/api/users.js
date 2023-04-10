@@ -189,7 +189,7 @@ usersRouter.patch('/:username', async (req, res) => {
     const hashedEmail = await bcrypt.hash(email, saltCount)
 
     try {
-        if (req.user.username === username) {
+        if (req.user.username === username || req.user.isAdmin) {
             const updatedUser = await updateUser(req.user.id, newUsername, hashedPassword, hashedEmail);
             console.log(updatedUser);
             res.send(updatedUser);
