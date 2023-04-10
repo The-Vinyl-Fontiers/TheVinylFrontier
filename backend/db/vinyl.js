@@ -155,6 +155,7 @@ async function addTagToVinyl (vinylName, tagName) {
         const {rows : [vinylTag]} = await client.query(`
         INSERT INTO "vinyl_tags"("tagID", "vinylID")
         VALUES ($1, $2)
+        ON CONFLICT ("vinylID", "tagID") DO NOTHING
         RETURNING *;
         `,[tag.id, vinyl.id])         
 
@@ -199,7 +200,9 @@ async function updateVinyl({id, title, artist, price, yearReleased, imgURL}) {
         RETURNING *;
         `,[title, artist, price, yearReleased, imgURL])
 
-        return vinyl;
+        const updatedVinyl = await getVinylByID(vinyl.id)
+
+        return updatedVinyl;
     } catch (error) {
         throw error
     }

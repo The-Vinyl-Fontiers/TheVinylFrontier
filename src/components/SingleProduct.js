@@ -30,7 +30,7 @@ const SingleProduct = (props) => {
                 <div>
                     <img src={imgURL} className="vinylImg"/>
                     <p>{title}</p>
-                    <Link to={`/artists/${artist}`}> {artist}</Link>
+                    <Link to={artist != "AC/DC" ? `/artists/${artist}` : '/artists/AC%2fDC'}> {artist}</Link>
                     <p>${price}</p>
                     <p>{yearReleased}</p>
                     <div>

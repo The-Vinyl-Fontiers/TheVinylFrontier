@@ -8,7 +8,7 @@ import ChangeUserAdmin from "./ChangeUserAdmin";
 import DeleteUser from "./DeleteUser";
 
 const Admin = (props) => {
-    const {currentUser, vinyls, setVinyls, fetchCurrentCart} = props;
+    const {currentUser, vinyls, setVinyls, fetchCurrentCart ,fetchVinyls} = props;
     const {isAdmin} = currentUser
     const token = localStorage.getItem("token");
 
@@ -143,6 +143,8 @@ const Admin = (props) => {
             });
             const data = await response.json()
             alert("Tag deleted successfully")
+            fetchCurrentCart()
+            fetchVinyls()
             setAllTags(data)
         } catch (error) {
             console.log(error)
@@ -168,16 +170,19 @@ const Admin = (props) => {
                             vinyls ? vinyls.map((vinyl) => {
                                 return(
                                     <div key={vinyl.id} className="adminSingleVinyl">
-                                        <div>
+                                        <div className="adminVinylData">
                                         <p>{vinyl.title}</p>
                                         <p>{vinyl.artist}</p>
-                                        <p>{vinyl.price}</p>
+                                        <p>${vinyl.price}</p>
                                         <p>Tags:  </p>
-                                        <div>
+                                        <div className="adminVinylTags">
                                         {
                                              vinyl.tags ? vinyl.tags.map((tag)=> {
                                                 return (
-                                                    <div>{tag}<RemoveTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} tag={tag} allTags={allTags}/> </div>
+                                                    <div style={{display: "flex", alignItems: "center", flexWrap: "wrap"}}>
+                                                        <p>{tag}</p>
+                                                        <RemoveTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} tag={tag} allTags={allTags}/>
+                                                          </div>
                                                     
                                                 )
                                             }) : "Tags loading..."
