@@ -218,6 +218,7 @@ body::-webkit-scrollbar-thumb{
   .singleItem2 {
     display: grid;
     position: relative;
+    top: -10cm;
     border-radius: 16px;
     box-shadow: -.5rem 0 .5rem #000;
     transition: .2s;

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Filterbar = ({ filters, onFilterChange }) => {
     const usedFilters = ['Rock', 'Pop', 'Jazz', 'Rap','Electronic','Indie','Featured'];

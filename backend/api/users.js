@@ -4,6 +4,7 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { getUserByUsername, createUser, makeUserAdmin, createOrder, updateUser, getAllUsers, getUserById, removeAdminStatus, deleteUser } = require("../db");
+const { async } = require('q');
 
 // Middleware to test api/users
 // usersRouter.use((req,res,next) => {
@@ -189,7 +190,7 @@ usersRouter.patch('/:username', async (req, res) => {
     const hashedEmail = await bcrypt.hash(email, saltCount)
 
     try {
-        if (req.user.username === username) {
+        if (req.user.username === username || req.user.isAdmin) {
             const updatedUser = await updateUser(req.user.id, newUsername, hashedPassword, hashedEmail);
             console.log(updatedUser);
             res.send(updatedUser);
@@ -228,6 +229,26 @@ usersRouter.delete("/:userID", async (req,res) => {
             const user = await deleteUser(userID);
 
             res.send(user)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+//allow admin to change user data
+usersRouter.patch("/:userID/admin", async(req,res) => {
+    const {username, email, password, userID} = req.body
+    const {isAdmin} = req.user;
+    try {
+        if(!isAdmin) {
+            res.send({message : "You are not authorized to request this data"}).status(401)
+        }else {
+            const saltCount = 12;
+            const hashedPassword = await bcrypt.hash(password, saltCount);
+            const hashedEmail = await bcrypt.hash(email, saltCount)
+            const updatedUser = await updateUser(userID, username, hashedPassword, hashedEmail);
+            console.log(updatedUser);
+            res.send(updatedUser);
         }
     } catch (error) {
         res.send(error)
