@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Checkout = (props) => {
-    const { cart } = props
+    const { cart, setCart, fetchCurrentCart} = props
     const [formData, setFormData] = useState({
         cardNumber: "",
         cardName: "",
@@ -26,6 +26,7 @@ const Checkout = (props) => {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     status: "inProgress"
@@ -33,6 +34,8 @@ const Checkout = (props) => {
             });
             const translatedData = await response.json();
             console.log(translatedData);
+            fetchCurrentCart()
+            
         } catch (error) {
             console.log(error);
         }

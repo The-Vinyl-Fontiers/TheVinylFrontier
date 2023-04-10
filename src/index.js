@@ -87,13 +87,14 @@ const App=()=>{
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
                 <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser} fetchCurrentUser={fetchCurrentUser}/>} />
                 <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
-                <Route path="/vinyls" element = {<VinylPage loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser}/>}/>
+                <Route path="/vinyls" element = {<VinylPage loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser} cart={cart} setCart={setCart} />}/>
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
                 <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls} fetchCurrentCart={fetchCurrentCart}/>} />
                 <Route path="/admin" element= {<Admin currentUser={currentUser} vinyls={vinyls} setVinyls={setVinyls} fetchCurrentCart={fetchCurrentCart} fetchVinyls={fetchVinyls}/> } />
+                <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} fetchCurrentCart={fetchCurrentCart}/>} />
              </Routes>
         </BrowserRouter>
     )

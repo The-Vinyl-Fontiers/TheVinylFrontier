@@ -19,11 +19,10 @@ export {default as Admin} from "./Admin"
 export {default as Filterbar} from "./Filterbar"
 export {default as DeleteVinyl} from "./DeleteVinyl"
 export {default as ChangeQuantity} from "./ChangeQuantity"
-<<<<<<< HEAD
+
 export {default as VinylPage} from "./VinylPage"
-=======
+
 export {default as AddTag} from "./AddTag"
 export {default as RemoveTag} from "./RemoveTag"
 export {default as ChangeUserAdmin} from "./ChangeUserAdmin"
 export {default as DeleteUser} from "./DeleteUser"
->>>>>>> main
