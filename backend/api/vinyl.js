@@ -28,17 +28,27 @@ vinylRouter.get( "/", async (req,res,next) => {
 vinylRouter.post( "/", async(req,res,next) => {
     console.log("A post request is being made to /vinyl");
 
-    const {title, artist, yearReleased, price, imgURL, tags} = req.body
+    const {title, artist, yearReleased, price, tags} = req.body
+    let imgURL
+    if(req.body.imgURL) {
+        imgURL = req.body.imgURL
+    }
  
     const {isAdmin}= req.user 
 
     try {
         if(!isAdmin) { //checks for admin 
             res.send({message: "You must be an admin to perform this action"})
-        } else  if(!title || !artist || !yearReleased || !price || !imgURL) { //checks for valid fields
+        } else  if(!title || !artist || !yearReleased || !price) { //checks for valid fields
             res.send({message: "Invalid vinyl data."}).status(400)
         }else {
-            const createdVinyl = await createVinyl({title, artist, yearReleased, price: price.toFixed(2), imgURL})
+            let createdVinyl
+            if(imgURL) { 
+                createdVinyl = await createVinyl({title, artist, yearReleased, price: price.toFixed(2), imgURL})
+            } else {
+                createdVinyl = await createVinyl({title, artist, yearReleased, price: price.toFixed(2)})
+            }
+            
 
             if(tags) { //if tags were included add them to the created vinyl
                 await Promise.all(tags.map(

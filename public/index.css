@@ -261,7 +261,7 @@ body::-webkit-scrollbar-thumb{
 }
 .artistLink{
     font-weight:bolder;
-    color:white;
+    color:black;
     text-decoration: none;
 }
 .artistLink:hover{
