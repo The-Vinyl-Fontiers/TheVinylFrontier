@@ -17,7 +17,7 @@ body {
     height:100%;
     width:100%; 
     background-image: linear-gradient(45deg,#e3d26f,#a15e49,#4e3822,#e3d26f);
-    background-size:contain;
+    background-size:cover;
 }
 body::-webkit-scrollbar{
     width:.5rem;
@@ -33,15 +33,16 @@ body::-webkit-scrollbar-thumb{
     display:inline-flex;
     margin-right:1cm;
     display:flex;
-    flex-direction: column;
     text-decoration: none;
     font-weight:bolder;
     font-size:28px;
 }
+.title:hover{
+    opacity:0.7;
+}
 .header{
     margin-left:3.75cm;
-    display:flex;
-    flex-direction: column;
+    display:inline-flex;
 }
 .searchContainer {
     display:flex;
@@ -81,24 +82,20 @@ body::-webkit-scrollbar-thumb{
 }
 .filtersContainer{
     display:inline-flex;
-    position:fixed;
-    left:0;
+    position:relative;
+    left:-5px;
     z-index: 2;
     flex-direction: column;
     background-color:gray;
-    margin:0;
+    margin-left:10px;
     padding:0;  
     border:solid black 3px;
-    width:120px;
-    top:0;
-    height:100vh;
+    width:130px;
+    top:10cm;
+    height:50vh;
     transition:600ms ease;
     z-index:2;
     filter:grayscale(100%)opacity(0.7);
-}
-.filtersContainer:hover{
-    width:12rem;
-
 }
 .headerLink{
     text-decoration: none;
@@ -109,7 +106,7 @@ body::-webkit-scrollbar-thumb{
     position:fixed;
     right:0;
     top:0;
-    background-color: gray;
+    background-color: #593322;
     border:solid black 3px;
     width:5rem;
     height:100vh;
@@ -165,8 +162,8 @@ body::-webkit-scrollbar-thumb{
     margin: 0 1.5rem;
 }
 .vinylImg{
-    width:128px;
-    height:128px;
+    width:140px;
+    height:140px
 }
 .itemContainer {
     display: flex;
@@ -177,6 +174,7 @@ body::-webkit-scrollbar-thumb{
     height: 50%;
     margin: 8rem;
     margin-top: 0;
+    border:black solid 3px;
     background-size: 100% 100%;
   }
   
@@ -212,7 +210,7 @@ body::-webkit-scrollbar-thumb{
     border-radius:16px;
     box-shadow: -.5rem 0 .5rem #000;
     transition:.2s;
-    width:400px;
+    width:300px;
     height:350px;
     padding:1.5rem;
     color:white;
@@ -221,10 +219,34 @@ body::-webkit-scrollbar-thumb{
     z-index:1;
 
 }
+.itemContainer2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;;
+  }
+  
+  .singleItem2 {
+    display: grid;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: -.5rem 0 .5rem #000;
+    transition: .2s;
+    width: 200px;
+    height: 350px;
+    padding: 1.5rem;
+    left:5rem;
+    color: white;
+    background: #76462f;
+    text-decoration: none;
+    z-index: 1;
+  }
+.singleItem2:hover{
+    transform:translateY(-1rem);
+}
 .singleItem:visited{
     color:white;
 
-}
+}   
 .singleItem:hover{
     transform:translateY(-1rem);
 }
@@ -237,4 +259,34 @@ body::-webkit-scrollbar-thumb{
 .vinylTitle{
     font-weight:bolder;
     font-family:'Playfair Display', serif;
+}
+.artistList{
+    display:inline-flex;
+    font-size:32px;
+    flex-direction: column;
+}
+.artistLink{
+    font-weight:bolder;
+    color:white;
+    text-decoration: none;
+}
+.artistLink:hover{
+    opacity:.8; 
+}
+hr{
+    height:3px;
+    position:relative;
+    top:-35px;
+    width:128px;
+    background-color:black;
+}
+h2{
+    font-family:'Playfair Display', serif;
+    position:relative;
+    top:-10px;
+    left:25px;
+}
+.vinylImg2{
+    width:128px;
+    height:120px;
 }

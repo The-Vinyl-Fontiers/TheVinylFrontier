@@ -7,6 +7,7 @@ const RemoveTag =(props) => {
     const [selectedTag, setSelectedTag] = useState()
 
     async function findTagID () {
+        console.log("searching for tag: " + tag)
         let filteredTag = allTags.filter((singleTag) => {
             return singleTag.name == tag
         })[0]
@@ -15,9 +16,13 @@ const RemoveTag =(props) => {
     }
 
     async function removeTagFromVinyl() {
-        await findTagID()
         try {
-            const response = await fetch(`http://localhost:3001/api/vinyls/${vinyl.id}/${selectedTag.id}`,
+            // await findTagID()
+            console.log(vinyl)
+            let filteredTag = allTags.filter((singleTag) => {
+                return singleTag.name == tag
+            })[0]
+            const response = await fetch(`http://localhost:3001/api/vinyls/${vinyl.id}/${filteredTag.id}`,
             {
                 method: "DELETE",
                 headers : {

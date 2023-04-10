@@ -4,6 +4,8 @@ const Filterbar = ({ filters, onFilterChange }) => {
   
     return (
       <div className="filtersContainer">
+        <h2>Filters</h2>
+        <hr></hr>
         {availableFilters.map(filter => (
           <label className="filterName"key={filter}>
             <input className ="checkBox"type="checkbox" value={filter} checked={filters.includes(filter)} onChange={onFilterChange} />
