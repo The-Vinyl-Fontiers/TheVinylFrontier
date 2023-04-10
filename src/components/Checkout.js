@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router";
 //TODO Add inputs and state for address
 
 const PaymentScreen = (props) => {
@@ -18,6 +19,8 @@ const PaymentScreen = (props) => {
     const [zip, setZip] = useState();
     //toggle for showing form to input a new payment option
     const [showPaymentForm, setShowPaymentForm] = useState(false);
+
+    const navigate = useNavigate()
 
     let address = ""
 
@@ -76,8 +79,7 @@ const PaymentScreen = (props) => {
         }
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
 
         try {
             const response = await fetch(`http://localhost:3001/api/orders/${cart.id}`, {
@@ -93,6 +95,8 @@ const PaymentScreen = (props) => {
             const translatedData = await response.json();
             console.log(translatedData);
             fetchCurrentCart()
+            navigate("/orders")
+            
 
         } catch (error) {
             console.log(error);
@@ -106,21 +110,10 @@ const PaymentScreen = (props) => {
 
     return (
         <div>
-            {
-                payment.cardholderName ?
-                    <div>
-                        <p>Cardholder Name: {payment.cardholderName}</p>
-                        <p>Card Number: {hideCard(cardNumber)}</p>
-                        <p>Expiration Date: {expMonth}/{expYear}</p>
-                        <p>Billing Address: {address}</p>
-                    </div> : "No payment on file"
-
-            }
 
             {
-                showPaymentForm ?
                     <div>
-                        <h3>Enter a new payment</h3>
+                        <h3>Enter a payment</h3>
                         <form onSubmit={(event) => {
                             event.preventDefault();
                             setShowPaymentForm(false);
@@ -213,11 +206,7 @@ const PaymentScreen = (props) => {
                             <input type="text" placeholder="Zip" onChange={(event) => setZip(event.target.value)}></input>
                             <button type="submit">Submit</button>
                         </form>
-                    </div> :
-                    <button onClick={(event) => {
-                        setShowPaymentForm(true)
-                        event.preventDefault()
-                    }}>Add new payment method</button>
+                    </div> 
             }
 
 
