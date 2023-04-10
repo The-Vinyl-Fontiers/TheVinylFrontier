@@ -11,7 +11,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-stripe-checkout": "^2.6.3"
   },
   "name": "thevinylfrontier",
   "version": "1.0.0",
