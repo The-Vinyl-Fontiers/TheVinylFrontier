@@ -23,7 +23,10 @@ function SearchBar(props) {
   }
 
   return (
-    <div className="searchContainer">
+    <form className="searchContainer" onSubmit={(event) => {
+      event.preventDefault()
+      handleSearch()
+      }}>
       <FaSearch onClick={() => setIsActive(!isActive)} className="searchIcon" />
       <input
         type="text"
@@ -31,8 +34,8 @@ function SearchBar(props) {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <button className="button"onSubmit={handleSearch}>Search</button>
-    </div>
+      <button className="button" type="submit">Search</button>
+    </form>
   );
 }
 
