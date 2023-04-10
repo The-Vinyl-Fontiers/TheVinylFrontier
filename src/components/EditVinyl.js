@@ -40,6 +40,7 @@ const EditVinyl = (props) => {
                 }
             })
             setVinyls(newVinyls)
+            props.fetchCurrentCart()
             // console.log(newVinyls)
             
         } catch (error) {
@@ -52,7 +53,7 @@ const EditVinyl = (props) => {
         {
             editFormShown ? 
             <div> 
-                <form onSubmit={(event) => {
+                <form style={{display: "flex", flexDirection: "column"}} onSubmit={(event) => {
                     event.preventDefault()
                     patchVinyl()
                     setEditFormShown(false)

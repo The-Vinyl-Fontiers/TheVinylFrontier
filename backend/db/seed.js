@@ -68,7 +68,6 @@ async function buildTables() {
         await client.query(`
          CREATE TABLE orders (
             id SERIAL PRIMARY KEY,
-            "paymentID" INTEGER REFERENCES payments(id),
             "userID" INTEGER REFERENCES users(id),
             status VARCHAR(255) DEFAULT 'pending'
         );`);
@@ -106,8 +105,8 @@ async function seedDB() {
         INSERT INTO payments ("userID", address, "CCNum", "cardholderName", "CVVNum") 
         VALUES (1, '123 Street Road', 2349876239846, 'Chase Forlini', 653) , (2, '1826 Lane Street', 239856729385, 'David Kapaku', 234), (3, '908 Circle Court', 3986510131, 'Jacob Boatright', 234), (4, '2324 Road Lane', 1243245545, 'User User', 234); 
 
-        INSERT INTO orders ("paymentID", "userID", status) 
-        VALUES (1, 1, 'pending'), (2, 2, 'completed'), (3, 3, 'inProgress'), (4 ,4, 'completed');
+        INSERT INTO orders ( "userID", status) 
+        VALUES ( 1, 'pending'), ( 2, 'completed'), ( 3, 'inProgress'), (4, 'completed');
 
         INSERT INTO order_products ("orderID", "vinylID") 
         VALUES (1, 1), (1,2) ,(1,3), (2, 2), (3, 1), (3,3), (4,2);

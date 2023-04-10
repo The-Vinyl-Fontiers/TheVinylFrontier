@@ -5,7 +5,7 @@ import ChangeQuantity from "./ChangeQuantity";
 import { Link } from "react-router-dom";
 
 const Cart = (props) => {
-    const {cart, setCart, vinyls} = props
+    const {cart, setCart, vinyls, fetchCurrentCart} = props
     const [products, setProducts] = useState(cart.products)
     const [subtotal, setSubtotal] = useState(0)
     const [tax, setTax] = useState(0)
@@ -21,6 +21,9 @@ const Cart = (props) => {
         setSubtotal(sum.toFixed(2))
     }
 
+    async function fetchProducts () {
+        setProducts(cart.products)
+    }
    
     //TODO Add submit order funciton that changes an orders status, retrieves the newly created cart and adds the order to order history, clears the cart in js, etc
    
@@ -29,9 +32,10 @@ const Cart = (props) => {
         sumPrice()
     },[products, vinyls])
 
-    // useEffect(()=>{
-    //     setProducts(joinedCart)
-    // },[vinyls])
+    useEffect( ()=>{
+        fetchCurrentCart()
+        setProducts(cart.products)
+    },[])
 
     return(
         <div>
@@ -40,7 +44,7 @@ const Cart = (props) => {
                     return(
                         <div key={vinyl.id}>
                             <p>{vinyl.title}</p>
-                            <p>{vinyl.price}</p>
+                            <p>${vinyl.price}</p>
                             <Link to={`/vinyl/${vinyl.id}`}>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                             </Link>

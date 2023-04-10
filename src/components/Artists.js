@@ -11,7 +11,12 @@ const Artists = (props) => {
         let foundArtists = []
         vinyls.map((vinyl) => {
             if(!foundArtists.includes(vinyl.artist)) {
-                foundArtists.push(vinyl.artist)
+                if(vinyl.artist == "AC/DC") {
+                    foundArtists.push("AC%2FDC")
+                }else {
+                    foundArtists.push(vinyl.artist)     
+                }
+               
             }
         })
         console.log(foundArtists)
@@ -30,8 +35,15 @@ const Artists = (props) => {
             {
                 artists ? artists.map((artist) => {
                     return(
+<<<<<<< HEAD
                         <Link className="artistLink"to={`/artists/${artist}`} key={artist}>{artist}</Link>
                     )
+=======
+                        <Link to={`/artists/${artist}`} key={artist}>{
+                            artist == "AC%2FDC" ? "AC/DC" : artist
+                            }</Link>
+                    ) 
+>>>>>>> main
                 }) : "Data loading..."
             }
         </div>

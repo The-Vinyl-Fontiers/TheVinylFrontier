@@ -66,7 +66,7 @@ const App=()=>{
 
     useEffect(()=> {
         fetchCurrentCart
-    },[currentUser])
+    },[currentUser, vinyls])
 
     //fetch the current user data anytime the token is changed, i.e. deleted or added
     useEffect(()=>{
@@ -75,7 +75,7 @@ const App=()=>{
 
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser}/>
+            <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser} cart={cart}/>
             <Navbar loggedIn={loggedIn}/>
             <Routes>
                 <Route path ="" element={
@@ -92,8 +92,8 @@ const App=()=>{
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
-                <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls}/>} />
-                <Route path="/admin" element= {<Admin currentUser={currentUser} vinyls={vinyls} setVinyls={setVinyls}/>} />
+                <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls} fetchCurrentCart={fetchCurrentCart}/>} />
+                <Route path="/admin" element= {<Admin currentUser={currentUser} vinyls={vinyls} setVinyls={setVinyls} fetchCurrentCart={fetchCurrentCart} fetchVinyls={fetchVinyls}/> } />
              </Routes>
         </BrowserRouter>
     )
