@@ -59,7 +59,7 @@ const Profile = (props) => {
             <div>
                 {/* Render the profile data here */}
                 {
-                    props.loggedIn ?
+                    loggedIn ?
                         <div>
                             <h3>Welcome, {currentUser.username}</h3>
     
