@@ -35,15 +35,12 @@ const Artists = (props) => {
             {
                 artists ? artists.map((artist) => {
                     return(
-<<<<<<< HEAD
-                        <Link className="artistLink"to={`/artists/${artist}`} key={artist}>{artist}</Link>
-                    )
-=======
-                        <Link to={`/artists/${artist}`} key={artist}>{
+
+                        <Link className="artistLink"to={`/artists/${artist}`} key={artist}>{
                             artist == "AC%2FDC" ? "AC/DC" : artist
                             }</Link>
                     ) 
->>>>>>> main
+
                 }) : "Data loading..."
             }
         </div>

@@ -91,7 +91,7 @@ body::-webkit-scrollbar-thumb{
     padding:0;  
     border:solid black 3px;
     width:130px;
-    top:10cm;
+    top:2cm;
     height:50vh;
     transition:600ms ease;
     z-index:2;
@@ -168,6 +168,8 @@ body::-webkit-scrollbar-thumb{
 .itemContainer {
     display: flex;
     padding: 3rem;
+    position:relative;
+    top:-8cm;
     overflow-x: scroll;
     background: linear-gradient(45deg, #a15e49, #e3d26f, #4e3822, #e3d26f);
     animation: gradient 15s ease infinite;
