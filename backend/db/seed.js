@@ -1,3 +1,4 @@
+const { async } = require("q");
 const client = require("./client")
 const {createVinyl, getAllVinyls, getVinylByTitle, getVinylsByTagName, addTagToVinyl, getVinylsByArtist, getVinylsByTagID, createUser, createTag} = require("./index")
 
@@ -87,12 +88,25 @@ async function buildTables() {
     
 }
 
+async function makeAdmins() {
+    try {
+        client.query(`
+        UPDATE users
+        SET "isAdmin" = true
+        WHERE id < 4;
+        `)        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 async function seedDB() {
     try {
         await createUser({username: 'chasetest', password: 'chasetest', email: 'chase@chase.com'})
         await createUser({username: 'davidtest', password: 'davidtest', email: 'david@david.com'})
         await createUser({username: 'jacobtest',password: 'jacobtest', email:'jacob@jacob.com'})
         await createUser({username: 'usertest', password: 'usertest',email: 'user@user.com'})
+        await makeAdmins();
         await client.query(
         // INSERT INTO users(username, password, email, "isAdmin") 
         // VALUES ('chasetest', 'chasetest', 'chase@chase.com', true), ('davidtest', 'davidtest', 'david@david.com', true), ('jacobtest', 'jacobtest', 'jacob@jacob.com', true) , ('usertest', 'usertest', 'user@user.com', false);
@@ -123,6 +137,56 @@ async function seedDB() {
         await createVinyl({title: "25", artist: "Adele", price: "9.99", yearReleased: 2015, imgURL: 'https://theme.visualmodo.com/music/wp-content/uploads/sites/45/2017/12/25_adele_1504764365.jpg'})
         await createVinyl({title: "1989", artist: "Taylor Swift", price: "6.99", yearReleased: 2014, imgURL: 'https://images-na.ssl-images-amazon.com/images/I/91Da6C9HuUL._AC_SL1500_.jpg'})
         await createVinyl({title: "The New Abnormal", artist: "The Strokes", price: "5.99", yearReleased: 2020, imgURL: "https://th.bing.com/th/id/R.75fcd4503e736580f17920cba66e3f06?rik=AzvX1DFN8d0phw&riu=http%3a%2f%2fneirad.org%2fwp-content%2fuploads%2f2020%2f04%2fthe-new-abnormal.jpeg&ehk=chkZT5kI6kvBixvf3VHqpGwfuM%2fHW7m5Rzh3Oxjxgxo%3d&risl=&pid=ImgRaw&r=0"})
+
+        await createVinyl({
+        title: "Vampire Weekend",
+        artist: "Vampire Weekend",
+        price: "9.99",
+        yearReleased: 2008,
+        imgURL: "https://img.discogs.com/djcA5_IPnTJAfIAvpFHDVf5Z-wU=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1245209-1410561074-5000.jpeg.jpg"
+        })
+        await createVinyl({
+        title: "channel ORANGE",
+        artist: "Frank Ocean",
+        price: "8.99",
+        yearReleased: 2012,
+        imgURL: "https://images-na.ssl-images-amazon.com/images/I/51vGncnu2uL._AC_SL1417_.jpg"
+        })
+        await createVinyl({
+        title: "Plastic Beach",
+        artist: "Gorillaz",
+        price: "12.99",
+        yearReleased: 2010,
+        imgURL: "https://i.pinimg.com/originals/b6/e4/a3/b6e4a32af267037448fc8c96f5e7900c.jpg"
+        })
+        await createVinyl({
+        title: "Demon Days",
+        artist: "Gorillaz",
+        price: "9.99",
+        yearReleased: 2005,
+        imgURL: "https://www.treblezine.com/wp-content/uploads/2017/03/gorillaz-demon-days.jpg"
+        })
+        await createVinyl({
+        title: "Currents",
+        artist: "Tame Impala",
+        price: "11.99",
+        yearReleased: 2015,
+        imgURL: "https://img.discogs.com/YTowwwHGojp-7OYH9xvBGk1PR8Q=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-7240348-1437277144-6299.jpeg.jpg"
+        })
+        await createVinyl({title: "Glimpse of Us", artist: "Joji", price:"1.99", yearReleased:2022, imgURL:"https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Joji_-_Glimpse_of_Us.png/220px-Joji_-_Glimpse_of_Us.png"})
+        await createVinyl({title: "lonely",artist: "YUMDDA", price:"3.99", yearReleased:2023, imgURL:"https://i.scdn.co/image/ab67616d00001e023271a8a371fe2bb3120553fc"})
+        await createVinyl({title:"Facing Future", artist: "Israel Kamakawiwo'ole", price:"1.99", yearReleased:1993, imgURL:"https://upload.wikimedia.org/wikipedia/en/f/f0/Israel_Kamakawiwo%27ole_Facing_Future.jpg"})
+        await createVinyl({title:"Breakthrough", artist:"TWICE", price:"1.99", yearReleased:2019, imgURL:"https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Twice_-_Breakthrough.png/220px-Twice_-_Breakthrough.png"})
+        await createVinyl({title: "Good Humor", artist: "Saint Etienne", price: "7.99", yearReleased: 1998, imgURL: "https://upload.wikimedia.org/wikipedia/en/1/16/Saint_Etienne_-_Good_Humor.png"})
+        await createVinyl({title: "Supergott (Speedy Mixes) ", artist: "Caramella Girls", price: "12.50", yearReleased: 2008, imgURL: "https://i.scdn.co/image/ab67616d0000b27339a6368dd1efeaea760d1d46"})
+        await createVinyl({title: "DiscO-Zone", artist: "O-Zone", price: "14.99", yearReleased: 2002, imgURL: "https://i.scdn.co/image/ab67616d0000b273cef3cb3cd725af3d689bea2e"})
+        await createVinyl({title: "Vespertine", artist: "Björk", price: "10.25", yearReleased: 2001, imgURL: "https://shop.bjork.com/wp-content/uploads/2020/07/TPLP101.jpg"})
+        await createVinyl({title: "A Moon Shaped Pool", artist: "Radiohead", price: "20.00", yearReleased: 2016, imgURL: "https://rovimusic.rovicorp.com/image.jpg?c=042CKio_tgHmWs_Uis-U1YAf7E_1E-2MlBBPmPAXRBU=&f=3"})
+        await createVinyl({title: "A Love Supreme", artist: "John Coltrane", price: "12.99", yearReleased: 1965, imgURL: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61ffflzj4xL._UF1000,1000_QL80_.jpg"})
+        await createVinyl({title: "Time Out", artist: "Dave Brubeck Quartet", price: "8.99", yearReleased: 1959, imgURL: "https://upload.wikimedia.org/wikipedia/en/e/e5/Time_out_album_cover.jpg"})
+        await createVinyl({title: "The Shape of Jazz to Come", artist: "Ornette Coleman", price: "14.99", yearReleased: 1959, imgURL: "https://upload.wikimedia.org/wikipedia/en/c/c9/ShapeOfJazzToCome.jpg"})
+        await createVinyl({title: "Giant Steps", artist: "John Coltrane", price: "11.99", yearReleased: 1960, imgURL: "https://upload.wikimedia.org/wikipedia/en/2/2a/Coltrane_Giant_Steps.jpg"})
+        await createVinyl({title: "Bitches Brew", artist: "Miles Davis", price: "10.99", yearReleased: 1969, imgURL: "https://upload.wikimedia.org/wikipedia/en/7/72/Bitches_brew.jpg"})
 
         await createTag('Rock')
         await createTag('Pop')

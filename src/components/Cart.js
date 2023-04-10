@@ -59,6 +59,7 @@ const Cart = (props) => {
                 <p>Tax: ${tax}</p>
                 <p>Final: ${(parseFloat(tax) + parseFloat(subtotal)).toFixed(2)}</p>
             </div>
+            <Link to="/checkout" >Checkout</Link>
             <PaymentScreen /> 
         </div>
     )

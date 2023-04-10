@@ -10,13 +10,14 @@ const EditUser = (props) => {
 
     async function  updateUser () {
         try {
-            const response = await fetch(`http://localhost:3001/api/users/${user.username}`, {
+            const response = await fetch(`http://localhost:3001/api/users/${user.username}/admin`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
+                    userID: user.id,
                     username: updateUsername,
                     password: updatePassword,
                     email: updateEmail
@@ -24,7 +25,15 @@ const EditUser = (props) => {
             });
 
             const translatedData = await response.json();
-            console.log(translatedData);
+            console.log(translatedData)
+            let newUsers = allUsers.map((singleUser) => {
+                if(singleUser.id == user.id){
+                    return translatedData
+                } else {
+                    return singleUser
+                }
+            })
+            setAllUsers(newUsers)
         } catch (error) {
             console.log(error);
         }
@@ -39,6 +48,7 @@ const EditUser = (props) => {
             <form onSubmit={(event) => {
                 event.preventDefault();
                 updateUser()
+                setEditUserShown(false)
             }}> 
                 <input type="text" value={updateUsername} placeholder= {`${user.username}`} onChange={(event) => setUpdateUsername(event.target.value)} />
                 <input type="text" value={updateEmail} placeholder= "new email" onChange={(event) => setUpdateEmail(event.target.value)} />

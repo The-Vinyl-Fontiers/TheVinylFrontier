@@ -28,7 +28,7 @@ const Search = (props) => {
 
     return(
         <div>
-        <div className="itemContainer">
+        <div >
             {
                 searchedProducts ? searchedProducts.map((vinyl) =>{
                     return(
