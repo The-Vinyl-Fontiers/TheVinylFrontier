@@ -204,9 +204,11 @@ body::-webkit-scrollbar-thumb{
     padding:1.5rem;
     color:white;
     background:#76462f;
-    text-decoration:none;
     z-index:1;
-
+}
+.itemLink{
+    text-decoration: none;
+    color:white;
 }
 .itemContainer2 {
     display: grid;
@@ -215,10 +217,9 @@ body::-webkit-scrollbar-thumb{
     padding-left: 3cm;
   }
   
-  .singleItem2 {
+.singleItem2 {
     display: grid;
     position: relative;
-    top: -10cm;
     border-radius: 16px;
     box-shadow: -.5rem 0 .5rem #000;
     transition: .2s;
