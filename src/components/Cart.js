@@ -44,7 +44,7 @@ const Cart = (props) => {
                     return(
                         <div key={vinyl.id}>
                             <p>{vinyl.title}</p>
-                            <p>{vinyl.price}</p>
+                            <p>${vinyl.price}</p>
                             <Link to={`/vinyl/${vinyl.id}`}>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                             </Link>
