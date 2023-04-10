@@ -62,7 +62,7 @@ body::-webkit-scrollbar-thumb{
     outline: none;
     position: absolute;
     top: 50%;
-    left: 30%;
+    left:9cm;
     transform: translate(-50%, -50%);
     opacity: 0;
     z-index: -1;

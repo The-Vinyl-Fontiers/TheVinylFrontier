@@ -34,11 +34,19 @@ async function deleteTag(id) {
     try {
         console.log("DB", id);
         await client.query(`
+        DELETE FROM vinyl_tags
+        WHERE "tagID" = $1
+        `,[id])
+
+
+        await client.query(`
             DELETE FROM tags
             WHERE id=$1;
         `, [id]);
 
-        return `DELETED TAG NUMBER: ${id}`
+        const allTags = await getAllTags()
+
+        return allTags
     } catch (error) {
         next(error);
     };

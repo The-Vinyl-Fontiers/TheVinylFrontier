@@ -3,7 +3,7 @@ const express = require('express');
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { getUserByUsername, createUser, makeUserAdmin, createOrder, updateUser } = require("../db");
+const { getUserByUsername, createUser, makeUserAdmin, createOrder, updateUser, getAllUsers, getUserById, removeAdminStatus, deleteUser } = require("../db");
 
 // Middleware to test api/users
 // usersRouter.use((req,res,next) => {
@@ -146,7 +146,7 @@ usersRouter.get("/userid/vinyl", async (req, res, next) => {
 });
 
 
-//make a user an admin
+//change admin status of user
 usersRouter.post("/:userID/admin", async (req, res) => {
     try {
         const { isAdmin, username, id } = req.user
@@ -158,9 +158,21 @@ usersRouter.post("/:userID/admin", async (req, res) => {
         } else {
             const { userID } = req.params;
 
-            const user = await makeUserAdmin(userID)
+            //check whether user is admin already
+            const user = await getUserById(userID)
 
-            res.send(user)
+            if(user.isAdmin) {
+                const updatedUser = await removeAdminStatus(userID)
+
+                res.send(updatedUser)
+
+            } else {
+                const updatedUser = await makeUserAdmin(userID)
+
+                res.send(updatedUser)
+            }
+
+            
         }
     } catch (error) {
         res.send(error)
@@ -189,6 +201,38 @@ usersRouter.patch('/:username', async (req, res) => {
     }
 });
 
+
+//purpose -- for admin to fetch all user data
+usersRouter.get("/" , async (req,res) => {
+    const {isAdmin} = req.user;
+    try {
+        if(!isAdmin) {
+            res.send({message : "You are not authorized to request this data"}).status(401)
+        } else {
+            const users = await getAllUsers();
+
+            res.send(users)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+usersRouter.delete("/:userID", async (req,res) => {
+    const {userID} = req.params
+    const {isAdmin} = req.user;
+    try {
+        if(!isAdmin) {
+            res.send({message : "You are not authorized to request this data"}).status(401)
+        } else {
+            const user = await deleteUser(userID);
+
+            res.send(user)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 
 

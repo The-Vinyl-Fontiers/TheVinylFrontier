@@ -115,6 +115,48 @@ async function makeUserAdmin(userID) {
     }
 }
 
+async function getAllUsers() {
+    try {
+        const {rows} = await client.query(`
+        SELECT * FROM users;
+        `)
+
+        return rows
+    } catch (error) {
+        throw error
+    }
+}
+
+async function removeAdminStatus (userID) {
+    try {
+        const {rows: [user]} = await client.query(`
+        UPDATE users
+        SET "isAdmin" = false
+        WHERE id = $1
+        RETURNING *;
+        `,[userID])
+
+        return user
+    } catch (error) {
+        throw error
+    }
+}
+
+async function deleteUser (userID) {
+    try {
+        const deletedUser = await getUserById(userID)
+
+        await client.query(`
+        DELETE FROM users
+        WHERE id = $1;
+        `,[userID])
+
+        return deletedUser;
+    } catch (error) {
+        throw error
+    }
+}
+
 // EXPORTING the users functions.
 
 module.exports = {
@@ -123,5 +165,8 @@ module.exports = {
     getUser,
     getUserById,
     getUserByUsername,
-    makeUserAdmin
+    makeUserAdmin,
+    getAllUsers,
+    removeAdminStatus,
+    deleteUser
 }

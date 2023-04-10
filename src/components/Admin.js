@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditVinyl from "./EditVinyl";
 import DeleteVinyl from "./DeleteVinyl";
+import AddTag from "./AddTag";
+import RemoveTag from "./RemoveTag";
+import "./Admin.css"
+import ChangeUserAdmin from "./ChangeUserAdmin";
+import DeleteUser from "./DeleteUser";
 
 const Admin = (props) => {
-    const {currentUser, vinyls, setVinyls} = props;
+    const {currentUser, vinyls, setVinyls, fetchCurrentCart} = props;
     const {isAdmin} = currentUser
     const token = localStorage.getItem("token");
 
     const [addVinylShown, setAddVinylShown] = useState(false);
+    const [addNewTagShown, setAddNewTagShow] = useState(false)
+
+    const [allUsers, setAllUsers] = useState({})
+    const [allTags, setAllTags] = useState()
 
     //State for added vinyl
     const [newTitle, setNewTitle] = useState();
@@ -15,6 +24,16 @@ const Admin = (props) => {
     const [newPrice, setNewPrice] = useState();
     const [newYear, setNewYear] = useState();
     const [newImgURL, setNewImgURL] = useState();
+    //state for new tag
+    const [tagName, setTagName] = useState();
+
+    const [deletedTagID, setDeletedTagID] = useState();
+
+    //TODO function to make user an admin
+    //TODO funciton to remove a tag from the system
+
+
+
     //TODO: Function and input form to add a new vinyl to the db
     async function addNewVinyl() {
         if(!newTitle || !newArtist || !newPrice || !newYear) {
@@ -46,9 +65,95 @@ const Admin = (props) => {
         }
     }
 
-    //TODO: Function to fetch user data and display
     //TODO: Function and input form to make a user an admin
-        //Add api function to fetch all users
+
+    async function fetchAllUsers () {
+        try {
+            const response = await fetch("http://localhost:3001/api/users/",
+            {
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }
+            });
+            const data = await response.json()
+            console.log(data)
+           setAllUsers(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function fetchAllTags () {
+        try {
+            const response = await fetch("http://localhost:3001/api/tags/",
+            {
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }
+            });
+            const data = await response.json()
+            console.log(data)
+           setAllTags(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function createNewTag () {
+        if(!tagName) {
+            alert("Please enter a tag name")
+            return
+        }
+        try {
+            const response = await fetch("http://localhost:3001/api/tags/",
+            {
+                method: "POST",
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                },
+                body : JSON.stringify({
+                    name: tagName
+                })
+            });
+            const data = await response.json()
+            console.log(data)
+           setAllTags([...allTags, data])
+           setAddNewTagShow(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function removeTagFromDB() {
+        if(!deletedTagID) {
+            alert("Please select a tag to delete")
+            return
+        }
+        try {
+            const response = await fetch(`http://localhost:3001/api/tags/${deletedTagID}`,
+            {
+                method: "DELETE",
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }
+            });
+            const data = await response.json()
+            alert("Tag deleted successfully")
+            setAllTags(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(()=> {
+        fetchAllUsers()
+        fetchAllTags()
+    },[])
 
 
 
@@ -56,29 +161,50 @@ const Admin = (props) => {
         <div>
             {
                 !isAdmin ? "You do not have permission to access. OwO" :
-                <div>
-                    Welcome to the admin page!
-                    {/* TODO display all vinyls with edit button */}
-                    <div>
+                <div id="adminContainer">
+                    <div id="adminVinylContainer">
                         <h3>Vinyls</h3>
                         {
                             vinyls ? vinyls.map((vinyl) => {
                                 return(
-                                    <div key={vinyl.id}>
+                                    <div key={vinyl.id} className="adminSingleVinyl">
+                                        <div>
                                         <p>{vinyl.title}</p>
                                         <p>{vinyl.artist}</p>
                                         <p>{vinyl.price}</p>
-                                        <EditVinyl vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls}/>
+                                        <p>Tags:  </p>
+                                        <div>
+                                        {
+                                             vinyl.tags ? vinyl.tags.map((tag)=> {
+                                                return (
+                                                    <div>{tag}<RemoveTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} tag={tag} allTags={allTags}/> </div>
+                                                    
+                                                )
+                                            }) : "Tags loading..."
+                                        }
+                                        </div>
+                                        </div>
+                                        
+                                        
+                                        <img src={`${vinyl.imgURL}`} className="vinylImg"/>
+                                        <div>
+                                        <EditVinyl vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} fetchCurrentCart={fetchCurrentCart}/>
                                         <DeleteVinyl vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls}/>
+                                        <AddTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} allTags={allTags}/>
+                                        </div>
                                     </div>
                                 )
                             }) : "Loading..."
                         }
 
-                        {
+                        
+                    </div>
+                    <div id="adminInputForms"> 
+                        <h3>New Vinyl or Tag</h3>
+                    {
                             addVinylShown ? 
                             <div>
-                                <form onSubmit={(event) => {
+                                <form style={{display: "flex", flexDirection: "column", marginBottom: "5%"}} onSubmit={(event) => {
                                     event.preventDefault()
                                     addNewVinyl()
                                 }}>
@@ -98,15 +224,78 @@ const Admin = (props) => {
                                         setNewImgURL(event.target.value)
                                     })} value={newImgURL}></input>
                                     <button type="submit">Add vinyl</button>
+                                    <button onClick={(event) => {
+                                        event.preventDefault();
+                                        setAddVinylShown(false)
+                                    }}>Cancel</button>
                                 </form>
                             </div> : 
                              <button onClick={(event => {
                                 event.preventDefault()
                                 setAddVinylShown(true)
                              })}>Add New Vinyl</button>
+
                         }
-                       
+
+                        {
+                            addNewTagShown ? <form  style={{display: "flex", flexDirection: "column"}} onSubmit={(event) => {
+                                event.preventDefault()
+                                createNewTag()
+                            }}>
+                                <input type="text" placeholder="Tag name" onChange={(event) => setTagName(event.target.value)}></input>
+                                <button type="submit">Add tag</button>
+                                <button onClick={(event) => {
+                                    event.preventDefault();
+                                    setAddNewTagShow(false)
+                                }}>Cancel</button>
+                                    </form>
+                            : <button onClick={(event => {
+                                event.preventDefault()
+                                setAddNewTagShow(true)
+                             })}>Add New Tag</button>
+                        }
+                        <form onSubmit={(event) => {
+                            event.preventDefault()
+                            removeTagFromDB()
+                        }}>
+                        <select onChange={(event) => setDeletedTagID(event.target.value)}>
+                           <option value="" >Tag to delete</option>
+                           {
+                            
+                                allTags ? allTags.map((tag) => {
+                                    return(
+                                        <option key={tag.id} value={tag.id}>{tag.name}</option>
+                                    )
+                                }) : <option >Loading tags..</option>
+                           }
+                        </select>
+                        <button>Delete Tag</button>
+                        </form>
+                        <div id="adminUserContainer"> 
+                        <h3>Users</h3>
+                        <div className="adminSingleUser">
+                                        <p>Username</p>
+                                        <p>ID</p>
+                                        <p>Admin</p>
+                                        <p>Change Admin Status</p>
+                                        <p>Delete User</p>
+                        </div>
+                        {
+                            allUsers.length ? allUsers.map((user) => {
+                                return (
+                                    <div key={user.id} className="adminSingleUser">
+                                        <p>{user.username}</p>
+                                        <p>{user.id}</p>
+                                        <p>{`${user.isAdmin}`}</p>
+                                        <ChangeUserAdmin user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
+                                        <DeleteUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
+                                    </div>
+                                )
+                            }): "Loading users..."
+                        }
                     </div>
+                    </div>
+                    
                 </div>
             }
         </div>
