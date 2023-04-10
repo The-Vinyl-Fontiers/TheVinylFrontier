@@ -31,7 +31,7 @@ function SearchBar(props) {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <button className="button"onClick={handleSearch}>Search</button>
+      <button className="button"onSubmit={handleSearch}>Search</button>
     </div>
   );
 }
@@ -57,14 +57,16 @@ const Header=(props)=> {
 
   return (
     <div className="header">
-      <div style={{display: "flex"}}>
+      <div>
         <Link to="/" className="headerLink">
-          <div className="title">Vinyls</div>
+          <div className="title">Home</div>
         </Link>
         <Link to="/artists" className="headerLink">
           <div className="title">Artists</div>
         </Link>
-        
+        <Link to ="/vinyls" className="headerLink">
+          <div className="title">Vinyls</div>
+        </Link>
         {
           currentUser.id ? 
           <Link to="/cart" className="headerLink">

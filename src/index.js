@@ -1,5 +1,5 @@
 import {useState,useEffect} from "react"
-import {AllProducts, SingleArtist, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct, Artists, Search, Navbar, Cart, Admin} from './components'
+import {AllProducts, SingleArtist, VinylPage, Car, Checkout, Filterbar, Header, Homepage, Login, Logout, OrderHistory,PaymentScreen,Postform, Profile,Register,SingleProduct, Artists, Search, Navbar, Cart, Admin} from './components'
 import {BrowserRouter, Routes, Link, Route} from "react-router-dom"
 import { createRoot } from "react-dom/client";
 const App=()=>{
@@ -85,8 +85,9 @@ const App=()=>{
                 <Route path="/logout" element={<Logout setLoggedIn={setLoggedIn} setCurrentUser={setCurrentUser}/>} />
                 <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
                 {/* <Route path="/orders" element={<OrderHistory />}/> */}
-                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser} fetchCurrentUser={fetchCurrentUser} fetchCurrentCart={fetchCurrentCart}/>} />
-                <Route path="/register" element = {<Register setLoggedIn = {setLoggedIn}/>} />
+                <Route path="/login" element = {<Login setLoggedIn = {setLoggedIn} setCurrentUser={setCurrentUser} fetchCurrentUser={fetchCurrentUser}/>} />
+                <Route path="/register" element = {<Register LoggedIn = {setLoggedIn}/>} />
+                <Route path="/vinyls" element = {<VinylPage loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser}/>}/>
                 <Route path ="/vinyl/:vinylID" element = {<SingleProduct vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists/:artistName" element = {<SingleArtist vinyls = {vinyls} cart={cart} setCart={setCart} currentUser={currentUser}/>} />
                 <Route path="/artists" element = {<Artists vinyls = {vinyls}/>} />
