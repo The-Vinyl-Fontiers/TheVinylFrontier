@@ -22,8 +22,8 @@ const AllProducts = (props) =>{
                 {
                     featured ? featured.map((vinyl) =>{
                         return(
-                            <div>
-                            <Link to={`/vinyl/${vinyl.id}`} className="singleItem"key={vinyl.id}>
+                            <div className="singleItem">
+                            <Link className="itemLink" to={`/vinyl/${vinyl.id}`}key={vinyl.id}>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                                 <p className="vinylTitle">{vinyl.title}</p>
                                 <p>{vinyl.artist}</p>
