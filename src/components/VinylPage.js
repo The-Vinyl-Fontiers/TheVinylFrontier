@@ -9,12 +9,12 @@ const VinylPage = (props) =>{
     const [filteredVinyls, setFilteredVinyls] = useState(vinyls);
   
     const handleFilterChange = (event) => {
-      const selectedFilter = event.target.value;
+      const filterSelected = event.target.value;
   
-      if (filters.includes(selectedFilter)) {
-        setFilters(filters.filter(filter => filter !== selectedFilter));
+      if (filters.includes(filterSelected)) {
+        setFilters(filters.filter(filter => filter !== filterSelected));
       } else {
-        setFilters([...filters, selectedFilter]);
+        setFilters([filters, filterSelected]);
       }
     };
   

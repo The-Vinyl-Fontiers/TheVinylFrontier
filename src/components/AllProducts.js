@@ -22,13 +22,14 @@ const AllProducts = (props) =>{
                 {
                     featured ? featured.map((vinyl) =>{
                         return(
-                            <div className="singleItem">
-                            <Link to={`/vinyl/${vinyl.id}`} key={vinyl.id}>
+                            <div>
+                            <Link to={`/vinyl/${vinyl.id}`} className="singleItem"key={vinyl.id}>
+                                <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                                 <p className="vinylTitle">{vinyl.title}</p>
                                 <p>{vinyl.artist}</p>
                                 <p>${vinyl.price}</p>
                                 <p>{vinyl.yearReleased}</p>
-                                <img src={`${vinyl.imgURL}`} className="vinylImg"/>
+
                             </Link>
                             <AddToCart vinyl = {vinyl} cart={props.cart} setCart= {props.setCart} currentUser= {props.currentUser}/>
                             </div>
