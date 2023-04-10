@@ -94,6 +94,7 @@ const App=()=>{
                 <Route path="/search" element= {<Search searchTerm={searchTerm} vinyls={vinyls}/>} />
                 <Route path="/cart" element ={<Cart cart={cart} setCart={setCart} vinyls = {vinyls} fetchCurrentCart={fetchCurrentCart}/>} />
                 <Route path="/admin" element= {<Admin currentUser={currentUser} vinyls={vinyls} setVinyls={setVinyls} fetchCurrentCart={fetchCurrentCart} fetchVinyls={fetchVinyls}/> } />
+                <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} fetchCurrentCart={fetchCurrentCart}/>} />
              </Routes>
         </BrowserRouter>
     )
