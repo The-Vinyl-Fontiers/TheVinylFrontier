@@ -2,7 +2,7 @@
 const express = require('express');
 const ordersRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct, incrementOrderProduct, getOrderProduct, deductOrderProduct } = require("../db");
+const { getOrderByID, getPendingOrderByUserID, createOrder, createOrderProduct, setOrderStatus, deleteOrderProduct, incrementOrderProduct, getOrderProduct, deductOrderProduct, getOrdersByUserID } = require("../db");
 
 // Middleware to test api/orders
 ordersRouter.use((req,res,next) => {
@@ -36,21 +36,21 @@ ordersRouter.get("/:orderID" , async (req,res,next) => {
 });
 
 // GET request - 
-ordersRouter.get("/:orderID" , async (req,res,next) => {
-    const {orderID} = req.params
+ordersRouter.get("/user/:userID" , async (req,res,next) => {
+    const {userID} = req.params
 
     try {
         //check for logged in
         if(!req.user) {
             res.send({error: "NotLoggedIn", message: "You must be logged in to perform this action"})
         } else{
-            const order = await getOrderByID(orderID)
+            const orders = await getOrdersByUserID(userID)
 
             //check if current user is the owner of the order or admin
-            if(order.userID != req.user.id && !req.user.isAdmin){
+            if(orders.userID != req.user.id && !req.user.isAdmin){
                 res.send({error: "Unauthorized", message: "You do not have the correct credentials to access this order"})
             }else {
-                res.send(order)
+                res.send(orders)
             }
         }
     } catch (error) {

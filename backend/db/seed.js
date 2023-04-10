@@ -187,6 +187,7 @@ async function seedDB() {
         await createVinyl({title: "The Shape of Jazz to Come", artist: "Ornette Coleman", price: "14.99", yearReleased: 1959, imgURL: "https://upload.wikimedia.org/wikipedia/en/c/c9/ShapeOfJazzToCome.jpg"})
         await createVinyl({title: "Giant Steps", artist: "John Coltrane", price: "11.99", yearReleased: 1960, imgURL: "https://upload.wikimedia.org/wikipedia/en/2/2a/Coltrane_Giant_Steps.jpg"})
         await createVinyl({title: "Bitches Brew", artist: "Miles Davis", price: "10.99", yearReleased: 1969, imgURL: "https://upload.wikimedia.org/wikipedia/en/7/72/Bitches_brew.jpg"})
+        await createVinyl({title: "In Rainbows", artist: "Radiohead", price: "5.99", yearReleased: 2007, imgURL: "https://th.bing.com/th/id/R.d5972bed64b6b1051ed5224fe52118ad?rik=HiDM7Q0uzwJk%2fA&riu=http%3a%2f%2fimages.genius.com%2f525c7ac8ba19f54cb8a545c285649b27.1000x1000x1.jpg&ehk=8MV56XK3c%2fLTYviAIV6Og%2fh6OrPrgPrb9ue%2fxQtnKWc%3d&risl=&pid=ImgRaw&r=0" })
 
         await createTag('Rock')
         await createTag('Pop')

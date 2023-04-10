@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 
-const OrderHistory = () => {
+const OrderHistory = (props) => {
+  const {currentUser} = props;
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/orders?userId=${userId}`, {
-          method: "GET",
+        const response = await fetch(`http://localhost:3001/api/orders/user/${currentUser.id}`, {
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           }
         });
     
         const data = await response.json();
+        console.log(data)
         setOrders(data);
       } catch (error) {
         console.error(error);
@@ -21,16 +23,18 @@ const OrderHistory = () => {
     };
 
     fetchOrders();
-  }, [userId]);
+  }, [currentUser]);
 
   return (
     <div>
       <h1>Order History</h1>
-      {orders.map((order) => (
-        <div key={order.id}>
-          <p>Order ID: {order.id}</p>
-        </div>
-      ))}
+      {orders.map((order) => {
+        if(order.status != "pending") {
+          return (<div key={order.id}>
+            <p>Order ID: {order.id}</p>
+          </div>)
+        }
+        })}
     </div>
   );
 };
