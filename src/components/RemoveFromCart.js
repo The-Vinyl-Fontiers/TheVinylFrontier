@@ -1,3 +1,5 @@
+import {BsTrash3} from "react-icons/bs"
+
 const RemoveFromCart = (props) => {
     const {vinyl, setCart, cart, products, setProducts} = props;
     const token = localStorage.getItem("token");
@@ -29,9 +31,9 @@ const RemoveFromCart = (props) => {
 
 
     return(
-        <button onClick={removeProduct}>
+        <BsTrash3 onClick={removeProduct} className="icon deleteIcon" >
             Remove From Cart
-        </button>
+        </BsTrash3>
     )
 }
 
