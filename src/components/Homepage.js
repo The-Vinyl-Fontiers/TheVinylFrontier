@@ -10,12 +10,12 @@ const HomePage = (props) => {
   const [filteredVinyls, setFilteredVinyls] = useState(vinyls);
 
   const handleFilterChange = (event) => {
-    const selectedFilter = event.target.value;
+    const filterHasBeenChosen = event.target.value;
 
-    if (filters.includes(selectedFilter)) {
-      setFilters(filters.filter(filter => filter !== selectedFilter));
+    if (filters.includes(filterHasBeenChosen)) {
+      setFilters(filters.filter(filter => filter !== filterHasBeenChosen));
     } else {
-      setFilters([...filters, selectedFilter]);
+      setFilters([filters, filterHasBeenChosen]);
     }
   };
 
@@ -26,7 +26,6 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <Filterbar filters={filters} onFilterChange={handleFilterChange} />
       <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
       {/* <Navbar /> */}
       <div>
