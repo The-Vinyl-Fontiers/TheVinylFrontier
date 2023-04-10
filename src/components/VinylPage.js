@@ -36,7 +36,7 @@ const VinylPage = (props) =>{
                                     <p>{vinyl.artist}</p>
                                     <p>${vinyl.price}</p>
                                     <p>{vinyl.yearReleased}</p>
-                                    <img src={`${vinyl.imgURL}`} className="vinylImg"/>
+                                    <img src={`${vinyl.imgURL}`} className="vinylImg2"/>
                                 </Link>
                                 <AddToCart vinyl={vinyl} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
                             </div>

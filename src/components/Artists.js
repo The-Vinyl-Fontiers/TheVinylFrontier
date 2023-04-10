@@ -30,7 +30,7 @@ const Artists = (props) => {
             {
                 artists ? artists.map((artist) => {
                     return(
-                        <Link to={`/artists/${artist}`} key={artist}>{artist}</Link>
+                        <Link className="artistLink"to={`/artists/${artist}`} key={artist}>{artist}</Link>
                     )
                 }) : "Data loading..."
             }

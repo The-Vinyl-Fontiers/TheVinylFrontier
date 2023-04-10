@@ -82,8 +82,8 @@ body::-webkit-scrollbar-thumb{
 }
 .filtersContainer{
     display:inline-flex;
-    position:fixed;
-    left:0;
+    position:relative;
+    left:-5px;
     z-index: 2;
     flex-direction: column;
     background-color:gray;
@@ -91,7 +91,7 @@ body::-webkit-scrollbar-thumb{
     padding:0;  
     border:solid black 3px;
     width:130px;
-    top:5cm;
+    top:10cm;
     height:50vh;
     transition:600ms ease;
     z-index:2;
@@ -106,7 +106,7 @@ body::-webkit-scrollbar-thumb{
     position:fixed;
     right:0;
     top:0;
-    background-color: gray;
+    background-color: #593322;
     border:solid black 3px;
     width:5rem;
     height:100vh;
@@ -222,7 +222,7 @@ body::-webkit-scrollbar-thumb{
 .itemContainer2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 1rem;;
   }
   
   .singleItem2 {
@@ -231,9 +231,10 @@ body::-webkit-scrollbar-thumb{
     border-radius: 16px;
     box-shadow: -.5rem 0 .5rem #000;
     transition: .2s;
-    width: 300px;
+    width: 200px;
     height: 350px;
     padding: 1.5rem;
+    left:5rem;
     color: white;
     background: #76462f;
     text-decoration: none;
@@ -260,13 +261,32 @@ body::-webkit-scrollbar-thumb{
     font-family:'Playfair Display', serif;
 }
 .artistList{
-    display:flex;
+    display:inline-flex;
     font-size:32px;
-    text-decoration: none;
     flex-direction: column;
+}
+.artistLink{
+    font-weight:bolder;
+    color:white;
+    text-decoration: none;
+}
+.artistLink:hover{
+    opacity:.8; 
 }
 hr{
     height:3px;
+    position:relative;
+    top:-35px;
     width:128px;
     background-color:black;
+}
+h2{
+    font-family:'Playfair Display', serif;
+    position:relative;
+    top:-10px;
+    left:25px;
+}
+.vinylImg2{
+    width:128px;
+    height:120px;
 }
