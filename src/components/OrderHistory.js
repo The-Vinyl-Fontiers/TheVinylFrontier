@@ -40,23 +40,26 @@ const OrderHistory = (props) => {
 
   return (
     <div >
-      <h1>Order History</h1>
+      <h1 id='orderHistoryTitle'>Order History</h1>
       <div id="orderHistoryContainer"> 
       { orders.length > 0 ? orders.map((order) => {
         if(order.status != "pending") {
           return (<div key={order.id} className='singleOrder'>
-            <p>Order ID: {order.id}</p>
+            <p className='orderInfo'>Order ID: {order.id} {order.status == "inProgress" ? "In progress" : order.status} </p>
+            <div>
             {
               order.products.map((product) => {
                 return (
-                  <div>
-                  <p>{product.title} x {product.quantity}</p>
+                  <div className='orderProduct'>
+                  <img  className="orderImg" src={`${product.imgURL}`} /><span>     {product.title}</span>
+                  <p>{product.quantity}</p>
                   </div>
                 )
               })
             }
-            <p>{order.status == "inProgress" ? "In progress" : order.status}</p>
-            <p>{sumTotal(order.products)}</p>
+            </div>
+            
+            <p className='orderTotal'>{sumTotal(order.products)}</p>
           </div>)
         }
         }) : "" }

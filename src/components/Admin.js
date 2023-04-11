@@ -283,7 +283,6 @@ const Admin = (props) => {
                                         <p>Username</p>
                                         <p>ID</p>
                                         <p>Admin</p>
-                                        <p>Change Admin Status</p>
                                         <p>Active</p>
                                         <p>Edit</p>
                         </div>
@@ -293,7 +292,6 @@ const Admin = (props) => {
                                     <div key={user.id} className="adminSingleUser">
                                         <p>{user.username}</p>
                                         <p>{user.id}</p>
-                                        <p>{`${user.isAdmin}`}</p>
                                         <ChangeUserAdmin user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                         <DeleteUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                         <EditUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>

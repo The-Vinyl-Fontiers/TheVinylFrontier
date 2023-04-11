@@ -27,21 +27,7 @@ const HomePage = (props) => {
   return (
     <div>
       <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
-      {/* <Navbar /> */}
-      <div>
-        <p>blah blah blah blah</p>
-      </div>
-      {
-        props.loggedIn ? (
-          <div>
-            {/* Cart, logout, profile shows up, register leaves */}
-          </div>
-        ) : (
-          <div>
-            Please log in to access more features blah blah blah
-          </div>
-        )
-      }
+     
     </div>
   );
 };

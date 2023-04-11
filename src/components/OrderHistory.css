@@ -4,13 +4,44 @@
     padding: 1%;
     width: 20%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border: solid whitesmoke 1px;
     margin: 1%;
     border-radius: 2%;
 }
 
-#orderHistoryContainer {
-    display: flex;
+.singleOrder div {
+    width: 100%;
 }
 
+#orderHistoryContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.orderInfo {
+    border-bottom: solid black 1px;
+}
+
+.orderTotal {
+    border-top: solid black 1px;
+}
+
+#orderHistoryTitle {
+    text-align: center;
+}
+
+
+.orderImg {
+    width: 50px;
+    margin: 1%;
+}
+
+
+.orderProduct {
+    display: flex;
+    align-items: center;
+    padding: 2%;
+    justify-content: space-between;
+    width: 100%;
+}

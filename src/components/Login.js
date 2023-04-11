@@ -38,7 +38,7 @@ const Login = (props) => {
                 const tokenKey = transData.token;
                 // console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
-                alert("Login was successfully.");
+                alert("Login was successful.");
                 setLoginUser("")
                 setLoginPass("")
                 setLoggedIn(true)

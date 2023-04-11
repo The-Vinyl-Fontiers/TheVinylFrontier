@@ -1,0 +1,20 @@
+.artistList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 80vh;
+    align-items: space-evenly;
+}
+
+.artistLink{
+    /* margin: 1%; */
+    padding: 1%;
+    padding-right: 5%;
+    width: 18%;
+    font-size: .8em;
+}
+
+.artistLink:hover {
+    font-size: .9em;
+    width: max-content;
+}

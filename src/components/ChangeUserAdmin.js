@@ -31,7 +31,7 @@ const ChangeUserAdmin = (props) => {
 
 
     return(
-        <button onClick={patchUserAdmin}>Change Admin Status</button>
+        <input  type="checkbox" checked={user.isAdmin} onClick={patchUserAdmin}></input>
     )
 }
 
