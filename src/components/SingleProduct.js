@@ -22,7 +22,7 @@ const SingleProduct = (props) => {
     const {imgURL, title, price, artist, yearReleased, tags} = thisVinyl
 
     return(
-        <div>
+        <div  className="animation">
             {
                 thisVinyl ? (
                 <div className="singleItem">

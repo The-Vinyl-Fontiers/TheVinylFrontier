@@ -25,7 +25,7 @@ const HomePage = (props) => {
   }, [filters, vinyls]);
 
   return (
-    <div>
+    <div  className="animation">
       <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
     </div>
   );
