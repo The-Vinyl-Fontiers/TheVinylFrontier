@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
+import './Payments.css';
 
 const PaymentScreen = (props) => {
     const token = localStorage.getItem("token");
@@ -92,7 +93,7 @@ const PaymentScreen = (props) => {
 
 
     return (
-        <div>
+        <div className="payment-form">
 
             {
                     <div>
