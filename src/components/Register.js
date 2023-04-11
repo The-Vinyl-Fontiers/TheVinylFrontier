@@ -24,7 +24,7 @@ const Register = (props) => {
                 alert ("Your username needs to be at least 6 characters");
                 return;
             }
-            const response = await fetch('http://localhost:3001/api/users/register', {
+            const response = await fetch('https://thevinylfrontier-server.onrender.com/api/users/register', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

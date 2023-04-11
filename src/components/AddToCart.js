@@ -4,7 +4,7 @@ const AddToCart = (props) => {
 
     async function addProduct() {
         try {
-            const response = await fetch(`http://localhost:3001/api/orders/${cart.id}/${vinyl.id}`,{
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/${cart.id}/${vinyl.id}`,{
                 method: 'POST',
                 headers : {
                     'Content-Type' : 'application/json',

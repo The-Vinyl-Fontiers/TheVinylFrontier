@@ -10,7 +10,7 @@ const EditUser = (props) => {
 
     async function  updateUser () {
         try {
-            const response = await fetch(`http://localhost:3001/api/users/${user.username}/admin`, {
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/users/${user.username}/admin`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',

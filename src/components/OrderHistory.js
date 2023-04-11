@@ -15,7 +15,7 @@ const OrderHistory = (props) => {
   }
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/orders/user/${currentUser.id}`, {
+      const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/user/${currentUser.id}`, {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${localStorage.getItem("token")}`

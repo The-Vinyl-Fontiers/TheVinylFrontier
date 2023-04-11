@@ -24,7 +24,7 @@ const Login = (props) => {
                 alert("Password is too short. 8 Character Minimum")
                 return;
             };
-            const response = await fetch(`http://localhost:3001/api/users/login`, {
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

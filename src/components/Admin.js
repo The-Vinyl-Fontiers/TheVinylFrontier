@@ -30,7 +30,7 @@ const Admin = (props) => {
             return
         } else {
             try {
-                const response = await fetch("http://localhost:3001/api/vinyls", {
+                const response = await fetch("https://thevinylfrontier-server.onrender.com/api/vinyls", {
                     method: "POST",
                     headers : {
                         'Content-Type' : 'application/json',
@@ -57,7 +57,7 @@ const Admin = (props) => {
 
     async function fetchAllUsers () {
         try {
-            const response = await fetch("http://localhost:3001/api/users/",
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/users/",
             {
                 headers : {
                     'Content-Type' : 'application/json',
@@ -74,7 +74,7 @@ const Admin = (props) => {
 
     async function fetchAllTags () {
         try {
-            const response = await fetch("http://localhost:3001/api/tags/",
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/tags/",
             {
                 headers : {
                     'Content-Type' : 'application/json',
@@ -95,7 +95,7 @@ const Admin = (props) => {
             return
         }
         try {
-            const response = await fetch("http://localhost:3001/api/tags/",
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/tags/",
             {
                 method: "POST",
                 headers : {
@@ -121,7 +121,7 @@ const Admin = (props) => {
             return
         }
         try {
-            const response = await fetch(`http://localhost:3001/api/tags/${deletedTagID}`,
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/tags/${deletedTagID}`,
             {
                 method: "DELETE",
                 headers : {
