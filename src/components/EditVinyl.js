@@ -31,7 +31,6 @@ const EditVinyl = (props) => {
             })
             const data = await response.json();
             console.log(data)
-            //filter through vinyls and replace the updated one
             let newVinyls = vinyls.map((singleVinyl) => {
                 if(singleVinyl.id == vinyl.id){
                     return data
@@ -41,7 +40,6 @@ const EditVinyl = (props) => {
             })
             setVinyls(newVinyls)
             props.fetchCurrentCart()
-            // console.log(newVinyls)
             
         } catch (error) {
             console.log(error)

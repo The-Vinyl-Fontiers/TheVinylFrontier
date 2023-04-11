@@ -26,7 +26,7 @@ body::-webkit-scrollbar-track{
     background:black;
 }
 body::-webkit-scrollbar-thumb{
-    background:white;
+    background:#FFFBE5;
 }
 .title{
     color:black;
@@ -201,8 +201,8 @@ body::-webkit-scrollbar-thumb{
     border-radius:16px;
     box-shadow: -.5rem 0 .5rem #000;
     transition:.2s;
-    width:300px;
-    height:350px;
+    width:250px;
+    height:400px;
     padding:1.5rem;
     color:white;
     background:#E69F4D;
@@ -249,6 +249,9 @@ body::-webkit-scrollbar-thumb{
 }
 .singleItem:not(:first-child){
     margin-left:-130px;
+}
+.vinylDetails{
+    font-family:'Arvo',serif;
 }
 .vinylTitle{
     font-weight:bolder;

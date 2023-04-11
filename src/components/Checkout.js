@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
-//TODO Add inputs and state for address
 
 const PaymentScreen = (props) => {
     const token = localStorage.getItem("token");
@@ -17,7 +16,6 @@ const PaymentScreen = (props) => {
     const [city, setCity] = useState()
     const [state, setState] = useState();
     const [zip, setZip] = useState();
-    //toggle for showing form to input a new payment option
     const [showPaymentForm, setShowPaymentForm] = useState(false);
 
     const navigate = useNavigate()
@@ -28,13 +26,11 @@ const PaymentScreen = (props) => {
         const expDate = new Date(expYear, expMonth)
 
 
-        //concat address together
         address = addressOne
         if (addressTwo) address += " " + addressTwo
         address += " " + city + ", " + state + " " + zip
 
         try {
-            //TODO Add payment to db
             const response = await fetch("http://localhost:3001/api/payments", {
                 method: "POST",
                 headers: {
@@ -70,15 +66,6 @@ const PaymentScreen = (props) => {
         return hiddenCard
     }
 
-    //TODO Check for payment in payments table
-    async function checkForPaymentOnFile() {
-        try {
-            // const response = await fetch("http://localhost:3001/api/payments/")
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const handleSubmit = async () => {
 
         try {
@@ -102,10 +89,6 @@ const PaymentScreen = (props) => {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        checkForPaymentOnFile()
-    }, [])
 
 
     return (

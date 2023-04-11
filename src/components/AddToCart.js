@@ -12,9 +12,6 @@ const AddToCart = (props) => {
                 }
             })
             const data = await response.json();
-            // let newCart = cart;
-            // // console.log(newCart.products)
-            // newCart.products.push(vinyl)
             console.log(data)
             setCart(data)
         } catch (error) {
