@@ -24,7 +24,7 @@ const VinylPage = (props) =>{
     }, [filters, vinyls]);
 
     return(
-        <div>
+        <div className="animation">
              <Filterbar filters={filters} onFilterChange={handleFilterChange} />
             <div className="itemContainer2">
                 {

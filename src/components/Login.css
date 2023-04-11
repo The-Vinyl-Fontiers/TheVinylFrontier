@@ -1,0 +1,60 @@
+#loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 15%;
+}
+
+#loginForm input{
+    padding: 4%;
+    margin: 3%;
+    width: 100%;
+}
+
+#loginHeader {
+    top: 0;
+    left: 0;
+
+}
+
+#forgotPass {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.eyeIcon {
+    border: 0;
+    position: absolute;
+    right: -25px;
+    top: 20px;
+}
+
+#loginPass {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    left: -20px
+}
+
+#loginSubmit {
+    padding: 3%;
+    width: 60%;
+    margin: 5%;
+    cursor: pointer;
+}
+
+#loginPass input{
+    padding: 4%;
+    margin: 3%;
+    width: 100%;
+}

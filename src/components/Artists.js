@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./Artists.css"
 
 const Artists = (props) => {
     const {vinyls} = props
 
     const [artists, setArtists] = useState()
-
-    //find unique artist names and set the state
     async function findArtists() {
         let foundArtists = []
         vinyls.map((vinyl) => {
@@ -31,6 +30,7 @@ const Artists = (props) => {
 
 
     return(
+        <div  className="animation">
         <div className="artistList">
             {
                 artists ? artists.map((artist) => {
@@ -41,6 +41,7 @@ const Artists = (props) => {
                     ) 
                 }) : "Data loading..."
             }
+        </div>
         </div>
     )
 }

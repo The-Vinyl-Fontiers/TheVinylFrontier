@@ -6,23 +6,21 @@ const Profile = (props) => {
     const [updateUsername, setUpdateUsername] = useState(currentUser.username);
     const [updatePassword, setUpdatePassword] = useState("");
     const [updateEmail, setUpdateEmail] = useState("");
-
-
-    const updateUser = async (userID) => {
-        console.log("userID", userID)
-        try {
-            const response = await fetch(`http://localhost:3001/api/users/${currentUser.username}`, {
-                method: "PATCH",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`
-                },
-                body: JSON.stringify({
-                    username: updateUsername,
-                    password: updatePassword,
-                    email: updateEmail
-                })
-            });
+        const updateUser = async (userID) => {
+            console.log("userID", userID)
+            try {
+                const response = await fetch(`http://localhost:3001/api/users/${currentUser.username}`, {
+                    method: "PATCH",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify({
+                        username: updateUsername,
+                        password: updatePassword,
+                        email: updateEmail
+                    })
+                });
 
             const translatedData = await response.json();
             console.log(translatedData);
@@ -36,7 +34,7 @@ const Profile = (props) => {
 
 
     return (
-        <div className="container">
+        <div className="animation container">
             {loggedIn ? (
                 <div className="form-box">
                     <h3>Welcome, {currentUser.username}! Here you can update your personal login information.</h3>

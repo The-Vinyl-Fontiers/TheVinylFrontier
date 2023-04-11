@@ -37,7 +37,7 @@ const Header=(props)=> {
         <Link to="/" className="headerLink">
           <div className="title">Home</div>
         </Link>
-        <Link to="/artists" className="headerLink">
+        <Link to="/artists" className="headerLink headerArtists">
           <div className="title">Artists</div>
         </Link>
         <Link to ="/vinyls" className="headerLink">

@@ -1,10 +1,15 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {FaEyeSlash, FaEye} from "react-icons/fa"
+
+import "./Login.css"
 const Register = (props) => {
     const [newUser, setNewUser] = useState("");
     const [newPass, setNewPass] = useState("");
     const [newEmail, setNewEmail] =useState ("");
     const nav = useNavigate();
+
+    const [passwordShown, setPasswordShown] = useState(false)
 
     const {setLoggedIn} = props
 
@@ -46,10 +51,15 @@ const Register = (props) => {
             console.log(error)
     }
     }
+
+    function togglePassword () {
+        setPasswordShown(!passwordShown)
+    }
+
     return (
-        <div>
-            <h2>Create an Account</h2>
-                <form onSubmit= {(event) => {
+        <div id='loginContainer'>
+            <h2 id='loginHeader'>Create an Account</h2>
+                <form id='loginForm' onSubmit= {(event) => {
                     console.log("button clicked")
                     event.preventDefault()
                     registerUser()
@@ -59,17 +69,28 @@ const Register = (props) => {
                 value={newUser}
                 placeholder="Username"
                 onChange={(event)=> setNewUser(event.target.value)}/>
-                <input 
-                type="text"
-                value={newPass}
-                placeholder="Password"
-                onChange={(event)=> setNewPass(event.target.value)}/>
-                <input 
+                 <input 
                 type="text"
                 value={newEmail}
                 placeholder="Email"
                 onChange={(event)=> setNewEmail(event.target.value)}/>
-                <input type="submit" value="Register Account"></input>
+                <div id='loginPass'>
+                <input 
+                type={passwordShown ? "text" : "password"}
+                value={newPass}
+                placeholder="Password"
+                onChange={(event)=> setNewPass(event.target.value)}/>
+                {
+                    passwordShown ? <FaEye className='icon eyeIcon' onClick={(event) => {
+                        event.preventDefault()
+                        togglePassword()}} ></FaEye> : <FaEyeSlash className='icon eyeIcon' onClick={(event) => {
+                        event.preventDefault()
+                        togglePassword()}}> Show password</FaEyeSlash>
+                    
+                }
+                </div>
+               
+                <button type="submit" id='loginSubmit' >Register</button>
                 </form>
         </div>
     )

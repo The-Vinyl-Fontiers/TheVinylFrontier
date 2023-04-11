@@ -9,7 +9,6 @@ const Search = (props) => {
         let filtered = ""
         if(searchTerm) {
             filtered = vinyls.filter((vinyl) => {
-                //check if search term matches title or artist
                 return vinyl.title.toLowerCase().includes(searchTerm.toLowerCase()) || vinyl.artist.toLowerCase().includes(searchTerm.toLowerCase())
             })
             setSearchedProducts(filtered)
@@ -19,16 +18,13 @@ const Search = (props) => {
         }
         
     }
-
-
-    //for useEffect have the search function run everytime the searchTerm is updated
     useEffect(()=>{
         searchProducts()
     },[searchTerm])
 
     return(
         <div>
-        <div >
+        <div>
             {
                 searchedProducts ? searchedProducts.map((vinyl) =>{
                     return(
