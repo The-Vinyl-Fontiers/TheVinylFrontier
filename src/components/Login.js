@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import "./Login.css"
+import {FaEyeSlash, FaEye} from "react-icons/fa"
 
 const Login = (props) => {
     const [loginUser, setLoginUser] = useState("");
     const [loginPass, setLoginPass] = useState("");
+
+    const [passwordShown, setPasswordShown] = useState(false)
 
     const nav = useNavigate();
 
@@ -50,22 +54,39 @@ const Login = (props) => {
         }
     }
 
+    function togglePassword () {
+        setPasswordShown(!passwordShown)
+    }
+
     return(
-        <div>
-            <h2>Log into Your Account</h2>
-            <form onSubmit={ logIn }>
+        <div id='loginContainer'>
+            <h2 id='loginHeader'>Log into Your Account</h2>
+            <form onSubmit={ logIn } id='loginForm'>
                 <input 
                     type="text"
                     placeholder="Username"
                     onChange={(event)=> setLoginUser(event.target.value)}
                 />
+                <div id='loginPass'>
                 <input 
-                    type="text"
+                    type={passwordShown ? "text" : "password"}
                     placeholder="Password"
                     onChange={(event)=> setLoginPass(event.target.value)}
                 />
-                <button type="submit" >Login</button>
+                
+                {
+                    passwordShown ? <FaEye className='icon eyeIcon' onClick={(event) => {
+                        event.preventDefault()
+                        togglePassword()}} ></FaEye> : <FaEyeSlash className='icon eyeIcon' onClick={(event) => {
+                        event.preventDefault()
+                        togglePassword()}}> Show password</FaEyeSlash>
+                    
+                }
+                </div>
+                
+                <button id='loginSubmit' type="submit" >Login</button>
             </form>
+            <div onClick={() => alert("Lol too bad.")} id='forgotPass'>Forgot password?</div>
         </div>
     )
 }

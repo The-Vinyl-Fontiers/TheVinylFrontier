@@ -59,7 +59,7 @@ const OrderHistory = (props) => {
             }
             </div>
             
-            <p className='orderTotal'>{sumTotal(order.products)}</p>
+            <p className='orderTotal'>Total: ${sumTotal(order.products)}</p>
           </div>)
         }
         }) : "" }

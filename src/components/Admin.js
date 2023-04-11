@@ -167,7 +167,7 @@ const Admin = (props) => {
                                         {
                                              vinyl.tags ? vinyl.tags.map((tag)=> {
                                                 return (
-                                                    <div style={{display: "flex", alignItems: "center", flexWrap: "wrap"}}>
+                                                    <div className= "indTag"style={{display: "flex", alignItems: "center"}}>
                                                         <p>{tag}</p>
                                                         <RemoveTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} tag={tag} allTags={allTags}/>
                                                           </div>

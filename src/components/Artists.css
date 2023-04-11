@@ -3,7 +3,8 @@
     flex-direction: column;
     flex-wrap: wrap;
     height: 80vh;
-    align-items: space-evenly;
+    align-items: space-around;
+    align-content: space-around;
 }
 
 .artistLink{
