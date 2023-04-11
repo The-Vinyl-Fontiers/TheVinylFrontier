@@ -19,6 +19,7 @@ const AllProducts = (props) =>{
     return(
         <div>
             <div className="itemContainer">
+                <p className="itemContainerTitle">Featured Items</p>
                 {
                     featured ? featured.map((vinyl) =>{
                         return(

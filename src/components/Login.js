@@ -40,13 +40,11 @@ const Login = (props) => {
                 alert(transData.message);
             } else {
                 const tokenKey = transData.token;
-                // console.log(tokenKey);
                 localStorage.setItem("token", tokenKey);
                 alert("Login was successful.");
                 setLoginUser("")
                 setLoginPass("")
                 setLoggedIn(true)
-                // fetchCurrentUser()
                 nav("/")
             }
         } catch(error){
@@ -59,7 +57,7 @@ const Login = (props) => {
     }
 
     return(
-        <div id='loginContainer'>
+        <div className="animation" id='loginContainer'>
             <h2 id='loginHeader'>Log into Your Account</h2>
             <form onSubmit={ logIn } id='loginForm'>
                 <input 
