@@ -5,29 +5,6 @@ const Profile = (props) => {
     const [updateUsername, setUpdateUsername] = useState(currentUser.username);
     const [updatePassword, setUpdatePassword] = useState("");
     const [updateEmail, setUpdateEmail] = useState("");
-
-
-        // async function fetchMyData() {
-        //     try {
-
-        //         const response = await fetch("http://localhost:3000/users/me", {
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //                 'Authorization': `Bearer ${localStorage.getItem("token")}`
-        //             }
-        //         })
-
-
-        //         const translatedData = await response.json();
-
-        //         console.log("Below is our personal account data:")
-        //         console.log(translatedData)
-        //         setCurrentUser(translatedData.data)
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }
-
         const updateUser = async (userID) => {
             console.log("userID", userID)
             try {
@@ -56,7 +33,7 @@ const Profile = (props) => {
 
 
         return (
-            <div>
+            <div className="animation">
                 {
                     loggedIn ?
                         <div>
