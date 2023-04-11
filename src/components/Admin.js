@@ -167,7 +167,7 @@ const Admin = (props) => {
                                         {
                                              vinyl.tags ? vinyl.tags.map((tag)=> {
                                                 return (
-                                                    <div style={{display: "flex", alignItems: "center", flexWrap: "wrap"}}>
+                                                    <div className= "indTag"style={{display: "flex", alignItems: "center"}}>
                                                         <p>{tag}</p>
                                                         <RemoveTag vinyl={vinyl} vinyls={vinyls} setVinyls={setVinyls} tag={tag} allTags={allTags}/>
                                                           </div>
@@ -270,7 +270,6 @@ const Admin = (props) => {
                                         <p>Username</p>
                                         <p>ID</p>
                                         <p>Admin</p>
-                                        <p>Change Admin Status</p>
                                         <p>Active</p>
                                         <p>Edit</p>
                         </div>
@@ -280,7 +279,6 @@ const Admin = (props) => {
                                     <div key={user.id} className="adminSingleUser">
                                         <p>{user.username}</p>
                                         <p>{user.id}</p>
-                                        <p>{`${user.isAdmin}`}</p>
                                         <ChangeUserAdmin user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                         <DeleteUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
                                         <EditUser user={user} allUsers={allUsers} setAllUsers={setAllUsers}/>
