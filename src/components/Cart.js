@@ -16,7 +16,6 @@ const Cart = (props) => {
         for(let i = 0; i < products.length; i ++) {
             sum += parseFloat(products[i].price) * products[i].quantity
         }
-        //check that it includes two deciaml places
         let taxAmnt = sum * 0.07
         setTax(taxAmnt.toFixed(2))
         setSubtotal(sum.toFixed(2))
@@ -26,7 +25,6 @@ const Cart = (props) => {
         setProducts(cart.products)
     }
    
-    //TODO Add submit order funciton that changes an orders status, retrieves the newly created cart and adds the order to order history, clears the cart in js, etc
    
 
     useEffect(()=>{

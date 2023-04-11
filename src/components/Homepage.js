@@ -27,7 +27,6 @@ const HomePage = (props) => {
   return (
     <div>
       <AllProducts vinyls={filteredVinyls} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>
-     
     </div>
   );
 };
