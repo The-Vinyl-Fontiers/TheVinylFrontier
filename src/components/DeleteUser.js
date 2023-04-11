@@ -4,7 +4,7 @@ const DeleteUser = (props) => {
 
     async function deleteUserFromDB() {
         try {
-            const response = await fetch(`http://localhost:3001/api/users/${user.id}`,
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/users/${user.id}`,
             {
                 method: "DELETE",
                 headers : {

@@ -32,7 +32,7 @@ const PaymentScreen = (props) => {
 
         try {
             //TODO Add payment to db
-            const response = await fetch("http://localhost:3001/api/payments", {
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/payments", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const PaymentScreen = (props) => {
     //TODO Check for payment in payments table
     async function checkForPaymentOnFile() {
         try {
-            // const response = await fetch("http://localhost:3001/api/payments/")
+            // const response = await fetch("https://thevinylfrontier-server.onrender.com/api/payments/")
         } catch (error) {
             console.log(error)
         }
@@ -80,7 +80,7 @@ const PaymentScreen = (props) => {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:3001/api/orders/${cart.id}`, {
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/${cart.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

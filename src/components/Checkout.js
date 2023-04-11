@@ -32,7 +32,7 @@ const PaymentScreen = (props) => {
         address += " " + city + ", " + state + " " + zip
 
         try {
-            const response = await fetch("http://localhost:3001/api/payments", {
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/payments", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const PaymentScreen = (props) => {
     const handleSubmit = async () => {
 
         try {
-            const response = await fetch(`http://localhost:3001/api/orders/${cart.id}`, {
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/${cart.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

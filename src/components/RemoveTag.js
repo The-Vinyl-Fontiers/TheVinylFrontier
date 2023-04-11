@@ -22,7 +22,7 @@ const RemoveTag =(props) => {
             let filteredTag = allTags.filter((singleTag) => {
                 return singleTag.name == tag
             })[0]
-            const response = await fetch(`http://localhost:3001/api/vinyls/${vinyl.id}/${filteredTag.id}`,
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/vinyls/${vinyl.id}/${filteredTag.id}`,
             {
                 method: "DELETE",
                 headers : {

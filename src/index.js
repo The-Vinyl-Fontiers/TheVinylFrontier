@@ -12,7 +12,7 @@ const App=()=>{
     async function fetchVinyls() {
         console.log("fetching vinyls")
         try {
-            const response=await fetch("http://localhost:3001/api/vinyls");
+            const response=await fetch("https://thevinylfrontier-server.onrender.com/api/vinyls");
             const vinylData=await response.json();
             console.log(vinylData)
             setVinyls(vinylData)
@@ -24,7 +24,7 @@ const App=()=>{
         console.log("fetching user data")
         if(token) {
             try {
-                const response = await fetch("http://localhost:3001/api/users/me",
+                const response = await fetch("https://thevinylfrontier-server.onrender.com/api/users/me",
                 {
                     headers : {
                         'Content-Type' : 'application/json',
@@ -44,7 +44,7 @@ const App=()=>{
     async function fetchCurrentCart() {
         if(token) {
             try {
-                const response = await fetch("http://localhost:3001/api/orders/me/cart" ,{
+                const response = await fetch("https://thevinylfrontier-server.onrender.com/api/orders/me/cart" ,{
                     headers : {
                         'Content-Type' : 'application/json',
                         'Authorization' : `Bearer ${token}`

@@ -12,7 +12,7 @@ const AddTag = (props) => {
             return
         }
         try {
-            const response = await fetch(`http://localhost:3001/api/vinyls/${vinyl.id}`,
+            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/vinyls/${vinyl.id}`,
             {
                 method: "POST",
                 headers : {

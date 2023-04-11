@@ -14,7 +14,7 @@ const EditVinyl = (props) => {
 
     async function patchVinyl() {
         try {
-            const response = await fetch("http://localhost:3001/api/vinyls", {
+            const response = await fetch("https://thevinylfrontier-server.onrender.com/api/vinyls", {
                 method: "PATCH",
                 headers: {
                         'Content-Type' : 'application/json',
