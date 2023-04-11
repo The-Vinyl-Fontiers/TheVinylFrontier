@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import "./OrderHistory.css"
 
 const OrderHistory = (props) => {
   const {currentUser} = props;
@@ -12,34 +13,38 @@ const OrderHistory = (props) => {
     }
     return (sum * 1.07).toFixed(2)
   }
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/orders/user/${currentUser.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      setOrders(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch(`http://localhost:3001/api/orders/user/${currentUser.id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem("token")}`
-          }
-        });
-    
-        const data = await response.json();
-        console.log(data)
-        setOrders(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchOrders();
-  }, [currentUser]);
+  },[currentUser]);
+
+  useEffect(()=> {
+    fetchOrders()
+  }, [])
 
   return (
-    <div>
+    <div >
       <h1>Order History</h1>
-      {orders.map((order) => {
+      <div id="orderHistoryContainer"> 
+      { orders.length > 0 ? orders.map((order) => {
         if(order.status != "pending") {
-          return (<div key={order.id} style={{border:"solid"}}>
+          return (<div key={order.id} className='singleOrder'>
             <p>Order ID: {order.id}</p>
             {
               order.products.map((product) => {
@@ -54,7 +59,8 @@ const OrderHistory = (props) => {
             <p>{sumTotal(order.products)}</p>
           </div>)
         }
-        })}
+        }) : "" }
+        </div>
     </div>
   );
 };

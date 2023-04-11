@@ -1,0 +1,16 @@
+.singleOrder {
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+    border: solid whitesmoke 1px;
+    margin: 1%;
+    border-radius: 2%;
+}
+
+#orderHistoryContainer {
+    display: flex;
+}
+

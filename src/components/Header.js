@@ -41,22 +41,6 @@ function SearchBar(props) {
 
 const Header=(props)=> {
   const { setSearchTerm ,searchTerm, currentUser, cart } = props;
-  const [itemCount, setItemCount] = useState();
-
-  function countProducts() {
-    let num = 0;
-    if(cart.products) {
-      for(let i = 0; i < cart.products.length; i++) {
-        num += cart.products[i].quantity
-      }
-      setItemCount(num)
-    }
-    
-  }
-  
-  useEffect(()=> {
-    countProducts()
-  }, [cart])
 
   return (
     <div className="header">
@@ -70,12 +54,6 @@ const Header=(props)=> {
         <Link to ="/vinyls" className="headerLink">
           <div className="title">Vinyls</div>
         </Link>
-        {
-          currentUser.id ? 
-          <Link to="/cart" className="headerLink">
-            <div className="title">Cart [{itemCount}]</div>
-          </Link> : ""
-        }
         {
           currentUser.isAdmin ? 
           <Link to="/admin" className="headerLink">

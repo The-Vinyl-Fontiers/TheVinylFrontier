@@ -1,6 +1,9 @@
+import {FiPlus, FiMinus} from "react-icons/fi"
+
 const ChangeQuantity = (props) => {
     const {quantity, vinyl, products, setProducts, cart, setCart} = props;
     const token = localStorage.getItem("token");
+    
     
     async function addProduct() {
         try {
@@ -42,16 +45,16 @@ const ChangeQuantity = (props) => {
     }
     
     return(
-        <div>
-            <button onClick={(event) => {
+        <div className="changeQuantity">
+            <FiPlus  className="icon" onClick={(event) => {
                 event.preventDefault();
                 addProduct()
-            }}>+</button>
-            <p>Quantity {quantity}</p>
-            <button onClick={(event) => {
+            }}></FiPlus>
+            <p>{quantity}</p>
+            <FiMinus className="icon" onClick={(event) => {
                 event.preventDefault();
                 deductProduct()
-            }}>-</button>
+            }}></FiMinus>
         </div>
     )
 }

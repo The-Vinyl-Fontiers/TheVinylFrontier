@@ -55,7 +55,7 @@ async function getUser({ username, password }) {
 async function getUserById(userId) {
     try {
         const { rows: [user] } = await client.query(`
-      SELECT id, username, email, "isAdmin"
+      SELECT id, username, email, "isAdmin", active
       FROM users
       WHERE id=${userId};
   `);
@@ -146,12 +146,27 @@ async function deleteUser (userID) {
     try {
         const deletedUser = await getUserById(userID)
 
-        await client.query(`
-        DELETE FROM users
-        WHERE id = $1;
-        `,[userID])
+        if(deletedUser.active) {
+            const {rows : [deactivedUser]} = await client.query(`
+            UPDATE users
+            SET active = false
+            WHERE id = $1
+            RETURNING *;
+            `,[userID])
+            return deactivedUser;
+        } else {
+            const {rows : [deactivedUser]} = await client.query(`
+            UPDATE users
+            SET active = true
+            WHERE id = $1
+            RETURNING *;
+            `,[userID])
+            return deactivedUser
+        }
 
-        return deletedUser;
+        
+
+        
     } catch (error) {
         throw error
     }

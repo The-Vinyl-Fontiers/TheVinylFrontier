@@ -14,8 +14,12 @@ const DeleteUser = (props) => {
             });
             const data = await response.json()
             console.log(data)
-            let newUsers = allUsers.filter((singleUser) => {
-                return singleUser.id != user.id
+            let newUsers = allUsers.map((singleUser) => {
+                if(singleUser.id == user.id){
+                    return data
+                } else {
+                    return singleUser
+                }
             })
             setAllUsers(newUsers)
         } catch (error) {
@@ -24,7 +28,7 @@ const DeleteUser = (props) => {
     }
 
     return(
-        <button onClick={deleteUserFromDB}>Delete User</button>
+        <input type="checkbox" checked={user.active} onClick={deleteUserFromDB}></input>
     )
 }
 

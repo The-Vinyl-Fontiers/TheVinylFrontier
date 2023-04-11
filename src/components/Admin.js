@@ -284,7 +284,7 @@ const Admin = (props) => {
                                         <p>ID</p>
                                         <p>Admin</p>
                                         <p>Change Admin Status</p>
-                                        <p>Delete User</p>
+                                        <p>Active</p>
                                         <p>Edit</p>
                         </div>
                         {

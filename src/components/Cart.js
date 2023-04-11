@@ -3,6 +3,7 @@ import RemoveFromCart from "./RemoveFromCart";
 import PaymentScreen from "./PaymentScreen";
 import ChangeQuantity from "./ChangeQuantity";
 import { Link } from "react-router-dom";
+import "./Cart.css"
 
 const Cart = (props) => {
     const {cart, setCart, vinyls, fetchCurrentCart} = props
@@ -38,16 +39,17 @@ const Cart = (props) => {
     },[])
 
     return(
-        <div>
+        <div id="cartContainer">
+            <div id="cartProducts">
             {
                 products.length ? products.map((vinyl) => {
                     return(
-                        <div key={vinyl.id}>
-                            <p>{vinyl.title}</p>
-                            <p>${vinyl.price}</p>
+                        <div key={vinyl.id} className="singleCartProduct">
+                            <p className="cartTitle">{vinyl.title}</p>
                             <Link to={`/vinyl/${vinyl.id}`}>
                                 <img src={`${vinyl.imgURL}`} className="vinylImg"/>
                             </Link>
+                            <p>${vinyl.price}</p>
                             <ChangeQuantity quantity = {vinyl.quantity} vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                             <RemoveFromCart vinyl={vinyl} cart={cart} setCart={setCart} products={products} setProducts={setProducts}/>
                         </div>
@@ -58,13 +60,14 @@ const Cart = (props) => {
                 
                 : "No items in cart"
             }
+            </div>
 
             {
-                 products.length ? <div>
+                 products.length ? <div id="cartTotal">
                  <p>Subtotal: ${subtotal}</p>
                  <p>Tax: ${tax}</p>
-                 <p>Final: ${(parseFloat(tax) + parseFloat(subtotal)).toFixed(2)}</p>
-                 <button><Link to="/checkout" >Checkout</Link></button>
+                 <p id="cartFinal">Final: ${(parseFloat(tax) + parseFloat(subtotal)).toFixed(2)}</p>
+                 <Link to="/checkout" ><button id="checkoutButton">Checkout</button></Link>
              </div> : ""
             }
             

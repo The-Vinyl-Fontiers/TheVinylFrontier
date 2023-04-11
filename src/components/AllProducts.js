@@ -14,7 +14,7 @@ const AllProducts = (props) =>{
 
     useEffect(()=> {
         filterFeatured()
-    },[])
+    },[vinyls])
 
     return(
         <div>

@@ -76,7 +76,7 @@ const App=()=>{
     return (
         <BrowserRouter>
             <Header loggedIn={loggedIn} setSearchTerm={setSearchTerm} searchTerm={searchTerm} vinyls={vinyls} currentUser={currentUser} cart={cart}/>
-            <Navbar loggedIn={loggedIn}/>
+            <Navbar loggedIn={loggedIn} cart={cart} currentUser={currentUser}/>
             <Routes>
                 <Route path ="" element={
                     <Homepage vinyls = {vinyls} cart={cart} setCart = {setCart} currentUser={currentUser}/>
