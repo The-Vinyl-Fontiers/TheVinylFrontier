@@ -7,8 +7,6 @@ const SingleProduct = (props) => {
     const {vinylID} = useParams();
 
     const [thisVinyl, setThisVinyl] = useState("")
-
-    //filter through vinyls and assign the selected vinyl to thisVinyl
     async function filterVinyls () {
         let filteredVinyl = vinyls.filter(
             vinyl => vinyl.id == vinylID
@@ -27,17 +25,17 @@ const SingleProduct = (props) => {
         <div>
             {
                 thisVinyl ? (
-                <div>
+                <div className="singleItem">
                     <img src={imgURL} className="vinylImg"/>
-                    <p>{title}</p>
-                    <Link to={artist != "AC/DC" ? `/artists/${artist}` : '/artists/AC%2fDC'}> {artist}</Link>
-                    <p>${price}</p>
-                    <p>{yearReleased}</p>
-                    <div>
+                    <p className="vinylTitle">{title}</p>
+                    <Link className="vinylDetails" to={artist != "AC/DC" ? `/artists/${artist}` : '/artists/AC%2fDC'}> {artist}</Link>
+                    <p className="vinylDetails">${price}</p>
+                    <p className="vinylDetails">{yearReleased}</p>
+                    <div className="vinylDetails">
                         Tags: 
                      {
                         tags ? tags.map((tag) => 
-                        <span key={tag}>{tag} </span>
+                        <span  className="vinylDetails" key={tag}>{tag} </span>
                         ) : "No tags"
                      }
                      <AddToCart vinyl = {thisVinyl} setCart={setCart} cart= {cart} currentUser={props.currentUser}/>

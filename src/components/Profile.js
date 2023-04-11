@@ -57,7 +57,6 @@ const Profile = (props) => {
 
         return (
             <div>
-                {/* Render the profile data here */}
                 {
                     loggedIn ?
                         <div>

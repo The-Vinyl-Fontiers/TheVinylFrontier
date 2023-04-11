@@ -12,30 +12,18 @@ const Admin = (props) => {
     const {currentUser, vinyls, setVinyls, fetchCurrentCart ,fetchVinyls} = props;
     const {isAdmin} = currentUser
     const token = localStorage.getItem("token");
-
     const [addVinylShown, setAddVinylShown] = useState(false);
     const [addNewTagShown, setAddNewTagShow] = useState(false)
-
     const [allUsers, setAllUsers] = useState({})
     const [allTags, setAllTags] = useState()
-
-    //State for added vinyl
     const [newTitle, setNewTitle] = useState();
     const [newArtist, setNewArtist] = useState();
     const [newPrice, setNewPrice] = useState();
     const [newYear, setNewYear] = useState();
     const [newImgURL, setNewImgURL] = useState();
-    //state for new tag
     const [tagName, setTagName] = useState();
 
     const [deletedTagID, setDeletedTagID] = useState();
-
-    //TODO function to make user an admin
-    //TODO funciton to remove a tag from the system
-
-
-
-    //TODO: Function and input form to add a new vinyl to the db
     async function addNewVinyl() {
         if(!newTitle || !newArtist || !newPrice || !newYear) {
             alert("You must include a title, artist, price, and year realeased!")
@@ -66,7 +54,6 @@ const Admin = (props) => {
         }
     }
 
-    //TODO: Function and input form to make a user an admin
 
     async function fetchAllUsers () {
         try {

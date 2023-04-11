@@ -32,10 +32,10 @@ const VinylPage = (props) =>{
                         return(
                             <div key={vinyl.id} className="singleItem2">
                                 <Link className="itemLink" to={`/vinyl/${vinyl.id}`} >
-                                    <p className="vinylTitle">{vinyl.title}</p>
-                                    <p>{vinyl.artist}</p>
-                                    <p>${vinyl.price}</p>
-                                    <p>{vinyl.yearReleased}</p>
+                                <p className="vinylTitle">{vinyl.title}</p>
+                                <p className="vinylDetails">{vinyl.artist}</p>
+                                <p className="vinylDetails">${vinyl.price}</p>
+                                <p className="vinylDetails">{vinyl.yearReleased}</p>
                                     <img src={`${vinyl.imgURL}`} className="vinylImg2"/>
                                 </Link>
                                 <AddToCart vinyl={vinyl} cart={props.cart} setCart={props.setCart} currentUser={props.currentUser}/>

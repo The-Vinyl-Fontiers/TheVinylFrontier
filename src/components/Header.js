@@ -8,17 +8,6 @@ function SearchBar(props) {
     const navigate = useNavigate()
 
   function handleSearch() {
-    // let filtered = ""
-    //     if(searchTerm) {
-    //         filtered = vinyls.filter((vinyl) => {
-    //             //check if search term matches title or artist
-    //             return vinyl.title.toLowerCase().includes(searchTerm.toLowerCase()) || vinyl.artist.toLowerCase().includes(searchTerm.toLowerCase())
-    //         })
-    //         setSearchedProducts(filtered)
-    //     }
-    //     else{
-    //         setSearchedProducts(vinyls)
-    //     }
     navigate("/search")
   }
 
