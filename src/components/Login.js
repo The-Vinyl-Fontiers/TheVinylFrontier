@@ -9,13 +9,16 @@ const Login = (props) => {
 
     const [passwordShown, setPasswordShown] = useState(false)
 
+    const [loginLoading, setLoginLoading] = useState()
+
     const nav = useNavigate();
 
     const {setLoggedIn, fetchCurrentUser} = props;
 
     async function logIn(event){
         event.preventDefault();
-
+        console.log("sending " + loginUser + " " + loginPass)
+        setLoginLoading(true)
         try {
             if(loginUser.length < 6){
                 alert("Username is too short. 6 Character Minimum")
@@ -35,13 +38,13 @@ const Login = (props) => {
                 })
             });
             const transData = await response.json();
+            setLoginLoading(false)
 
             if (!transData.token){
                 alert(transData.message);
             } else {
                 const tokenKey = transData.token;
                 localStorage.setItem("token", tokenKey);
-                alert("Login was successful.");
                 setLoginUser("")
                 setLoginPass("")
                 setLoggedIn(true)
@@ -59,7 +62,8 @@ const Login = (props) => {
     return(
         <div className="animation" id='loginContainer'>
             <h2 id='loginHeader'>Log into Your Account</h2>
-            <form onSubmit={ logIn } id='loginForm'>
+            {
+                loginLoading ? <h2 id='loginHeader' className='animation'>Loading ...</h2> : <form onSubmit={ logIn } id='loginForm'>
                 <input 
                     type="text"
                     placeholder="Username"
@@ -84,6 +88,8 @@ const Login = (props) => {
                 
                 <button id='loginSubmit' type="submit" >Login</button>
             </form>
+            }
+            
             <div onClick={() => alert("Lol too bad.")} id='forgotPass'>Forgot password?</div>
         </div>
     )
