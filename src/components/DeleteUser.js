@@ -28,7 +28,7 @@ const DeleteUser = (props) => {
     }
 
     return(
-        <input type="checkbox" checked={user.active} onClick={deleteUserFromDB}></input>
+        <input type="checkbox" checked={user.active} onChange={deleteUserFromDB}></input>
     )
 }
 

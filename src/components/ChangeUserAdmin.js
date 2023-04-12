@@ -5,7 +5,7 @@ const ChangeUserAdmin = (props) => {
 
     async function patchUserAdmin () {
         try {
-            const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/users/${user.id}/admin`,
+            const response = await fetch(`http://localhost:3001/api/users/${user.id}/admin`,
             {
                 method: "POST",
                 headers : {
@@ -31,7 +31,7 @@ const ChangeUserAdmin = (props) => {
 
 
     return(
-        <input  type="checkbox" checked={user.isAdmin} onClick={patchUserAdmin}></input>
+        <input  type="checkbox" checked={user.isAdmin} onChange={patchUserAdmin}></input>
     )
 }
 

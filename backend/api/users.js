@@ -4,7 +4,7 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { getUserByUsername, createUser, makeUserAdmin, createOrder, updateUser, getAllUsers, getUserById, removeAdminStatus, deleteUser } = require("../db");
-const { async } = require('q');
+// const { async } = require('q');
 
 // Middleware to test api/users
 // usersRouter.use((req,res,next) => {
@@ -70,9 +70,9 @@ usersRouter.post("/login", async (req, res, next) => {
             });
         };
         const user = await getUserByUsername(username);
-        console.log(user)
+        console.log("checking password")
         const areTheyTheSame = await bcrypt.compare(password, user.password);
-
+        console.log("Finished checking")
         if (user && areTheyTheSame) { // If the user exists & user password matches password from the request body...
 
             if(!user.active) {
