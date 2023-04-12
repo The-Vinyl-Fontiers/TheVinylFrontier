@@ -50,7 +50,7 @@ const AddTag = (props) => {
                 {
                     allTags ? allTags.map((tag) => {
                         return(
-                            <option value={tag.id}>{tag.name}</option>
+                            <option key={tag.id} value={tag.id}>{tag.name}</option>
                         )
                     }) : <option >Loading tags..</option>
                 }
