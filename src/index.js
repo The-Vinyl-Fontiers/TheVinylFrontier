@@ -65,7 +65,7 @@ const App=()=>{
     },[])
 
     useEffect(()=> {
-        fetchCurrentCart
+        fetchCurrentCart()
     },[currentUser, vinyls])
 
     //fetch the current user data anytime the token is changed, i.e. deleted or added

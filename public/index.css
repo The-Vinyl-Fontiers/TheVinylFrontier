@@ -294,28 +294,34 @@ body::-webkit-scrollbar-thumb{
 }
 .vinylDetails{
     font-family:'Arvo',serif;
+    text-decoration: none;
+    color: inherit;
+}
+
+.vinylArtist:hover{
+    opacity: 1.5;
 }
 .vinylTitle{
     font-weight:bolder;
     font-family:'Playfair Display', serif;
 }
 .artistList{
-    display:inline-flex;
+    /* display:inline-flex; */
     font-size:32px;
     flex-direction: column;
 }
 .artistLink{
-    display:flex;
-    justify-content: center;
-    position:relative;
-    font-weight:bolder;
-    left:65%;
+    /* display:flex;
+    justify-content: center; */
+    /* position:relative;
+    font-weight:bolder; */
+    /* left:65%; */
     color:black;
     text-decoration: none;
 }
-.artistLink:hover{
+/* .artistLink:hover{
     opacity:.5; 
-}
+} */
 hr{
     height:3px;
     position:relative;

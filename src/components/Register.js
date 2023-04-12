@@ -60,7 +60,7 @@ const Register = (props) => {
     }
 
     return (
-        <div id='loginContainer'>
+        <div id='loginContainer' className='animation'>
             <h2 id='loginHeader'>Create an Account</h2>
             {
                 loginLoading ? <h2 id='loginHeader' className='animation'>Loading ...</h2>  : <form id='loginForm' onSubmit= {(event) => {

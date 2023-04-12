@@ -26,15 +26,16 @@ const SingleArtist = (props) => {
 
 
     return (
-        <div>
-            <p className="artistList">{artistName}</p>
+        <div className="animation">
+            <p className="singleArtistTitle">{artistName}</p>
+            <div className="itemContainer2">
             {
                 artistVinyls ? artistVinyls.map((vinyl) => {
                     return (
                         <div key={vinyl.id} className="singleItem2">
                         <Link className="itemLink" to={`/vinyl/${vinyl.id}`} >
                         <p className="vinylTitle">{vinyl.title}</p>
-                        <p className="vinylDetails">{vinyl.artist}</p>
+                        <p className="vinylDetails vinylArtist">{vinyl.artist}</p>
                         <p className="vinylDetails">${vinyl.price}</p>
                         <p className="vinylDetails">{vinyl.yearReleased}</p>
                             <img src={`${vinyl.imgURL}`} className="vinylImg2"/>
@@ -44,6 +45,7 @@ const SingleArtist = (props) => {
                     )
                 }) :"Data loading..."
             }
+            </div>
         </div>
     )
 }
