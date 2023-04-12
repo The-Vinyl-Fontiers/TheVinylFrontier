@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { AllProducts, Navbar } from './index';
-import { AddToCart } from '../components';
-import {Filterbar} from '../components';
 
 const HomePage = (props) => {
   const { vinyls } = props;
