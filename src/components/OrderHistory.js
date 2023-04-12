@@ -4,6 +4,7 @@ import "./OrderHistory.css"
 const OrderHistory = (props) => {
   const {currentUser} = props;
   const [orders, setOrders] = useState([]);
+  const id =currentUser.id
 
 
   function sumTotal (products) {
@@ -15,16 +16,17 @@ const OrderHistory = (props) => {
   }
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/user/${currentUser.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${localStorage.getItem("token")}`
-        }
-      });
-  
-      const data = await response.json();
-      console.log(data)
-      setOrders(data);
+      if(currentUser.id){
+          const response = await fetch(`https://thevinylfrontier-server.onrender.com/api/orders/user/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+    
+        const data = await response.json();
+        setOrders(data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -34,15 +36,11 @@ const OrderHistory = (props) => {
     fetchOrders();
   },[currentUser]);
 
-  useEffect(()=> {
-    fetchOrders()
-  }, [])
-
   return (
     <div >
       <h1 id='orderHistoryTitle'>Order History</h1>
       <div id="orderHistoryContainer"> 
-      { orders.length > 0 ? orders.map((order) => {
+      { orders ? orders.map((order) => {
         if(order.status != "pending") {
           return (<div key={order.id} className='singleOrder'>
             <p className='orderInfo'>Order ID: {order.id} {order.status == "inProgress" ? "In progress" : order.status} </p>
@@ -50,7 +48,7 @@ const OrderHistory = (props) => {
             {
               order.products.map((product) => {
                 return (
-                  <div className='orderProduct'>
+                  <div className='orderProduct' key={product.id}>
                   <img  className="orderImg" src={`${product.imgURL}`} /><span>     {product.title}</span>
                   <p>{product.quantity}</p>
                   </div>
@@ -62,7 +60,7 @@ const OrderHistory = (props) => {
             <p className='orderTotal'>Total: ${sumTotal(order.products)}</p>
           </div>)
         }
-        }) : "" }
+        }) : "Loading orders..." }
         </div>
     </div>
   );
