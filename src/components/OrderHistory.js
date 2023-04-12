@@ -4,7 +4,7 @@ import "./OrderHistory.css"
 const OrderHistory = (props) => {
   const {currentUser} = props;
   const [orders, setOrders] = useState([]);
-  const id =currentUser.id
+  const id = currentUser.id
 
 
   function sumTotal (products) {
@@ -25,6 +25,7 @@ const OrderHistory = (props) => {
         });
     
         const data = await response.json();
+        console.log(data)
         setOrders(data);
       }
     } catch (error) {
