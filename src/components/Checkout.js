@@ -55,18 +55,6 @@ const PaymentScreen = (props) => {
 
     }
 
-    function hideCard(cardNumber) {
-        let hiddenCard = ""
-        for (let i = 0; i < cardNumber.length; i++) {
-            if (i < cardNumber.length - 4) {
-                hiddenCard += "*"
-            } else {
-                hiddenCard += cardNumber[i]
-            }
-        }
-        return hiddenCard
-    }
-
     const handleSubmit = async () => {
 
         try {
@@ -93,20 +81,20 @@ const PaymentScreen = (props) => {
 
 
     return (
-        <div className="payment-form">
+        <div className="container">
 
             {
-                    <div>
-                        <h3>Enter a payment</h3>
+                    <div className="payment-form">
+                        <h3 className="title-header">Enter a Payment:</h3>
                         <form onSubmit={(event) => {
                             event.preventDefault();
                             setShowPaymentForm(false);
                             handleSubmit();
                             submitPayment();
                         }}>
-                            <input type="text" placeholder="Card Number" onChange={(event) => setCardNumber(event.target.value)}></input>
-                            <input type="text" placeholder="Name on Card" onChange={(event) => setCardName(event.target.value)}></input>
-                            <select onChange={(event) => setExpMonth(event.target.value)}>
+                            <input className="card-input" type="text" placeholder="Card Number" onChange={(event) => setCardNumber(event.target.value)}></input>
+                            <input className="card-input" type="text" placeholder="Name on Card" onChange={(event) => setCardName(event.target.value)}></input>
+                            <select className="selection" onChange={(event) => setExpMonth(event.target.value)}>
                                 <option value="1">Jan</option>
                                 <option value="2">Feb</option>
                                 <option value="3">Mar</option>
@@ -121,7 +109,7 @@ const PaymentScreen = (props) => {
                                 <option value="12">Dec</option>
                             </select>
 
-                            <select onChange={(event) => setExpYear(event.target.value)}>
+                            <select  select className="selection" onChange={(event) => setExpYear(event.target.value)}>
                                 <option value="2023">2023</option>
                                 <option value="2024">2024</option>
                                 <option value="2025">2025</option>
@@ -129,11 +117,11 @@ const PaymentScreen = (props) => {
                                 <option value="2027">2027</option>
                                 <option value="2028">2028</option>
                             </select>
-                            <input type="text" placeholder="CVV Number" onChange={(event) => setCVVNum(event.target.value)}></input>
-                            <input type="text" placeholder="Address 1" onChange={(event) => setAdressOne(event.target.value)}></input>
-                            <input type="text" placeholder="Address 2 (Optional)" onChange={(event) => setAdressTwo(event.target.value)}></input>
-                            <input type="text" placeholder="City" onChange={(event) => setCity(event.target.value)}></input>
-                            <select name="state" onChange={(event) => setState(event.target.value)}>
+                            <input className="card-input" type="text" placeholder="CVV Number" onChange={(event) => setCVVNum(event.target.value)}></input>
+                            <input className="card-input" type="text" placeholder="Address 1" onChange={(event) => setAdressOne(event.target.value)}></input>
+                            <input className="card-input" type="text" placeholder="Address 2 (Optional)" onChange={(event) => setAdressTwo(event.target.value)}></input>
+                            <input className="card-input" type="text" placeholder="City" onChange={(event) => setCity(event.target.value)}></input>
+                            <select  select className="selection" name="state" onChange={(event) => setState(event.target.value)}>
                                 <option value="">Select a State</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -187,8 +175,8 @@ const PaymentScreen = (props) => {
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
-                            <input type="text" placeholder="Zip" onChange={(event) => setZip(event.target.value)}></input>
-                            <button type="submit">Submit</button>
+                            <input className="card-input" type="text" placeholder="Zip" onChange={(event) => setZip(event.target.value)}></input>
+                            <button className="sub-btn" type="submit">Submit</button>
                         </form>
                     </div> 
             }
