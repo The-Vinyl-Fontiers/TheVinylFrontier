@@ -34,10 +34,10 @@ const Profile = (props) => {
 
 
     return (
-        <div className="animation container">
+        <div className="container">
             {loggedIn ? (
                 <div className="form-box">
-                    <h3>Welcome, {currentUser.username}! Here you can update your personal login information.</h3>
+                    <h3>Welcome, {currentUser.username}! Update Your Information Here.</h3>
 
                     <form
                         onSubmit={(event) => {
@@ -45,25 +45,25 @@ const Profile = (props) => {
                             updateUser(currentUser.id);
                         }}
                     >
-                        <input
+                        <input className="text-input"
                             type="text"
                             value={updateUsername}
                             placeholder={`${currentUser.username}`}
                             onChange={(event) => setUpdateUsername(event.target.value)}
                         />
-                        <input
+                        <input className="text-input"
                             type="text"
                             value={updateEmail}
-                            placeholder="new email"
+                            placeholder="New E-Mail"
                             onChange={(event) => setUpdateEmail(event.target.value)}
                         />
-                        <input
+                        <input className="password-input"
                             type="password"
                             value={updatePassword}
-                            placeholder="new password"
+                            placeholder="New Password"
                             onChange={(event) => setUpdatePassword(event.target.value)}
                         />
-                        <button type="submit">Update</button>
+                        <button className="btn" type="submit">Update</button>
                     </form>
                 </div>
             ) : (
