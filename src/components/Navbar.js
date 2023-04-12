@@ -41,17 +41,18 @@ const Navbar= (props) => {
                                 </Link>
                             </li>
                             <li className="navbar-item">
-                                <Link className= "link" to="/logout">
-                                <FaSignOutAlt className="icon"/>
-                                <span className="link-text">Logout</span>
-                                </Link>
-                            </li>
-                            <li className="navbar-item">
                                 <Link to="/cart" className= "link">
                                     <FaShoppingCart className="icon" />
                                     <span className="link-text">Cart [{itemCount}]</span>
                                 </Link> 
                             </li>
+                            <li className="navbar-item">
+                                <Link className= "link" to="/logout">
+                                <FaSignOutAlt className="icon"/>
+                                <span className="link-text">Logout</span>
+                                </Link>
+                            </li>
+
                                 
                             </div>
                         ):<div>
