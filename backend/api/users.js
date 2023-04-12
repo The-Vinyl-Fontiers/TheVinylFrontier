@@ -70,7 +70,7 @@ usersRouter.post("/login", async (req, res, next) => {
             });
         };
         const user = await getUserByUsername(username);
-        if(!user.password) {
+        if(!user) {
             res.send({message: "That username does not exist"})
         } else {
             console.log("checking password")
