@@ -70,35 +70,40 @@ usersRouter.post("/login", async (req, res, next) => {
             });
         };
         const user = await getUserByUsername(username);
-        console.log("checking password")
-        const areTheyTheSame = await bcrypt.compare(password, user.password);
-        console.log("Finished checking")
-        if (user && areTheyTheSame) { // If the user exists & user password matches password from the request body...
-
-            if(!user.active) {
-                res.send({message: "You account has been deactived"})
-            } else {
-                const token = jwt.sign({ // Create token that has users ID & username encrypted by JWT SECRET.
-                    id: user.id,
-                    username,
-                    isAdmin: user.isAdmin
-                }, process.env.JWT_SECRET, {
-                    expiresIn: "1w"
-                });
-                // Create token 
-                res.send({
-                    message: "You are now logged in!",
-                    token: token
-                });
-    
-            }
-            
+        if(!user.password) {
+            res.send({message: "That username does not exist"})
         } else {
-            res.send({
-                name: "Incorrect Credentials!",
-                message: "Username or password is incorrect!"
-            });
+            console.log("checking password")
+            const areTheyTheSame = await bcrypt.compare(password, user.password);
+            console.log("Finished checking")
+            if (user && areTheyTheSame) { // If the user exists & user password matches password from the request body...
+    
+                if(!user.active) {
+                    res.send({message: "You account has been deactived"})
+                } else {
+                    const token = jwt.sign({ // Create token that has users ID & username encrypted by JWT SECRET.
+                        id: user.id,
+                        username,
+                        isAdmin: user.isAdmin
+                    }, process.env.JWT_SECRET, {
+                        expiresIn: "1w"
+                    });
+                    // Create token 
+                    res.send({
+                        message: "You are now logged in!",
+                        token: token
+                    });
+        
+                }
+                
+            } else {
+                res.send({
+                    name: "Incorrect Credentials!",
+                    message: "Username or password is incorrect!"
+                });
+            }
         }
+       
     } catch (error) {
         next(error);
     };

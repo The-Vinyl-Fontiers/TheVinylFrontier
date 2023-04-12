@@ -10,12 +10,14 @@ const Register = (props) => {
     const nav = useNavigate();
 
     const [passwordShown, setPasswordShown] = useState(false)
+    const [loginLoading, setLoginLoading] = useState()
 
     const {setLoggedIn} = props
 
     async function registerUser(){
         console.log()
         // event.preventDefault ();
+         
         try{
             if (newPass.length<8){
                 alert ("Your password needs to be at least 8 characters");
@@ -24,6 +26,7 @@ const Register = (props) => {
                 alert ("Your username needs to be at least 6 characters");
                 return;
             }
+            setLoginLoading(true)
             const response = await fetch('https://thevinylfrontier-server.onrender.com/api/users/register', {
                 method: "POST",
                 headers: {
@@ -37,13 +40,13 @@ const Register = (props) => {
 
             })
             const transData = await response.json();
+            setLoginLoading(false)
             console.log (transData);
             if (!transData.token){
                 alert(transData.message);
             }else{
                 const tokenKey = transData.token;
                 localStorage.setItem("token", tokenKey);
-                alert ("New Account Was Successfully Created");
                 setLoggedIn(true)
                 nav("/")
             }
@@ -59,7 +62,8 @@ const Register = (props) => {
     return (
         <div id='loginContainer'>
             <h2 id='loginHeader'>Create an Account</h2>
-                <form id='loginForm' onSubmit= {(event) => {
+            {
+                loginLoading ? <h2 id='loginHeader' className='animation'>Loading ...</h2>  : <form id='loginForm' onSubmit= {(event) => {
                     console.log("button clicked")
                     event.preventDefault()
                     registerUser()
@@ -92,6 +96,8 @@ const Register = (props) => {
                
                 <button type="submit" id='loginSubmit' >Register</button>
                 </form>
+            }
+                
         </div>
     )
 }
