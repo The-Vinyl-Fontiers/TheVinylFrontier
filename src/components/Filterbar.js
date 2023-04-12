@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const Filterbar = ({ filters, onFilterChange }) => {
-    const usedFilters = ['Rock', 'Pop', 'Jazz', 'Rap','Electronic','Indie','Featured'];
+    const usedFilters = ['Rock', 'Pop', 'Jazz', 'Rap','Electronic','Indie','R&B', 'Punk', 'K-Pop','Featured'];
   
     return (
       <div className="filtersContainer">
