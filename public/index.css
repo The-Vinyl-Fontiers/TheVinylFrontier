@@ -197,7 +197,7 @@ body::-webkit-scrollbar-thumb{
     position:relative;
     top:0;
     overflow-x: scroll;
-    background: #b0403c;
+    background: #FAEDCD;
     height: 50%;
     margin: 5rem;
     margin-top:0;
@@ -229,13 +229,13 @@ body::-webkit-scrollbar-thumb{
     height:400px;
     margin:.5cm;
     top:1cm;
-    padding:1.5rem;
+    padding:2.5rem;
     color:white;
-    background:#E69F4D;
+    background:#D4A373;
     z-index:1;
 }
 .itemContainerTitle{
-    color:white;
+    color:black;
     position:relative;
     top:-60px;
     font-weight:bolder;
@@ -245,13 +245,13 @@ body::-webkit-scrollbar-thumb{
 }
 .itemLink{
     text-decoration: none;
-    color:white;
+    color:#e7e7e7;
 }
 .itemContainer2 {
     display: grid;
     grid-template-columns: repeat(3, .25fr);
     gap: 1rem;;
-    background: #b0403c;
+    background: #FAEDCD;
     height: 50%;
     width:75%;
     margin: 8rem;
@@ -272,7 +272,7 @@ body::-webkit-scrollbar-thumb{
     padding: 1.5rem;
     left:5rem;
     color: white;
-    background: #E69F4D;
+    background: #D4A373;
     text-decoration: none;
     z-index: 1;
   }
