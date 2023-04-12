@@ -1,33 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: -5%;
+}
+
 .payment-form {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .payment-form h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .payment-form input,
-  .payment-form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .payment-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .payment-form button:hover {
-    background-color: #3e8e41;
-  }
-  
+  background-color: #dad6c2;
+  padding: 10px;
+  border-radius: 10px;
+  border:solid #a0a38b;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.title-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.card-input{
+  width: 98%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+}
+.selection {
+  width: 99%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.sub-btn {
+  background-color: rgb(2, 52, 133);
+  color: white;
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: baseline;
+}
+
+.sub-btn:hover {
+  background-color: #50617c
+}

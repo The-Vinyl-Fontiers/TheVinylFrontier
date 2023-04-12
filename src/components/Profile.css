@@ -6,35 +6,35 @@
   }
   
   .form-box {
-    background-color: #e7e7e7;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: #dad6c2;
+    padding: 10px;
+    border-radius: 10px;
+    border:solid #a0a38b;
+    margin-top: -15%;
+    font-family: 'Libre Baskerville', serif;
   }
   
-  .form-box input[type="text"],
-  .form-box input[type="password"] {
+  .text-input,
+  .password-input {
     display: block;
+    width: 97%;
     margin-bottom: 10px;
     padding: 10px;
-    width: 97%;
-    border-radius: 5px;
     border: none;
   }
   
-  .form-box button[type="submit"] {
+  .btn {
     display: block;
     margin-top: 20px;
     padding: 10px;
     width: 100%;
-    background-color: #4285f4;
+    background-color: rgb(2, 52, 133);
     color: rgb(255, 255, 255);
-    border-radius: 5px;
     border: none;
     cursor: pointer;
   }
   
-  .form-box button[type="submit"]:hover {
-    background-color: #357ae8;
+  .btn:hover {
+    background-color: #50617c;
   }
   
